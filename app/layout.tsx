@@ -1,12 +1,12 @@
-import { FC, PropsWithChildren } from "react";
-import "@/app/shared/css/globals.css";
+import "@/app/styles/globals.css"
+import { UserInitializer } from "./lib/initializers/user.initializer"
 
-const Rootlayout: FC<PropsWithChildren> = ({ children }) => {
-  return (
-    <html lang="es">
-      <body>{children}</body>
-    </html>
-  );
-};
-
-export default Rootlayout;
+export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+   return (
+      <html lang="es">
+         <UserInitializer>
+            <body>{children}</body>
+         </UserInitializer>
+      </html>
+   )
+}

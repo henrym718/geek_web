@@ -1,7 +1,7 @@
-import React from "react";
+import { Box } from "./components/ui/Box"
 
 const Home = () => {
-  return <div className="text-6xl">Hola Mundo</div>;
-};
+   return <Box>AuthModal</Box>
+}
 
-export default Home;
+export default Home
