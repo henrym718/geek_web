@@ -4,6 +4,7 @@ export interface RegisterRequest {
    role: RoleType
    email: string
    password: string
+   username: string
    firstName: string
    lastName: string
    phone?: string
