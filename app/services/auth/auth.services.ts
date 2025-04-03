@@ -6,6 +6,7 @@ import { LoginRequest, LoginResponse } from "@/app/types/api/login.types"
 import { RegisterRequest, RegisterResponse } from "@/app/types/api/register.types"
 import { GetUserResponse } from "@/app/types/api/get-user.types"
 import { CheckEmailExistsRequest, CheckEmailExistsResponse } from "@/app/types/api/check-email.types"
+import { CheckUsernameExistsRequest, CheckUsernameExistsResponse } from "@/app/types/api/check-username.types"
 
 /**
  * Inicia sesión con credenciales locales.
@@ -14,7 +15,7 @@ import { CheckEmailExistsRequest, CheckEmailExistsResponse } from "@/app/types/a
  */
 export const loginUser = async (credentials: LoginRequest): Promise<ApiResponse<LoginResponse>> => {
    try {
-      const { data } = await apiClient.post<ApiResponse<LoginResponse>>("/authenticate/local/login", credentials)
+      const { data } = await apiClient.post<ApiResponse<LoginResponse>>("/authenticate/login", credentials)
       return data
    } catch (error) {
       return mapAxiosErrorToApiResponse(error as AxiosError)
@@ -48,9 +49,28 @@ export const fetchAuthenticatedUser = async (): Promise<ApiResponse<GetUserRespo
    }
 }
 
+/**
+ * Verifica si un correo electrónico ya existe.
+ * @param request - Datos del usuario para verificar el correo electrónico.
+ * @returns Respuesta de la API con la información de la existencia del correo electrónico.
+ */
 export const checkEmailExists = async (request: CheckEmailExistsRequest): Promise<ApiResponse<CheckEmailExistsResponse>> => {
    try {
       const { data } = await apiClient.post<ApiResponse<CheckEmailExistsResponse>>("/authenticate/check-email", request)
+      return data
+   } catch (error) {
+      return mapAxiosErrorToApiResponse(error as AxiosError)
+   }
+}
+
+/**
+ * Verifica si un nombre de usuario ya existe.
+ * @param request - Datos del usuario para verificar el nombre de usuario.
+ * @returns Respuesta de la API con la información de la existencia del nombre de usuario.
+ */
+export const checkUsernameExists = async (request: CheckUsernameExistsRequest): Promise<ApiResponse<CheckUsernameExistsResponse>> => {
+   try {
+      const { data } = await apiClient.post<ApiResponse<CheckUsernameExistsResponse>>("/authenticate/check-username", request)
       return data
    } catch (error) {
       return mapAxiosErrorToApiResponse(error as AxiosError)
