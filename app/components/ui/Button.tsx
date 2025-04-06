@@ -58,6 +58,13 @@ const buttonVariants = cva(
             destructive: "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/80",
          },
 
+         rounded: {
+            sm: "rounded-sm",
+            md: "rounded-md",
+            lg: "rounded-lg",
+            full: "rounded-full",
+         },
+
          // Variantes de tamaño
          size: {
             sm: "h-8 px-3 text-xs",
@@ -84,10 +91,10 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>, VariantPr
  * Componente Button que implementa las variantes de estilo definidas.
  * Acepta todas las propiedades de un botón HTML estándar más las variantes personalizadas.
  */
-export const Button: FC<ButtonProps> = ({ variant, size, disabled, children, className, ...props }) => {
+export const Button: FC<ButtonProps> = ({ variant, size, rounded, disabled, children, className, ...props }) => {
    return (
       <button
-         className={cn(buttonVariants({ variant, size }), className)}
+         className={cn(buttonVariants({ variant, size, rounded }), className)}
          disabled={disabled}
          {...props}>
          {children}
