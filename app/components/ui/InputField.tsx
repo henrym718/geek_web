@@ -18,16 +18,7 @@ import { UseFormRegisterReturn } from "react-hook-form"
 // Definición de variantes de estilo usando class-variance-authority
 const inputVariants = cva(
    [
-      "flex",
-      "h-9",
       "w-full",
-      "border",
-      "border-primary",
-      "bg-transparent",
-      "px-3",
-      "py-1",
-      "text-md",
-      "shadow-sm",
       "transition-colors",
       "placeholder:text-muted-foreground",
       "focus-visible:outline-none",
@@ -35,17 +26,18 @@ const inputVariants = cva(
       "focus-visible:ring-ring",
       "disabled:cursor-not-allowed",
       "disabled:opacity-50",
-      "data-[error=true]:ring-[2px] data-[error=true]:ring-red-600 data-[error=true]:border-none",
    ],
    {
       variants: {
          variant: {
-            default: "border-primary",
+            default: "border border-primary",
+            outline: "border border-gray-300",
+            ghost: "border-none",
          },
          sizing: {
-            default: "h-10 px-3 py-1",
-            sm: "h-8 px-2 py-1 text-xs",
-            lg: "h-12 px-4 py-2",
+            default: "text-md h-10 px-3",
+            sm: "text-sm h-8 px-2",
+            lg: "text-lg h-12 px-4",
          },
          rounded: {
             none: "rounded-none",
@@ -55,9 +47,17 @@ const inputVariants = cva(
             full: "rounded-full",
          },
          background: {
+            transparent: "bg-transparent",
             white: "bg-white",
             gray: "bg-gray-100",
-            transparent: "bg-transparent",
+         },
+         error: {
+            true: "ring-2 ring-red-600 border-red-600",
+            false: "",
+         },
+         fullWidth: {
+            true: "w-full",
+            false: "w-auto",
          },
       },
       defaultVariants: {
@@ -65,6 +65,8 @@ const inputVariants = cva(
          sizing: "default",
          rounded: "md",
          background: "transparent",
+         error: false,
+         fullWidth: true,
       },
    }
 )
@@ -80,11 +82,12 @@ export interface InputFieldProps extends InputHTMLAttributes<HTMLInputElement> {
    sizing?: VariantProps<typeof inputVariants>["sizing"]
    rounded?: VariantProps<typeof inputVariants>["rounded"]
    background?: VariantProps<typeof inputVariants>["background"]
+   fullWidth?: VariantProps<typeof inputVariants>["fullWidth"]
    register?: UseFormRegisterReturn
 }
 
 export const InputField = (props: InputFieldProps) => {
-   const { ref, error, className, classNameWrapper, label, variant, sizing, rounded, background, register, ...rest } = props
+   const { ref, error, fullWidth, className, classNameWrapper, label, variant, sizing, rounded, background, register, ...rest } = props
 
    return (
       <div className={cn("relative flex flex-col w-full", classNameWrapper)}>
@@ -93,9 +96,8 @@ export const InputField = (props: InputFieldProps) => {
 
          {/* Input con estilos configurables */}
          <input
-            className={cn(inputVariants({ variant, sizing, rounded, background }), className)}
+            className={cn(inputVariants({ variant, sizing, rounded, background, fullWidth, error: !!error }), className)}
             ref={ref}
-            data-error={error ? true : null}
             {...rest}
             {...register}
          />
