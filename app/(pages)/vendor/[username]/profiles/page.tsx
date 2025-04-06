@@ -15,6 +15,7 @@ export default async function Profiles(props: ProfilesProps) {
 
    // Obtenemos el token de las cookies
    const accessToken = (await cookies()).get("accessToken")?.value as string
+   console.log(accessToken, "accessToken")
    if (!accessToken) {
       redirect("/") // Si no hay token, redirige al login
    }
@@ -29,7 +30,6 @@ export default async function Profiles(props: ProfilesProps) {
 
    // Obtener los perfiles del vendedor, pasando el token
    const vendorProfiles = await getVendorProfiles(accessToken)
-   console.log(vendorProfiles, "vendorProfiles")
 
    // Si la respuesta es exitosa, usamos los datos, si no, mostramos un array vacío
    const data = vendorProfiles.success ? vendorProfiles.data : []
