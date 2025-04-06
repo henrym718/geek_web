@@ -1,3 +1,4 @@
+"use client"
 import { handleRegister } from "@/app/lib/actions/auth/register.action"
 import { RegisterType } from "@/app/lib/validation/register.schema"
 import { useRouter } from "next/navigation"

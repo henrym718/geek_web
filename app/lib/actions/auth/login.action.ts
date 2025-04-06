@@ -1,27 +1,20 @@
-import { useAuthStore } from "@/app/stores/common/auth.store"
 import { loginUser } from "@/app/services/auth/auth.services"
+import { LoginType } from "../../validation/login.schema"
 import { setLocalStorageItem } from "../../utils/localStorageData"
+import { useAuthStore } from "@/app/stores/global/auth.store"
 
-/**
- * Maneja la acción de inicio de sesión del usuario.
- * @param previousState - Estado anterior del formulario.
- * @param formData - Datos del formulario con email y contraseña.
- * @returns Un objeto indicando si hubo un error en la autenticación.
- */
-export const handleLogin = async (previousState: any, formData: FormData) => {
-   const email = formData.get("email") as string
-   const password = formData.get("password") as string
+export const handleLogin = async (previousState: { success: boolean; error: string }, formData: LoginType) => {
+   const email = formData.email
+   const password = formData.password
 
-   const authResponse = await loginUser({ email, password })
-
-   // Simulación de retraso (1s) para mejorar UX en el login
    await new Promise((resolve) => setTimeout(resolve, 1000))
+   const response = await loginUser({ email, password })
 
-   if (authResponse.success) {
-      useAuthStore.getState().setUser(authResponse.data)
-      setLocalStorageItem("accessToken", authResponse.data.accessToken)
-      return { error: false }
+   if (response.success) {
+      setLocalStorageItem("accessToken", response.data.accessToken)
+      await useAuthStore.getState().loadUser()
+      return { success: true, error: "" }
    }
 
-   return { error: authResponse.message, email, password }
+   return { success: false, error: response.message }
 }

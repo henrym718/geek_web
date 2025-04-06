@@ -34,6 +34,13 @@ export function RegisterForm() {
          </Box>
 
          <InputField
+            label="Username"
+            sizing="default"
+            register={register("username")}
+            error={errors.username?.message}
+         />
+
+         <InputField
             label="Email"
             sizing="default"
             register={register("email")}

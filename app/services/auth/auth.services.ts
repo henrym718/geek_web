@@ -1,12 +1,12 @@
-import { ApiResponse } from "@/app/types/api/api-response.types"
+import { ApiResponse } from "@/app/types/dtos/api-response.types"
 import { apiClient } from "../api/api.client"
 import { mapAxiosErrorToApiResponse } from "@/app/services/api/api.error-adapter"
 import { AxiosError } from "axios"
-import { LoginRequest, LoginResponse } from "@/app/types/api/login.types"
-import { RegisterRequest, RegisterResponse } from "@/app/types/api/register.types"
-import { GetUserResponse } from "@/app/types/api/get-user.types"
-import { CheckEmailExistsRequest, CheckEmailExistsResponse } from "@/app/types/api/check-email.types"
-import { CheckUsernameExistsRequest, CheckUsernameExistsResponse } from "@/app/types/api/check-username.types"
+import { LoginRequest, LoginResponse } from "@/app/types/dtos/login.types"
+import { RegisterRequest, RegisterResponse } from "@/app/types/dtos/register.types"
+import { GetUserResponse } from "@/app/types/dtos/get-user.types"
+import { CheckEmailExistsRequest, CheckEmailExistsResponse } from "@/app/types/dtos/check-email.types"
+import { CheckUsernameExistsRequest, CheckUsernameExistsResponse } from "@/app/types/dtos/check-username.types"
 
 /**
  * Inicia sesión con credenciales locales.

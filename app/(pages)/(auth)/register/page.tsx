@@ -3,6 +3,7 @@ import { RegisterForm } from "@/app/components/features/auth/register/RegisterFo
 import { AUTH_FORM } from "@/app/lib/constants/auth.constants"
 import HandleRolOptions from "@/app/components/features/auth/register/RoleSelectionForm"
 import { useRegistrationFormStore } from "@/app/stores/auth/registrationFormStore"
+import VendorProfileForm from "@/app/components/features/auth/register/VendorProfileForm"
 
 export default function Regsitration() {
    const { currentForm } = useRegistrationFormStore((state) => state)
@@ -10,6 +11,7 @@ export default function Regsitration() {
    const formComponents = {
       [AUTH_FORM.ROLE]: <HandleRolOptions />,
       [AUTH_FORM.REGISTER]: <RegisterForm />,
+      [AUTH_FORM.VENDOR_PROFILE]: <VendorProfileForm />,
    }
 
    return <div className="flex justify-center items-center h-screen w-[35%] mx-auto">{formComponents[currentForm]}</div>
