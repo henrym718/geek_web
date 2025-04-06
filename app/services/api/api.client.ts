@@ -1,11 +1,10 @@
-import { getLocalStorageItem } from "@/app/lib/utils/localStorageData"
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from "axios"
 
 // URL base de la API, obtenida desde las variables de entorno.
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL
 
 // Instancia de Axios configurada con la URL base.
-export const apiClient = axios.create({ baseURL: API_BASE_URL })
+export const apiClient = axios.create({ baseURL: API_BASE_URL, withCredentials: true })
 
 /**
  * Interceptor de solicitudes (request).
@@ -13,10 +12,6 @@ export const apiClient = axios.create({ baseURL: API_BASE_URL })
  */
 apiClient.interceptors.request.use(
    (config: InternalAxiosRequestConfig) => {
-      const accessToken = getLocalStorageItem("accessToken")
-      if (accessToken !== null) {
-         config.headers.Authorization = `Bearer ${accessToken}`
-      }
       return config
    },
    (error: AxiosError) => {
