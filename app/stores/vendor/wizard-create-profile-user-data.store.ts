@@ -4,6 +4,7 @@ import { create } from "zustand"
 interface State {
    vendorProfile: CreateVendorProfileRequest
    setVendorProfile: (data: Partial<CreateVendorProfileRequest>) => void
+   resetVendorProfile: () => void
 }
 
 export const useWizardUserDataStore = create<State>((set) => ({
@@ -11,9 +12,18 @@ export const useWizardUserDataStore = create<State>((set) => ({
       title: "",
       skills: [],
       aboutme: "",
-      vendorId: "",
       categoryId: "",
    },
    setVendorProfile: (data: Partial<CreateVendorProfileRequest>) =>
       set((state) => ({ vendorProfile: { ...state.vendorProfile, ...data } })),
+
+   resetVendorProfile: () =>
+      set({
+         vendorProfile: {
+            title: "",
+            skills: [],
+            aboutme: "",
+            categoryId: "",
+         },
+      }),
 }))

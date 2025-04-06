@@ -5,6 +5,7 @@ interface State {
    totalSteps: number
    nextStep: () => void
    previousStep: () => void
+   resetStep: () => void
 }
 
 export const useWizardCreateProfileStepHandlerStore = create<State>((set) => ({
@@ -12,4 +13,5 @@ export const useWizardCreateProfileStepHandlerStore = create<State>((set) => ({
    totalSteps: 4,
    nextStep: () => set((state) => ({ step: state.step + 1 })),
    previousStep: () => set((state) => ({ step: state.step - 1 })),
+   resetStep: () => set({ step: 1 }),
 }))
