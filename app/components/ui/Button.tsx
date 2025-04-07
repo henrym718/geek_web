@@ -72,6 +72,14 @@ const buttonVariants = cva(
             lg: "h-12 px-6 text-base",
             icon: "h-9 w-9 p-0", // Para botones que solo contienen un icono
          },
+
+         // Variantes de color
+         color: {
+            primary: "bg-primary text-primary-foreground hover:bg-primary/95",
+            secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/10",
+            outline: "bg-transparent border border-opacity-50 hover:bg-primary hover:text-primary-foreground",
+            link: "underline-offset-4 hover:underline shadow-none",
+         },
       },
 
       // Valores predeterminados
@@ -85,16 +93,24 @@ const buttonVariants = cva(
  * Props del componente Button, extendiendo los atributos HTML nativos
  * e incorporando las variantes definidas con CVA.
  */
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants> {}
+interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, "color"> {
+   variant?: VariantProps<typeof buttonVariants>["variant"]
+   size?: VariantProps<typeof buttonVariants>["size"]
+   rounded?: VariantProps<typeof buttonVariants>["rounded"]
+   color?: VariantProps<typeof buttonVariants>["color"]
+   className?: string
+   disabled?: boolean
+   children: React.ReactNode
+}
 
 /**
  * Componente Button que implementa las variantes de estilo definidas.
  * Acepta todas las propiedades de un botón HTML estándar más las variantes personalizadas.
  */
-export const Button: FC<ButtonProps> = ({ variant, size, rounded, disabled, children, className, ...props }) => {
+export const Button: FC<ButtonProps> = ({ variant, size, rounded, color, disabled, children, className, ...props }) => {
    return (
       <button
-         className={cn(buttonVariants({ variant, size, rounded }), className)}
+         className={cn(buttonVariants({ variant, size, rounded, color }), className)}
          disabled={disabled}
          {...props}>
          {children}
