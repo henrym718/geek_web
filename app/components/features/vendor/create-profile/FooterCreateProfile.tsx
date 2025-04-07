@@ -2,17 +2,17 @@
 import { Button } from "@/app/components/ui"
 import { ProgressBar } from "@/app/components/ui/ProgressBar"
 import { Box } from "@/app/components/ui"
-import { useWizardCreateProfileStepHandlerStore } from "@/app/stores/vendor/wizard-create-profile-step-handler.store"
-import { useWizardUserDataStore } from "@/app/stores/vendor/wizard-create-profile-user-data.store"
-import { createVendorProfile } from "@/app/services/vendor/vendor.services"
-import { useAuthStore } from "@/app/stores/global/auth.store"
+import { useWizardCreateProfileStepHandlerStore } from "@/app/stores/use-create-profile-step-handler.store"
+import { useWizardUserDataStore } from "@/app/stores/use-create-profile-user-data.store"
+import { useSessionDataStore } from "@/app/stores/user-session-data.store"
 import { useRouter } from "next/navigation"
+import { createVendorProfile } from "@/app/services/vendor-profile.service"
 
 export default function FooterCreateProfile() {
    const router = useRouter()
    const { step, totalSteps, previousStep, nextStep, resetStep } = useWizardCreateProfileStepHandlerStore((state) => state)
    const { vendorProfile, resetVendorProfile } = useWizardUserDataStore((state) => state)
-   const { user } = useAuthStore((state) => state)
+   const { user } = useSessionDataStore((state) => state)
 
    const handleCreateProfile = async () => {
       if (!user?.vendor) return

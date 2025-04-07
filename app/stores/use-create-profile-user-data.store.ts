@@ -1,4 +1,4 @@
-import { CreateVendorProfileRequest } from "@/app/types/dtos/create-vendor-profile.types"
+import { CreateVendorProfileRequest } from "@/app/data/dtos/create-vendor-profile.types"
 import { create } from "zustand"
 
 interface State {

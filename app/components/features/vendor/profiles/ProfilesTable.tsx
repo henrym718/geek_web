@@ -2,7 +2,7 @@
 
 import { Box, Button } from "@/app/components/ui"
 import { useRouter } from "next/navigation"
-import { GetVendorProfileResponse } from "@/app/types/dtos/get-vendor-profile"
+import { GetVendorProfileResponse } from "@/app/data/dtos/get-vendor-profile"
 interface ProfilesTableProps {
    data: GetVendorProfileResponse[]
    username: string

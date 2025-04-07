@@ -1,6 +1,6 @@
 import { Box, Typography } from "@/app/components/ui"
 import { TextArea } from "@/app/components/ui/TextArea"
-import { useWizardUserDataStore } from "@/app/stores/vendor/wizard-create-profile-user-data.store"
+import { useWizardUserDataStore } from "@/app/stores/use-create-profile-user-data.store"
 import React from "react"
 
 export default function ProfileAboutMe() {

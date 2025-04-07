@@ -14,6 +14,7 @@ export default function HandleRolOptions() {
    const handleRoleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       setSelectedRole(event.target.value)
    }
+
    const getButtonText = (role: string | null) => {
       if (!role) return "Crear una cuenta"
       return role === ROLE.CLIENT ? "Unete como Cliente" : "Aplica como Freelancer"

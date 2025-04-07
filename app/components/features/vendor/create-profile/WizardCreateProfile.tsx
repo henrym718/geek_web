@@ -3,7 +3,7 @@ import GroupAndCategorySelector from "./GroupAndCategorySelector"
 import ProfileAboutMe from "./ProfileAboutMe"
 import ProfileHeadline from "./ProfileHeadline"
 import SkillsSelector from "./SkillsSelector"
-import { useWizardCreateProfileStepHandlerStore } from "@/app/stores/vendor/wizard-create-profile-step-handler.store"
+import { useWizardCreateProfileStepHandlerStore } from "@/app/stores/use-create-profile-step-handler.store"
 
 export default function WizardCreateProfile() {
    const { step } = useWizardCreateProfileStepHandlerStore((state) => state)

@@ -1,8 +1,8 @@
-import { getAllGroups } from "@/app/services/group/group.services"
-import { getCategoriesByGroupId } from "@/app/services/category/catgory.services"
-import { GetCategoriesByGroupIdResponse } from "@/app/types/dtos/get-categories-by-groupId"
-import { GetSkillsByCategoryIdResponse } from "@/app/types/dtos/get-skills-by-categoryId"
-import { GetAllGroupsResponse } from "@/app/types/dtos/gett-all-groups"
+import { GetCategoriesByGroupIdResponse } from "@/app/data/dtos/get-categories-by-groupId"
+import { GetSkillsByCategoryIdResponse } from "@/app/data/dtos/get-skills-by-categoryId"
+import { GetAllGroupsResponse } from "@/app/data/dtos/gett-all-groups"
+import { fetchCategoriesByGroupId } from "@/app/services/category.service"
+import { fetchAllGroups } from "@/app/services/group.service"
 import { create } from "zustand"
 
 interface State {
@@ -37,7 +37,7 @@ export const useWizardCreateProfileFormDataStore = create<State>((set) => ({
 
    loadGroups: async () => {
       set({ isLoading: true, error: null })
-      const res = await getAllGroups()
+      const res = await fetchAllGroups()
 
       if (res.success) {
          set({ groups: res.data })
@@ -50,7 +50,7 @@ export const useWizardCreateProfileFormDataStore = create<State>((set) => ({
 
    loadCategories: async (groupId: string) => {
       set({ isLoading: true, error: null })
-      const response = await getCategoriesByGroupId(groupId)
+      const response = await fetchCategoriesByGroupId(groupId)
 
       if (response.success) {
          set({ categories: response.data })

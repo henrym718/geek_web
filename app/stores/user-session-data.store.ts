@@ -1,8 +1,8 @@
 import { create } from "zustand"
-import { fetchAuthenticatedUser } from "@/app/services/auth/auth.services"
-import { GetUserResponse } from "@/app/types/dtos/get-user.types"
+import { fetchAuthenticatedUser } from "../services/auth.service"
+import { GetUserResponse } from "@/app/data/dtos/get-user.types"
 
-interface AuthStore {
+interface State {
    user: GetUserResponse | null
    loadUser: () => Promise<void>
    logout: () => void
@@ -12,7 +12,7 @@ interface AuthStore {
 /**
  * Hook de Zustand para manejar los datos de authentication de usuario.
  */
-export const useAuthStore = create<AuthStore>((set) => ({
+export const useSessionDataStore = create<State>((set) => ({
    user: null,
 
    /**

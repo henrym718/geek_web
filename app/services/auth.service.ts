@@ -1,18 +1,13 @@
-import { ApiResponse } from "@/app/types/dtos/api-response.types"
-import { apiClient } from "../api/api.client"
-import { mapAxiosErrorToApiResponse } from "@/app/services/api/api.error-adapter"
+import { ApiResponse } from "@/app/data/dtos/api-response.types"
+import { apiClient } from "@/app/lib/api/api.client"
+import { mapAxiosErrorToApiResponse } from "@/app/lib/api/api.error-adapter"
 import { AxiosError } from "axios"
-import { LoginRequest, LoginResponse } from "@/app/types/dtos/login.types"
-import { RegisterRequest, RegisterResponse } from "@/app/types/dtos/register.types"
-import { GetUserResponse } from "@/app/types/dtos/get-user.types"
-import { CheckEmailExistsRequest, CheckEmailExistsResponse } from "@/app/types/dtos/check-email.types"
-import { CheckUsernameExistsRequest, CheckUsernameExistsResponse } from "@/app/types/dtos/check-username.types"
+import { LoginRequest, LoginResponse } from "@/app/data/dtos/login.types"
+import { RegisterRequest, RegisterResponse } from "@/app/data/dtos/register.types"
+import { GetUserResponse } from "@/app/data/dtos/get-user.types"
+import { CheckEmailExistsRequest, CheckEmailExistsResponse } from "@/app/data/dtos/check-email.types"
+import { CheckUsernameExistsRequest, CheckUsernameExistsResponse } from "@/app/data/dtos/check-username.types"
 
-/**
- * Inicia sesión con credenciales locales.
- * @param credentials - Datos del usuario para autenticación.
- * @returns Respuesta de la API con la información del usuario autenticado.
- */
 export const loginUser = async (credentials: LoginRequest): Promise<ApiResponse<LoginResponse>> => {
    try {
       const { data } = await apiClient.post<ApiResponse<LoginResponse>>("/authenticate/login", credentials)
@@ -22,11 +17,6 @@ export const loginUser = async (credentials: LoginRequest): Promise<ApiResponse<
    }
 }
 
-/**
- * Registra un nuevo usuario con credenciales locales.
- * @param userDetails - Datos del usuario a registrar.
- * @returns Respuesta de la APIClient con la información del usuario registrado.
- */
 export const registerUser = async (userDetails: RegisterRequest): Promise<ApiResponse<RegisterResponse>> => {
    try {
       const { data } = await apiClient.post<ApiResponse<RegisterResponse>>("/authenticate/register", userDetails)
@@ -36,10 +26,6 @@ export const registerUser = async (userDetails: RegisterRequest): Promise<ApiRes
    }
 }
 
-/**
- * Obtiene la información del usuario autenticado.
- * @returns Datos del usuario si está autenticado.
- */
 export const fetchAuthenticatedUser = async (): Promise<ApiResponse<GetUserResponse>> => {
    try {
       const { data } = await apiClient.get<ApiResponse<GetUserResponse>>("/authenticate/me")
@@ -49,11 +35,6 @@ export const fetchAuthenticatedUser = async (): Promise<ApiResponse<GetUserRespo
    }
 }
 
-/**
- * Verifica si un correo electrónico ya existe.
- * @param request - Datos del usuario para verificar el correo electrónico.
- * @returns Respuesta de la API con la información de la existencia del correo electrónico.
- */
 export const checkEmailExists = async (request: CheckEmailExistsRequest): Promise<ApiResponse<CheckEmailExistsResponse>> => {
    try {
       const { data } = await apiClient.post<ApiResponse<CheckEmailExistsResponse>>("/authenticate/check-email", request)
@@ -63,11 +44,6 @@ export const checkEmailExists = async (request: CheckEmailExistsRequest): Promis
    }
 }
 
-/**
- * Verifica si un nombre de usuario ya existe.
- * @param request - Datos del usuario para verificar el nombre de usuario.
- * @returns Respuesta de la API con la información de la existencia del nombre de usuario.
- */
 export const checkUsernameExists = async (request: CheckUsernameExistsRequest): Promise<ApiResponse<CheckUsernameExistsResponse>> => {
    try {
       const { data } = await apiClient.post<ApiResponse<CheckUsernameExistsResponse>>("/authenticate/check-username", request)

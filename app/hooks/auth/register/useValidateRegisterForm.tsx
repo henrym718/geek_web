@@ -1,4 +1,4 @@
-import { registerSchema, RegisterType } from "@/app/lib/validation/register.schema"
+import { registerSchema, RegisterType } from "@/app/data/schemas/register.schema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 

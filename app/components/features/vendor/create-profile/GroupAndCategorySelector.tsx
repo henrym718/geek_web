@@ -1,7 +1,7 @@
 "use client"
 import { Box, Button, Typography } from "@/app/components/ui"
-import { useWizardCreateProfileFormDataStore } from "@/app/stores/vendor/wizard-create-profile-form-data.store"
-import { useWizardUserDataStore } from "@/app/stores/vendor/wizard-create-profile-user-data.store"
+import { useWizardCreateProfileFormDataStore } from "@/app/stores/use-create-profile-form-data.store"
+import { useWizardUserDataStore } from "@/app/stores/use-create-profile-user-data.store"
 import React, { useEffect } from "react"
 
 export default function GroupAndCategoryStep() {

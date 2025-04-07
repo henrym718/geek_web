@@ -1,9 +1,9 @@
 "use client"
 import { useEffect } from "react"
-import { useAuthStore } from "../../stores/global/auth.store"
+import { useSessionDataStore } from "../../stores/user-session-data.store"
 
 export function UserInitializer({ children }: Readonly<React.PropsWithChildren>) {
-   const { user, loadUser } = useAuthStore() // Usamos el hook aquí también para escuchar cambios
+   const { user, loadUser } = useSessionDataStore() // Usamos el hook aquí también para escuchar cambios
    console.log("INIZIALITER ", user)
    useEffect(() => {
       if (!user) {

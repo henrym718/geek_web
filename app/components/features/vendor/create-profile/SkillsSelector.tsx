@@ -2,7 +2,7 @@
 
 import { Box, Typography } from "@/app/components/ui"
 import InputTag from "@/app/components/ui/InputTag"
-import { useWizardUserDataStore } from "@/app/stores/vendor/wizard-create-profile-user-data.store"
+import { useWizardUserDataStore } from "@/app/stores/use-create-profile-user-data.store"
 
 export default function SkillsSelector() {
    const { vendorProfile } = useWizardUserDataStore((state) => state)

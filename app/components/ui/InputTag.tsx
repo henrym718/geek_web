@@ -15,11 +15,11 @@
 
 // 📦 Imports
 import { cn } from "@/app/lib/utils/cn"
-import { getSkillsByCategoryId } from "@/app/services/skill/skill.services"
-import { useWizardCreateProfileFormDataStore } from "@/app/stores/vendor/wizard-create-profile-form-data.store"
-import { useWizardUserDataStore } from "@/app/stores/vendor/wizard-create-profile-user-data.store"
-import { GetSkillsByCategoryIdResponse } from "@/app/types/dtos/get-skills-by-categoryId"
+import { useWizardCreateProfileFormDataStore } from "@/app/stores/use-create-profile-form-data.store"
+import { useWizardUserDataStore } from "@/app/stores/use-create-profile-user-data.store"
+import { GetSkillsByCategoryIdResponse } from "@/app/data/dtos/get-skills-by-categoryId"
 import { useEffect, useState } from "react"
+import { fetchSkillsByCategoryId } from "@/app/services/skill.service"
 
 // 📐 Props
 interface InputTagProps {
@@ -112,7 +112,7 @@ export default function InputTag(props: Readonly<InputTagProps>) {
     */
    useEffect(() => {
       const fetchSkills = async () => {
-         const response = await getSkillsByCategoryId({ categoryId: props.categoryId })
+         const response = await fetchSkillsByCategoryId({ categoryId: props.categoryId })
          if (response.success) {
             const newTags = response.data.filter((tag) => !selectedTags.some((selected) => selected.id === tag.id))
             setOptionsTags(newTags)

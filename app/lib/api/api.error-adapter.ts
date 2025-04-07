@@ -1,12 +1,12 @@
 import { AxiosError } from "axios"
-import { ApiResponse, FailureApiResponse } from "../../types/dtos/api-response.types"
+import { ApiResponse, FailureApiResponse } from "../../data/dtos/api-response.types"
 
 /**
  * Verifica si el error recibido proviene del servidor y cumple con la estructura esperada.
  * @param error - Objeto de error recibido en la respuesta de la API.
  * @returns `true` si el error tiene un formato esperado, `false` en caso contrario.
  */
-const isServerError = (error: unknown): error is FailureApiResponse => {
+const isServerError = (error: any): error is FailureApiResponse => {
    return error?.success === false && typeof error?.message === "string"
 }
 

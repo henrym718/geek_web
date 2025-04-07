@@ -2,7 +2,7 @@ import { verifyToken } from "@/app/lib/utils/verifyToken"
 import { redirect } from "next/navigation"
 import { cookies } from "next/headers"
 import ProfilesTable from "@/app/components/features/vendor/profiles/ProfilesTable"
-import { getVendorProfiles } from "@/app/services/vendor/vendor.services"
+import { fetchVendorProfilesByAccessToken } from "@/app/services/vendor-profile.service"
 
 interface ProfilesProps {
    params: {
@@ -29,7 +29,7 @@ export default async function Profiles(props: ProfilesProps) {
    }
 
    // Obtener los perfiles del vendedor, pasando el token
-   const vendorProfiles = await getVendorProfiles(accessToken)
+   const vendorProfiles = await fetchVendorProfilesByAccessToken(accessToken)
 
    // Si la respuesta es exitosa, usamos los datos, si no, mostramos un array vacío
    const data = vendorProfiles.success ? vendorProfiles.data : []

@@ -1,10 +1,8 @@
 import { Box, InputField, Typography } from "@/app/components/ui"
-import { useWizardUserDataStore } from "@/app/stores/vendor/wizard-create-profile-user-data.store"
+import { useWizardUserDataStore } from "@/app/stores/use-create-profile-user-data.store"
 
 export default function ProfileHeadline() {
    const { setVendorProfile, vendorProfile } = useWizardUserDataStore((state) => state)
-
-   console.log(vendorProfile)
 
    return (
       <Box className="flex flex-col gap-2 w-4/7">

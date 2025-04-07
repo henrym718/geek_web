@@ -1,14 +1,11 @@
-// getVendorProfiles.ts
-
-import { apiClient } from "../api/api.client"
-import { ApiResponse } from "@/app/types/dtos/api-response.types"
+import { ApiResponse } from "@/app/data/dtos/api-response.types"
+import { apiClient } from "@/app/lib/api/api.client"
+import { mapAxiosErrorToApiResponse } from "@/app/lib/api/api.error-adapter"
 import { AxiosError } from "axios"
-import { mapAxiosErrorToApiResponse } from "../api/api.error-adapter"
-import { GetVendorProfileResponse } from "@/app/types/dtos/get-vendor-profile"
-import { CreateVendorProfileRequest, CreateVendorProfileResponse } from "@/app/types/dtos/create-vendor-profile.types"
+import { GetVendorProfileResponse } from "@/app/data/dtos/get-vendor-profile"
+import { CreateVendorProfileRequest, CreateVendorProfileResponse } from "@/app/data/dtos/create-vendor-profile.types"
 
-// Esta función obtiene el perfil del vendedor
-export const getVendorProfiles = async (accessToken: string): Promise<ApiResponse<GetVendorProfileResponse[]>> => {
+export const fetchVendorProfilesByAccessToken = async (accessToken: string): Promise<ApiResponse<GetVendorProfileResponse[]>> => {
    try {
       // Incluyendo el token manualmente en los headers
       const { data } = await apiClient.get<ApiResponse<GetVendorProfileResponse[]>>("/vendor-profile/me", {

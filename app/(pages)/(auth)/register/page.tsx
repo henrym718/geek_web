@@ -2,11 +2,11 @@
 import { RegisterForm } from "@/app/components/features/auth/register/RegisterForm"
 import { AUTH_FORM } from "@/app/lib/constants/auth.constants"
 import HandleRolOptions from "@/app/components/features/auth/register/RoleSelectionForm"
-import { useRegistrationFormStore } from "@/app/stores/auth/registrationFormStore"
+import { useRegistrationStore } from "@/app/stores/use-registration.store"
 import VendorProfileForm from "@/app/components/features/auth/register/VendorProfileForm"
 
 export default function Regsitration() {
-   const { currentForm } = useRegistrationFormStore((state) => state)
+   const { currentForm } = useRegistrationStore((state) => state)
 
    const formComponents = {
       [AUTH_FORM.ROLE]: <HandleRolOptions />,

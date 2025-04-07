@@ -1,7 +1,7 @@
-import { loginUser } from "@/app/services/auth/auth.services"
-import { LoginType } from "../../validation/login.schema"
+import { loginUser } from "@/app/services/auth.service"
+import { LoginType } from "@/app/data/schemas/login.schema"
 import { setLocalStorageItem } from "../../utils/localStorageData"
-import { useAuthStore } from "@/app/stores/global/auth.store"
+import { useSessionDataStore } from "@/app/stores/user-session-data.store"
 
 export const handleLogin = async (previousState: { success: boolean; error: string }, formData: LoginType) => {
    const email = formData.email
@@ -12,7 +12,7 @@ export const handleLogin = async (previousState: { success: boolean; error: stri
 
    if (response.success) {
       setLocalStorageItem("accessToken", response.data.accessToken)
-      await useAuthStore.getState().loadUser()
+      await useSessionDataStore.getState().loadUser()
       return { success: true, error: "" }
    }
 

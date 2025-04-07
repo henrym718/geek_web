@@ -4,7 +4,7 @@ import { Button, InputField, Typography } from "@/app/components/ui"
 import { handleLogin } from "@/app/lib/actions/auth/login.action"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { loginSchema, LoginType } from "@/app/lib/validation/login.schema"
+import { loginSchema, LoginType } from "@/app/data/schemas/login.schema"
 import { useRouter } from "next/navigation"
 
 export function LoginForm() {
