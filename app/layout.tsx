@@ -1,11 +1,11 @@
 import "@/app/styles/globals.css"
-import { UserInitializer } from "./lib/initializers/user.initializer"
+import { UserInitializer } from "@/app/lib/initializers/user.initializer"
 
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
    return (
       <html lang="es">
          <UserInitializer>
-            <body>{children}</body>
+            <body>{children} </body>
          </UserInitializer>
       </html>
    )
