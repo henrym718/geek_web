@@ -23,6 +23,7 @@ async function getUserRole(request: NextRequest) {
    const accessToken = request.cookies.get("accessToken")?.value
    if (!accessToken) return null
    const tokenPayload = await verifyToken(accessToken)
+   console.log(tokenPayload)
    return tokenPayload.role
 }
 
