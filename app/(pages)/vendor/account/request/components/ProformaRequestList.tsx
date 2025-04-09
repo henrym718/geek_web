@@ -33,6 +33,5 @@ export default function ProformaRequestList() {
    if (proformaRequest.length === 0) {
       return <Box className="p-4 text-center">No hay solicitudes disponibles</Box>
    }
-
    return <ProformaRequestCard request={proformaRequest} />
 }
