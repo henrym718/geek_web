@@ -34,7 +34,6 @@ export const SideModal = ({ children, trigger }: SideModalProps) => {
 
       return () => {
          document.body.style.overflow = ""
-         document.body.style.overscrollBehavior = ""
          document.removeEventListener("mousedown", handleClickOutside)
          document.removeEventListener("keydown", handleEscapeKey)
       }
