@@ -87,7 +87,7 @@ export const Modal: React.FC<ModalProps> = ({ children, trigger, className }) =>
          {triggerWithOpenAction}
          {isOpen && (
             <div
-               className="fixed inset-0 h-screen w-screen bg-[rgba(0,0,0,.65)] flex items-center justify-center z-50 transition-discrete starting:open:opacity-0"
+               className="fixed inset-0 bg-[rgba(0,0,0,.65)] flex items-center justify-center z-50"
                ref={modalRef}>
                <div
                   className={cn(
