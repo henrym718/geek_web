@@ -150,8 +150,7 @@ export const Typography: React.FC<TypographyProps> = ({ variant, color, align, e
    return (
       <Component
          className={cn(typographyVariants({ variant, color, align, effect }), className)}
-         {...rest}
-      >
+         {...rest}>
          {children}
       </Component>
    )
