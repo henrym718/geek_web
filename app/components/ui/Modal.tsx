@@ -18,7 +18,7 @@ import { cloneElement, ReactElement, ReactNode, useEffect, useRef, useState } fr
  */
 interface ModalProps {
    children?: ReactNode
-   trigger: ReactElement<any, any>
+   trigger: ReactElement<{ onClick: () => void; className?: string }>
    className?: string
 }
 
