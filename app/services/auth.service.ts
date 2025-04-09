@@ -8,6 +8,12 @@ import { GetUserResponse } from "@/app/data/dtos/get-user.types"
 import { CheckEmailExistsRequest, CheckEmailExistsResponse } from "@/app/data/dtos/check-email.types"
 import { CheckUsernameExistsRequest, CheckUsernameExistsResponse } from "@/app/data/dtos/check-username.types"
 
+export async function getAccessTokenFromApi(): Promise<string | null> {
+   const res = await fetch("/api/token")
+   const data = await res.json()
+   return data.token ?? null
+}
+
 export const loginUser = async (credentials: LoginRequest): Promise<ApiResponse<LoginResponse>> => {
    try {
       const { data } = await apiClient.post<ApiResponse<LoginResponse>>("/authenticate/login", credentials)
