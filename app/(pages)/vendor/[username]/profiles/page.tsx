@@ -1,7 +1,7 @@
 import { verifyToken } from "@/app/lib/utils/verifyToken"
 import { redirect } from "next/navigation"
 import { cookies } from "next/headers"
-import ProfilesTable from "@/app/components/features/vendor/profiles/ProfilesTable"
+import ProfilesTable from "@/app/(pages)/vendor/[username]/profiles/components/ProfilesTable"
 import { fetchVendorProfilesByAccessToken } from "@/app/services/vendor-profile.service"
 
 interface ProfilesProps {
