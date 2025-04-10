@@ -1,5 +1,5 @@
 import { NextResponse, NextRequest } from "next/server"
-import { verifyToken } from "./app/lib/utils/verifyToken"
+import { verifyToken } from "./src/lib/utils/verifyToken"
 
 const RouteType = {
    VENDOR: "VENDOR",
