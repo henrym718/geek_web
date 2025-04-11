@@ -4,7 +4,7 @@ import Link from "next/link"
 import { RoleOption } from "./role-option"
 import { Box, Button, Typography } from "@/components/ui"
 import { ROLE, RoleType } from "@/lib/constants/auth.constants"
-import { handleRoles } from "@/lib/actions/auth/roles.action"
+import { handleRoles } from "@/lib/actions/roles.action"
 import { UserRoundCheck, UserRoundSearch } from "lucide-react"
 
 export function RoleOptionSelector() {
