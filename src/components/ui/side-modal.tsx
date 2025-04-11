@@ -3,7 +3,7 @@
 import React, { useEffect, useRef, useState } from "react"
 
 interface SideModalProps {
-   children: React.ReactNode
+   children: (close: () => void) => React.ReactNode
    trigger: React.ReactElement<{ onClick: () => void }>
 }
 
@@ -46,7 +46,7 @@ export const SideModal = ({ children, trigger }: SideModalProps) => {
             <div
                className="fixed inset-0 flex justify-end bg-black/50 z-50"
                ref={divRef}>
-               <div className="h-screen overflow-y-auto bg-white">{children}</div>
+               <div className="h-screen overflow-y-auto bg-white">{children(closeModal)}</div>
             </div>
          )}
       </>
