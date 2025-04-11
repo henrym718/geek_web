@@ -1,4 +1,4 @@
-import { AUTH_FORM, RoleType } from "../../constants/auth.constants"
+import { AUTH_FORM, RoleType } from "../constants/auth.constants"
 import { useRegistrationStore } from "@/stores/use-registration.store"
 
 export const handleRoles = async (previousState: FormData | null, formData: RoleType) => {
