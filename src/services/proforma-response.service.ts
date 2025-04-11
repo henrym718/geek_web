@@ -4,9 +4,17 @@ import { apiClient } from "@/lib/api/api.client"
 import { mapAxiosErrorToApiResponse } from "@/lib/api/api.error-adapter"
 import { AxiosError } from "axios"
 
-export const createProformaResponse = async (request: CreateProformaResponseRequest): Promise<ApiResponse<CreateProformaResponse>> => {
+export const createProformaResponse = async (
+   accessToken: string,
+   request: CreateProformaResponseRequest
+): Promise<ApiResponse<CreateProformaResponse>> => {
    try {
-      const { data } = await apiClient.post<ApiResponse<CreateProformaResponse>>("/proforma-response", request)
+      await new Promise((resolve) => setTimeout(resolve, 1000))
+      const { data } = await apiClient.post<ApiResponse<CreateProformaResponse>>("/proforma-response", request, {
+         headers: {
+            Authorization: `Bearer ${accessToken}`,
+         },
+      })
       return data
    } catch (error) {
       return mapAxiosErrorToApiResponse(error as AxiosError)

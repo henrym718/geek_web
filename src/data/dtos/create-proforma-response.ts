@@ -1,5 +1,5 @@
 export interface CreateProformaResponseRequest {
-   budget: number | undefined
+   budget?: number
    message: string
    profileVendorId: string
    proformaRequestId: string

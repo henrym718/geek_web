@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation"
 import { Box, Button } from "@/components/ui"
 import { fetchVendorProfilesByAccessToken } from "@/services/vendor-profile.service"
 import { GetVendorProfileResponse } from "@/data/dtos/get-vendor-profile"
+import { useCreateRequestResponseStore } from "@/stores/use-create-request-response.store"
 
 export function ProfileSelector() {
    const pathname = usePathname()
@@ -15,9 +16,11 @@ export function ProfileSelector() {
    const [profiles, setProfiles] = useState<GetVendorProfileResponse[]>([])
    const [isOpen, setIsOpen] = useState(false)
    const [selectedVendorProfile, setSelectedVendorProfile] = useState("")
+   const { setProfileActive } = useCreateRequestResponseStore((state) => state)
 
    function handleProfileSelection(name: string, id: string) {
       setSelectedVendorProfile(name)
+      setProfileActive(id)
       setIsOpen(false)
       const params = new URLSearchParams(searchParams)
       params.set("profile", id)
@@ -31,6 +34,7 @@ export function ProfileSelector() {
          if (response.success) {
             setProfiles(response.data)
             setSelectedVendorProfile(response.data[0].category.name)
+            setProfileActive(response.data[0].id)
             const params = new URLSearchParams(searchParams)
             const profile = params.get("profile")
             if (!profile) {

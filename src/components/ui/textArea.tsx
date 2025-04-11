@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils/cn"
 import { cva, VariantProps } from "class-variance-authority"
+import { UseFormRegisterReturn } from "react-hook-form"
 
 const textAreaVariants = cva(
    [
@@ -37,6 +38,10 @@ const textAreaVariants = cva(
             true: "w-full",
             false: "w-auto",
          },
+         error: {
+            true: "ring-2 ring-red-600 border-red-600",
+            false: "",
+         },
       },
       defaultVariants: {
          variant: "default",
@@ -53,15 +58,24 @@ interface TextAreaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement
    rounded?: VariantProps<typeof textAreaVariants>["rounded"]
    background?: VariantProps<typeof textAreaVariants>["background"]
    fullWidth?: VariantProps<typeof textAreaVariants>["fullWidth"]
+   register?: UseFormRegisterReturn
+   label?: string
+   error?: string
 }
 
 export const TextArea = (props: TextAreaProps) => {
-   const { variant, rounded, background, fullWidth, className, ...rest } = props
+   const { variant, rounded, background, fullWidth, className, error, label, register, ...rest } = props
 
    return (
-      <textarea
-         className={cn(textAreaVariants({ variant, rounded, background, fullWidth }), className)}
-         {...rest}
-      />
+      <>
+         {label && <span className="text-sm pb-1">{label}</span>}
+
+         <textarea
+            className={cn(textAreaVariants({ variant, rounded, background, fullWidth, error: !!error }), className)}
+            {...rest}
+            {...register}
+         />
+         <div className="h-2 mt-1">{error && <p className="text-xs text-red-500">{error}</p>}</div>
+      </>
    )
 }

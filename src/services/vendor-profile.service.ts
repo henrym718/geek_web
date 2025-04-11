@@ -5,14 +5,10 @@ import { AxiosError } from "axios"
 import { GetVendorProfileResponse } from "@/data/dtos/get-vendor-profile"
 import { CreateVendorProfileRequest, CreateVendorProfileResponse } from "@/data/dtos/create-vendor-profile.types"
 
-export const fetchVendorProfilesByAccessToken = async (accessToken: string): Promise<ApiResponse<GetVendorProfileResponse[]>> => {
+export const fetchVendorProfilesByAccessToken = async (): Promise<ApiResponse<GetVendorProfileResponse[]>> => {
    try {
       // Incluyendo el token manualmente en los headers
-      const { data } = await apiClient.get<ApiResponse<GetVendorProfileResponse[]>>("/vendor-profile/me", {
-         headers: {
-            Authorization: `Bearer ${accessToken}`,
-         },
-      })
+      const { data } = await apiClient.get<ApiResponse<GetVendorProfileResponse[]>>("/vendor-profile/me", {})
 
       return data
    } catch (error) {

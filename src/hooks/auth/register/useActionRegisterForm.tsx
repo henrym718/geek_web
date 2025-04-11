@@ -1,5 +1,5 @@
 "use client"
-import { handleRegister } from "@/lib/actions/auth/register.action"
+import { handleRegister } from "@/lib/actions/register.action"
 import { RegisterType } from "@/data/schemas/register.schema"
 import { useRouter } from "next/navigation"
 import { startTransition, useActionState, useEffect } from "react"

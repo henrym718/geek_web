@@ -51,7 +51,12 @@ export function ProformaRequestCard({ request }: Props) {
                      </Box>
                   </Box>
                }>
-               <RequestResponseForm request={request} />
+               {(close) => (
+                  <RequestResponseForm
+                     request={request}
+                     closeModal={close}
+                  />
+               )}
             </SideModal>
          ))}
          <Box
