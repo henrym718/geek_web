@@ -1,10 +1,10 @@
-export interface CreateProformaResponseRequest {
+export interface CreateResponseRequest {
    budget?: number
    message: string
    profileVendorId: string
    proformaRequestId: string
 }
 
-export interface CreateProformaResponse {
+export interface CreateResponse {
    details: string
 }
