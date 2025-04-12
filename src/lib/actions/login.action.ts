@@ -1,6 +1,6 @@
 import { loginUser } from "@/services/auth.service"
 import { LoginType } from "@/data/schemas/login.schema"
-import { setLocalStorageItem } from "../../utils/localStorageData"
+import { setLocalStorageItem } from "../utils/localStorageData"
 import { useSessionDataStore } from "@/stores/user-session-data.store"
 
 export const handleLogin = async (previousState: { success: boolean; error: string }, formData: LoginType) => {
