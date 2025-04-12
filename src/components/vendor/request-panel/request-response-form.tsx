@@ -10,12 +10,15 @@ import useSubmitRequestResponse from "@/hooks/auth/vendor/use-submit-proforma-re
 
 interface Props {
    request: GetRequestByProfileIdResponse
+   profileId: string
+   exists: boolean
    closeModal: () => void
 }
 
-export function RequestResponseForm({ request, closeModal }: Props) {
+export function RequestResponseForm({ request, profileId, exists, closeModal }: Props) {
    const { register, handleSubmit, formState: { errors } } = useForm() // prettier-ignore
-   const { onSubmitHandler, state, pending } = useSubmitRequestResponse(request.id, closeModal)
+
+   const { onSubmitHandler, state, pending } = useSubmitRequestResponse(request.id, profileId, closeModal)
 
    return (
       <Box className="flex flex-col p-10 gap-4 cursor-default w-[700px] min-h-[100vh] overflow-y-auto">
@@ -81,34 +84,43 @@ export function RequestResponseForm({ request, closeModal }: Props) {
             ))}
          </Box>
          <Divider />
-         <Typography variant="subtitulo2">Aplica a esta propuesta</Typography>
-         <form onSubmit={handleSubmit(onSubmitHandler)}>
-            <TextArea
-               rows={5}
-               error={errors.message?.message as string}
-               register={register("message", {
-                  required: "El mensaje es requerido",
-                  minLength: {
-                     value: 10,
-                     message: "El mensaje debe tener al menos 10 caracteres",
-                  },
-               })}
-            />
-            <Button
-               className="mt-4 w-full"
-               variant="primary"
-               size="lg"
-               type="submit"
-               disabled={pending}
-               isLoading={pending}>
-               Enviar propuesta
-            </Button>
-         </form>
-         {state.error && (
+         {exists ? (
             <Box className="flex h-2 items-center gap-2">
                <IoAlertCircleOutline size={22} />
-               <Typography variant="nota">{state.error}</Typography>
+               <Typography variant="nota">Ya has aplicado a esta soliciutd de trabajo</Typography>
             </Box>
+         ) : (
+            <>
+               <Typography variant="subtitulo2">Aplica a esta propuesta</Typography>
+               <form onSubmit={handleSubmit(onSubmitHandler)}>
+                  <TextArea
+                     rows={5}
+                     error={errors.message?.message as string}
+                     register={register("message", {
+                        required: "El mensaje es requerido",
+                        minLength: {
+                           value: 10,
+                           message: "El mensaje debe tener al menos 10 caracteres",
+                        },
+                     })}
+                  />
+                  <Button
+                     className="mt-4 w-full"
+                     variant="primary"
+                     size="lg"
+                     type="submit"
+                     disabled={pending}
+                     isLoading={pending}>
+                     Enviar propuesta
+                  </Button>
+               </form>
+               {state.error && (
+                  <Box className="flex h-2 items-center gap-2">
+                     <IoAlertCircleOutline size={22} />
+                     <Typography variant="nota">{state.error}</Typography>
+                  </Box>
+               )}
+            </>
          )}
       </Box>
    )

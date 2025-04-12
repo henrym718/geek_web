@@ -1,16 +1,17 @@
+"use client"
 import { createRequestResponse } from "@/lib/actions/create-request-response.action"
-import { useCreateRequestResponseStore } from "@/stores/use-create-request-response.store"
-import { startTransition, useActionState, useEffect } from "react"
+import { useActionState, useEffect, startTransition } from "react"
 import { FieldValues } from "react-hook-form"
+import { mutate } from "swr"
 
-export default function useSubmitRequestResponse(requestId: string, closeModal: () => void) {
+export default function useSubmitRequestResponse(requestId: string, profileId: string, closeModal: () => void) {
    const [state, action, pending] = useActionState(createRequestResponse, { error: "", success: false })
 
    const onSubmitHandler = (data: FieldValues) => {
       const formData = new FormData()
       formData.append("message", data.message)
       formData.append("proformaRequestId", requestId)
-      formData.append("profileVendorId", useCreateRequestResponseStore.getState().profileActive)
+      formData.append("profileVendorId", profileId)
 
       startTransition(() => {
          action(formData)
@@ -18,10 +19,14 @@ export default function useSubmitRequestResponse(requestId: string, closeModal: 
    }
 
    useEffect(() => {
-      if (state.success) {
-         closeModal()
+      const onSuccess = () => {
+         if (state.success) {
+            mutate(["request-list", profileId], { revalidate: true })
+            closeModal()
+         }
       }
-   }, [state.success, closeModal])
+      onSuccess()
+   }, [state.success, closeModal, profileId])
 
    return { onSubmitHandler, state, pending }
 }

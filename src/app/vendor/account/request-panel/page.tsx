@@ -10,7 +10,7 @@ const tabs = [
    { label: "Guardados", value: "saved" },
 ]
 
-export default function RequestPage() {
+export default async function RequestPage() {
    return (
       <Box className="flex flex-col gap-4 w-3/4 mx-auto">
          <Box className="flex gap-4 justify-between items-center border-b border-black/10 pb-4">
