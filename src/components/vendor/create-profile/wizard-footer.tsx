@@ -1,7 +1,7 @@
 "use client"
 import { useRouter } from "next/navigation"
 import { Button, Box, ProgressBar } from "@/components/ui"
-import { createVendorProfile } from "@/services/vendor-profile.service"
+import { createVendorProfile } from "@/lib/services/vendor-profile.service"
 import { useWizardCreateProfileStepHandlerStore } from "@/stores/use-create-profile-step-handler.store"
 import { useWizardUserDataStore } from "@/stores/use-create-profile-user-data.store"
 import { useSessionDataStore } from "@/stores/user-session-data.store"

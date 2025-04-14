@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation"
 import { cookies } from "next/headers"
 import { ProfilesTable } from "@/components/vendor/profiles-panel/profiles-table"
-import { fetchVendorProfilesByAccessToken } from "@/services/vendor-profile.service"
+import { fetchVendorProfilesByAccessToken } from "@/lib/services/vendor-profile.service"
 import { verifyToken } from "@/lib/utils/verifyToken"
 
 interface ProfilesProps {

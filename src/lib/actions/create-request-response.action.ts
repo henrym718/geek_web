@@ -1,4 +1,4 @@
-import { createProformaResponse } from "@/services/proforma-response.service"
+import { createProformaResponse } from "@/lib/services/proforma-response.service"
 import { getAccessTokenFromCookie } from "../utils/get-access-token-from-cookie"
 
 export const createRequestResponse = async (prevState: { error: string }, formData: FormData) => {

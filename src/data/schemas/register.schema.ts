@@ -1,6 +1,6 @@
 import z from "zod"
 import { cityVO, emailVO, textVO, passwordVO, phoneVO, usernameVO } from "../value-objects"
-import { checkEmailExists, checkUsernameExists } from "@/services/auth.service"
+import { checkEmailExists, checkUsernameExists } from "@/lib/services/auth.service"
 
 export const registerSchema = z.object({
    firstName: textVO("Nombre"),

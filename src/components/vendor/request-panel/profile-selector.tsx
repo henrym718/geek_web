@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import { usePathname, useSearchParams } from "next/navigation"
 import { useRouter } from "next/navigation"
 import { Box, Button } from "@/components/ui"
-import { fetchVendorProfilesByAccessToken } from "@/services/vendor-profile.service"
+import { fetchVendorProfilesByAccessToken } from "@/lib/services/vendor-profile.service"
 import { GetVendorProfileResponse } from "@/data/dtos/get-vendor-profile"
 import { useCreateRequestResponseStore } from "@/stores/use-create-request-response.store"
 

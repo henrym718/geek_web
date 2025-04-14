@@ -23,9 +23,9 @@ interface CityOption {
 
 interface InputSearchProps<T extends FieldValues> extends Omit<InputFieldProps, "type"> {
    options: CityOption[]
-   limit: number
+   limit?: number
    name: Path<T>
-   control: Control<T>
+   control?: Control<T>
 }
 
 export const InputSearch = <T extends FieldValues>(props: InputSearchProps<T>) => {

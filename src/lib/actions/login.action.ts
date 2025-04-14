@@ -1,4 +1,4 @@
-import { loginUser } from "@/services/auth.service"
+import { loginUser } from "@/lib/services/auth.service"
 import { LoginType } from "@/data/schemas/login.schema"
 import { setLocalStorageItem } from "../utils/localStorageData"
 import { useSessionDataStore } from "@/stores/user-session-data.store"

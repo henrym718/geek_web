@@ -2,7 +2,7 @@
 
 import { Box } from "@/components/ui"
 import { ProformaRequestCard } from "./request-card"
-import { fetchProformaRequestByProfileId } from "@/services/proforma-request.service"
+import { fetchProformaRequestByProfileId } from "@/lib/services/proforma-request.service"
 import useSWR from "swr"
 import { useSearchParams } from "next/navigation"
 
