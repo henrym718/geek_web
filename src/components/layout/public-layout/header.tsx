@@ -2,7 +2,7 @@
 import { useRouter } from "next/navigation"
 import { Box, Button, Typography } from "@/components/ui"
 import { useRegistrationStore } from "@/stores/use-registration.store"
-import { AUTH_FORM } from "@/lib/constants/auth.constants"
+import { AUTH_FORM } from "@/config/constants"
 
 export function Header() {
    const router = useRouter()

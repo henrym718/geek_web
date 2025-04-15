@@ -1,5 +1,5 @@
 import { create } from "zustand"
-import { fetchAuthenticatedUser } from "../lib/services/auth.service"
+import { fetchAuthenticatedUser } from "../data/api/services/auth.service"
 import { GetUserResponse } from "@/data/dtos/get-user.types"
 
 interface State {

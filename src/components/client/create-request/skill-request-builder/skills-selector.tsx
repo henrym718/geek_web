@@ -2,7 +2,7 @@
 
 import { InputTag } from "@/components/ui/input-tag copy"
 import { GetSkillsByCategoryIdResponse } from "@/data/dtos/get-skills-by-categoryId"
-import { fetchSkillsByCategoryId } from "@/lib/services/skill.service"
+import { fetchSkillsByCategoryId } from "@/data/api/services/skill.service"
 import { useCreateRequestFormDataStore } from "@/stores/use-create-request-form-data.store"
 import { useEffect } from "react"
 import useSWR from "swr"

@@ -1,5 +1,5 @@
 import "@/styles/globals.css"
-import { UserInitializer } from "@/lib/initializers/user.initializer"
+import { UserInitializer } from "@/providers/user.provider"
 import { lato } from "@/styles/fonts"
 
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

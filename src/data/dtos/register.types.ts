@@ -1,4 +1,4 @@
-import { RoleType } from "@/lib/constants/auth.constants"
+import { RoleType } from "@/config/constants"
 
 export interface RegisterRequest {
    role: RoleType

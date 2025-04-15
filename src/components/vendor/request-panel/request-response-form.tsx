@@ -6,7 +6,7 @@ import { IoAlertCircleOutline, IoLocationOutline, IoPricetagOutline, IoTimeOutli
 import { TfiAnnouncement } from "react-icons/tfi"
 import { IoIosArrowRoundBack } from "react-icons/io"
 import { useForm } from "react-hook-form"
-import useSubmitRequestResponse from "@/hooks/auth/vendor/use-submit-proforma-response"
+import useSubmitRequestResponse from "@/lib/hooks/auth/vendor/use-submit-proforma-response"
 
 interface Props {
    request: GetRequestByProfileIdResponse

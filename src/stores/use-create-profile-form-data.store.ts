@@ -2,8 +2,8 @@ import { create } from "zustand"
 import { GetCategoriesByGroupIdResponse } from "@/data/dtos/get-categories-by-groupId"
 import { GetSkillsByCategoryIdResponse } from "@/data/dtos/get-skills-by-categoryId"
 import { GetAllGroupsResponse } from "@/data/dtos/gett-all-groups"
-import { fetchAllGroups } from "@/lib/services/group.service"
-import { fetchCategoriesByGroupId } from "@/lib/services/category.service"
+import { fetchAllGroups } from "@/data/api/services/group.service"
+import { fetchCategoriesByGroupId } from "@/data/api/services/category.service"
 
 interface State {
    groups: GetAllGroupsResponse[]

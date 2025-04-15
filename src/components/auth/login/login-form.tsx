@@ -4,8 +4,8 @@ import { useRouter } from "next/navigation"
 import { useForm } from "react-hook-form"
 import { Button, InputField, Typography } from "@/components/ui"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { handleLogin } from "@/lib/actions/login.action"
 import { loginSchema, LoginType } from "@/data/schemas/login.schema"
+import { loginAction } from "@/app/(auth)/login/actions"
 
 export function LoginForm() {
    const router = useRouter()
@@ -18,7 +18,7 @@ export function LoginForm() {
       resolver: zodResolver(loginSchema),
    })
 
-   const [state, action, pending] = useActionState(handleLogin, { success: false, error: "" })
+   const [state, action, pending] = useActionState(loginAction, { success: false, error: "" })
 
    const submit = handleSubmit(async (formData) => {
       startTransition(() => {

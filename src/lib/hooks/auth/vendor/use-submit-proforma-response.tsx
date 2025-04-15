@@ -1,11 +1,11 @@
 "use client"
-import { createRequestResponse } from "@/lib/actions/create-request-response.action"
+import { createRequestResponseAction } from "@/app/vendor/account/request-panel/action"
 import { useActionState, useEffect, startTransition } from "react"
 import { FieldValues } from "react-hook-form"
 import { mutate } from "swr"
 
 export default function useSubmitRequestResponse(requestId: string, profileId: string, closeModal: () => void) {
-   const [state, action, pending] = useActionState(createRequestResponse, { error: "", success: false })
+   const [state, action, pending] = useActionState(createRequestResponseAction, { error: "", success: false })
 
    const onSubmitHandler = (data: FieldValues) => {
       const formData = new FormData()

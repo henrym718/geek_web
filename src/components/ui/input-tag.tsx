@@ -17,7 +17,7 @@
 "use client"
 import { useEffect, useState } from "react"
 import { useWizardCreateProfileFormDataStore } from "@/stores/use-create-profile-form-data.store"
-import { fetchSkillsByCategoryId } from "@/lib/services/skill.service"
+import { fetchSkillsByCategoryId } from "@/data/api/services/skill.service"
 import { useWizardUserDataStore } from "@/stores/use-create-profile-user-data.store"
 import { GetSkillsByCategoryIdResponse } from "@/data/dtos/get-skills-by-categoryId"
 import { cn } from "@/lib/utils/cn"

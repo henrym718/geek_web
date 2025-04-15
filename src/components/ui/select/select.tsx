@@ -1,4 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+
 import { forwardRef, useImperativeHandle, useMemo, useRef, useState } from "react"
 import { SelectContext } from "./select-context"
 
@@ -14,7 +15,7 @@ export interface SelectRef {
 
 export const Select = forwardRef<SelectRef, SelectProps>(({ children, value, onChange }, ref) => {
    const [isOpen, setIsOpen] = useState(false)
-   const triggerRef = useRef<HTMLButtonElement>(null)
+   const triggerRef = useRef<HTMLButtonElement | null>(null)
 
    useImperativeHandle(ref, () => ({
       close: () => setIsOpen(false),

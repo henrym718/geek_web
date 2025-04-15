@@ -1,6 +1,6 @@
 // src/stores/registration-wizard.store.ts
 import { create } from "zustand"
-import { AuthFormType, AUTH_FORM, RoleType } from "@/lib/constants/auth.constants"
+import { AuthFormType, AUTH_FORM, RoleType } from "@/config/constants"
 
 interface State {
    currentForm: AuthFormType

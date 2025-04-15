@@ -1,7 +1,7 @@
 "use client"
 import { Box, Button, InputField, Typography, InputSearch } from "@/components/ui"
-import useValidateRegisterForm from "@/hooks/auth/register/useValidateRegisterForm"
-import useActionRegisterForm from "@/hooks/auth/register/useActionRegisterForm"
+import useValidateRegisterForm from "@/lib/hooks/auth/register/useValidateRegisterForm"
+import useActionRegisterForm from "@/lib/hooks/auth/register/useActionRegisterForm"
 
 export function RegisterForm() {
    const { register, control, handleSubmit, errors } = useValidateRegisterForm()

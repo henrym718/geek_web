@@ -9,6 +9,7 @@ interface WizardProps {
       requestBudget: React.ReactNode
       requestScope: React.ReactNode
       groupCategorySkillsSelector: React.ReactNode
+      requestTiming: React.ReactNode
    }
 }
 
@@ -21,6 +22,7 @@ export function Wizard({ steps }: Readonly<WizardProps>) {
       3: steps.requestBudget,
       4: steps.requestScope,
       5: steps.groupCategorySkillsSelector,
+      6: steps.requestTiming,
    }
 
    return RenderStep[step]

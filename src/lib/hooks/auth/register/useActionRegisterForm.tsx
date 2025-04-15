@@ -1,12 +1,12 @@
 "use client"
-import { handleRegister } from "@/lib/actions/register.action"
 import { RegisterType } from "@/data/schemas/register.schema"
 import { useRouter } from "next/navigation"
 import { startTransition, useActionState, useEffect } from "react"
+import { registerAction } from "@/app/(auth)/register/action"
 
 export default function useActionRegisterForm() {
    const router = useRouter()
-   const [state, action, pending] = useActionState(handleRegister, { success: false, error: null })
+   const [state, action, pending] = useActionState(registerAction, { success: false, error: null })
 
    const onSubmitHandler = (formData: RegisterType) => {
       startTransition(() => {

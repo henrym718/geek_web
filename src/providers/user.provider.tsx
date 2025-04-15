@@ -1,6 +1,6 @@
 "use client"
 import { useEffect } from "react"
-import { useSessionDataStore } from "../../stores/user-session-data.store"
+import { useSessionDataStore } from "../stores/user-session-data.store"
 
 export function UserInitializer({ children }: Readonly<React.PropsWithChildren>) {
    const { user, loadUser } = useSessionDataStore() // Usamos el hook aquí también para escuchar cambios

@@ -3,12 +3,12 @@ import { startTransition, useActionState, useState } from "react"
 import Link from "next/link"
 import { RoleOption } from "./role-option"
 import { Box, Button, Typography } from "@/components/ui"
-import { ROLE, RoleType } from "@/lib/constants/auth.constants"
-import { handleRoles } from "@/lib/actions/roles.action"
+import { ROLE, RoleType } from "@/config/constants"
 import { UserRoundCheck, UserRoundSearch } from "lucide-react"
+import { roleAction } from "@/app/(auth)/register/action"
 
 export function RoleOptionSelector() {
-   const [, action] = useActionState(handleRoles, null)
+   const [, action] = useActionState(roleAction, null)
    const [selectedRole, setSelectedRole] = useState<string>("")
 
    const handleRoleChange = (event: React.ChangeEvent<HTMLInputElement>) => {

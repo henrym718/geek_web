@@ -1,7 +1,7 @@
 "use client"
 import { RegisterForm } from "@/components/auth/register/register-form"
 import { useRegistrationStore } from "@/stores/use-registration.store"
-import { AUTH_FORM } from "@/lib/constants/auth.constants"
+import { AUTH_FORM } from "@/config/constants"
 import { RoleOptionSelector } from "@/components/auth/register/role-pption-selector"
 
 export default function RegsiterPage() {

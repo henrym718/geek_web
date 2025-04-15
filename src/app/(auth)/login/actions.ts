@@ -1,9 +1,9 @@
-import { loginUser } from "@/lib/services/auth.service"
+import { loginUser } from "@/data/api/services/auth.service"
 import { LoginType } from "@/data/schemas/login.schema"
-import { setLocalStorageItem } from "../utils/localStorageData"
+import { setLocalStorageItem } from "@/lib/utils/localStorageData"
 import { useSessionDataStore } from "@/stores/user-session-data.store"
 
-export const handleLogin = async (previousState: { success: boolean; error: string }, formData: LoginType) => {
+export const loginAction = async (previousState: { success: boolean; error: string }, formData: LoginType) => {
    const email = formData.email
    const password = formData.password
 
