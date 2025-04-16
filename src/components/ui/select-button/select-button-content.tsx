@@ -2,7 +2,7 @@
 "use client"
 
 import { cn } from "@/lib/utils/cn"
-import { useSelect } from "./select-context"
+import { useSelect } from "./select-button-context"
 import { useEffect, useRef } from "react"
 
 interface SelectContentProps {
@@ -10,7 +10,7 @@ interface SelectContentProps {
    className?: string
 }
 
-export function SelectContent({ children, className, ...props }: Readonly<SelectContentProps>) {
+export function SelectButtonContent({ children, className, ...props }: Readonly<SelectContentProps>) {
    const { isOpen, setIsOpen, triggerRef } = useSelect()
    const containerRef = useRef<HTMLDivElement>(null)
 

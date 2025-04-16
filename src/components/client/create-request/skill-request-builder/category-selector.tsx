@@ -1,10 +1,6 @@
 "use client"
 
-import { Select } from "@/components/ui/select/select"
-import { SelectContent } from "@/components/ui/select/select-content"
-import SelectItem from "@/components/ui/select/select-item"
-import { SelectTrigger } from "@/components/ui/select/select-trigger"
-import { SelectValue } from "@/components/ui/select/select-value"
+import { SelectButton, SelectButtonContent, SelectButtonItem, SelectButtonTrigger, SelectButtonValue } from "@/components/ui"
 import { fetchCategoriesByGroupId } from "@/data/api/services/category.service"
 import { useCreateRequestFormDataStore } from "@/stores/use-create-request-form-data.store"
 import { useEffect, useMemo } from "react"
@@ -33,22 +29,22 @@ export function CategorySelector() {
    }
 
    return (
-      <Select
+      <SelectButton
          value={selectedCategory}
          onChange={handleCategorySelect}>
-         <SelectTrigger>
-            <SelectValue placeholder="Seleccione una categoría" />
-         </SelectTrigger>
-         <SelectContent>
-            {isLoadingCategories && <SelectItem value="loading">Cargando categorías...</SelectItem>}
+         <SelectButtonTrigger>
+            <SelectButtonValue placeholder="Seleccione una categoría" />
+         </SelectButtonTrigger>
+         <SelectButtonContent>
+            {isLoadingCategories && <SelectButtonItem value="loading">Cargando categorías...</SelectButtonItem>}
             {categoryOptions.map((category) => (
-               <SelectItem
+               <SelectButtonItem
                   key={category.id}
                   value={category.id}>
                   {category.name}
-               </SelectItem>
+               </SelectButtonItem>
             ))}
-         </SelectContent>
-      </Select>
+         </SelectButtonContent>
+      </SelectButton>
    )
 }

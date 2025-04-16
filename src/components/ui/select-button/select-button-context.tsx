@@ -2,7 +2,7 @@
 
 import { createContext, useContext } from "react"
 
-interface SelectContextProps {
+interface SelectButtonContextProps {
    selected: { id: string; name: string }
    setSelected: (selected: { id: string; name: string }) => void
    isOpen: boolean
@@ -10,10 +10,10 @@ interface SelectContextProps {
    triggerRef: React.RefObject<HTMLButtonElement | null>
 }
 
-export const SelectContext = createContext<SelectContextProps | null>(null)
+export const SelectButtonContext = createContext<SelectButtonContextProps | null>(null)
 
 export function useSelect() {
-   const ctx = useContext(SelectContext)
+   const ctx = useContext(SelectButtonContext)
    if (!ctx) {
       throw new Error("useSelect must be used within a SelectProvider")
    }

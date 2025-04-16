@@ -11,8 +11,8 @@ import { IoLocationOutline } from "react-icons/io5"
 import { LuCircleCheckBig } from "react-icons/lu"
 import { checkResponseExists } from "@/data/api/services/proforma-response.service"
 import { SideModal } from "@/components/ui/side-modal/side-modal"
-import { TriggerSideModal } from "@/components/ui/side-modal/trigger-side-modal"
-import { ContentSideModal } from "@/components/ui/side-modal/content-side-modal"
+import { SideModalTrigger } from "@/components/ui/side-modal/side-modal-trigger"
+import { SideModalContent } from "@/components/ui/side-modal/side-modal-content"
 interface Props {
    request: GetRequestByProfileIdResponse
    profileId: string
@@ -42,7 +42,7 @@ export function ProformaRequestCard({ request, profileId }: Props) {
          data-exists={exists}
          className="flex flex-col relative border-b border-t border-black/10 gap-4 px-4 py-4 data-[exists=true]:bg-black/5 hover:bg-black/5 hover:cursor-pointer hover:border-black/5 transition-all duration-300">
          <SideModal>
-            <TriggerSideModal>
+            <SideModalTrigger>
                <Box>
                   <Typography variant="etiqueta">{timeAgo(request.createdAt ?? new Date())}</Typography>
                   <Typography
@@ -72,8 +72,8 @@ export function ProformaRequestCard({ request, profileId }: Props) {
                      <Typography variant="label">Propuestas: 10 a 20</Typography>
                   </Box>
                </Box>
-            </TriggerSideModal>
-            <ContentSideModal>
+            </SideModalTrigger>
+            <SideModalContent>
                {(close) => (
                   <RequestResponseForm
                      request={request}
@@ -82,7 +82,7 @@ export function ProformaRequestCard({ request, profileId }: Props) {
                      closeModal={close}
                   />
                )}
-            </ContentSideModal>
+            </SideModalContent>
          </SideModal>
          <Box
             className="absolute right-10 top-6 cursor-pointer"

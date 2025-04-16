@@ -1,7 +1,7 @@
 "use client"
 
 import { useMemo, useState } from "react"
-import { SideModalContext } from "./context-modal"
+import { SideModalContext } from "./side-modal-context"
 
 export function SideModal({ children }: Readonly<React.PropsWithChildren>) {
    const [isOpen, setIsOpen] = useState(false)

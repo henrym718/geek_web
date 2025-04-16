@@ -11,6 +11,8 @@ export const useCreateRequestUserDataStore = create<CreateRequestUserDataStore>(
       title: "",
       description: "",
       budget: 0,
+      budgetUnit: "project",
+      quotation: false,
       scope: "",
       clientId: "",
       categoryId: "",

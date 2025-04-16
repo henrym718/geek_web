@@ -1,10 +1,6 @@
 "use client"
 
-import { Select } from "@/components/ui/select/select"
-import { SelectContent } from "@/components/ui/select/select-content"
-import SelectItem from "@/components/ui/select/select-item"
-import { SelectTrigger } from "@/components/ui/select/select-trigger"
-import { SelectValue } from "@/components/ui/select/select-value"
+import { SelectButton, SelectButtonContent, SelectButtonItem, SelectButtonTrigger, SelectButtonValue } from "@/components/ui"
 import { ApiResponse } from "@/data/dtos/api-response.types"
 import { GetAllGroupsResponse } from "@/data/dtos/get-all-groups"
 import { fetchAllGroups } from "@/data/api/services/group.service"
@@ -35,22 +31,22 @@ export function GroupSelector() {
    }
 
    return (
-      <Select
+      <SelectButton
          value={selectedGroup}
          onChange={handleGroupSelect}>
-         <SelectTrigger>
-            <SelectValue placeholder="Seleccione un grupo" />
-         </SelectTrigger>
-         <SelectContent>
-            {isLoadingGroups && <SelectItem value="loading">Cargando grupos...</SelectItem>}
+         <SelectButtonTrigger>
+            <SelectButtonValue placeholder="Seleccione un grupo" />
+         </SelectButtonTrigger>
+         <SelectButtonContent>
+            {isLoadingGroups && <SelectButtonItem value="loading">Cargando grupos...</SelectButtonItem>}
             {groupOptions.map((group) => (
-               <SelectItem
+               <SelectButtonItem
                   key={group.id}
                   value={group.id}>
                   {group.name}
-               </SelectItem>
+               </SelectButtonItem>
             ))}
-         </SelectContent>
-      </Select>
+         </SelectButtonContent>
+      </SelectButton>
    )
 }

@@ -4,7 +4,7 @@ import { RequestDetails } from "@/components/client/create-request/request-detai
 import { RequestHeadline } from "@/components/client/create-request/request-headline"
 import { RequestScope } from "@/components/client/create-request/request-scope"
 import { Wizard } from "@/components/client/create-request/wizard"
-import RequestTiming from "@/components/client/create-request/request-timing"
+import { RequestTiming } from "@/components/client/create-request/request-timing"
 
 export default function CreateRequestPage() {
    return (
@@ -13,9 +13,9 @@ export default function CreateRequestPage() {
             requestHeadline: <RequestHeadline />,
             requestDetails: <RequestDetails />,
             requestBudget: <RequestBudget />,
+            requestTiming: <RequestTiming />,
             requestScope: <RequestScope />,
             groupCategorySkillsSelector: <GroupCategorySkillsSelector />,
-            requestTiming: <RequestTiming />,
          }}
       />
    )

@@ -1,7 +1,7 @@
 "use client"
 
 import { cn } from "@/lib/utils/cn"
-import { useSelect } from "./select-context"
+import { useSelect } from "./select-button-context"
 import { useState } from "react"
 import { IoCheckmarkOutline } from "react-icons/io5"
 
@@ -11,7 +11,7 @@ interface SelectItemProps {
    children: React.ReactNode
 }
 
-export default function SelectItem({ value, className, children, ...props }: Readonly<SelectItemProps>) {
+export function SelectButtonItem({ value, className, children, ...props }: Readonly<SelectItemProps>) {
    const { setIsOpen, setSelected, selected } = useSelect()
    const [isHovered, setIsHovered] = useState("")
 

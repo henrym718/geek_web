@@ -11,6 +11,16 @@ export const AUTH_FORM = {
 
 export type AuthFormType = (typeof AUTH_FORM)[keyof typeof AUTH_FORM]
 
+export const BUDGET_TYPE_OPTIONS = [
+   { value: "project", label: "Proyecto" },
+   { value: "hour", label: "Hora" },
+   { value: "day", label: "Día" },
+   { value: "week", label: "Semana" },
+   { value: "month", label: "Mes" },
+] as const
+
+export type BudgetType = (typeof BUDGET_TYPE_OPTIONS)[number]["value"]
+
 export const AUTH_ENDPOINTS = {
    LOGIN: "/authenticate/login",
    REGISTER: "/authenticate/register",

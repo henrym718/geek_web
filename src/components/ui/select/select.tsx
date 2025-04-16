@@ -1,42 +1,18 @@
-/* eslint-disable react-hooks/exhaustive-deps */
+import { cn } from "@/lib/utils/cn"
 
-import { forwardRef, useImperativeHandle, useMemo, useRef, useState } from "react"
-import { SelectContext } from "./select-context"
-
-interface SelectProps {
-   children: React.ReactNode
-   value: { id: string; name: string }
-   onChange: (value: { id: string; name: string }) => void
-}
-
-export interface SelectRef {
-   close: () => void
-}
-
-export const Select = forwardRef<SelectRef, SelectProps>(({ children, value, onChange }, ref) => {
-   const [isOpen, setIsOpen] = useState(false)
-   const triggerRef = useRef<HTMLButtonElement | null>(null)
-
-   useImperativeHandle(ref, () => ({
-      close: () => setIsOpen(false),
-   }))
-
-   const contextValue = useMemo(
-      () => ({
-         selected: value,
-         setSelected: onChange,
-         isOpen,
-         setIsOpen,
-         triggerRef,
-      }),
-      [value, isOpen]
-   )
+export function Select(props: Readonly<React.SelectHTMLAttributes<HTMLSelectElement>>) {
+   const { children, className, ...rest } = props
 
    return (
-      <SelectContext.Provider value={contextValue}>
-         <div className="relative w-full">{children}</div>
-      </SelectContext.Provider>
+      <select
+         className={cn(
+            "bg-white text-sm",
+            "focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary",
+            "disabled:opacity-50 disabled:cursor-not-allowed",
+            className
+         )}
+         {...rest}>
+         {children}
+      </select>
    )
-})
-
-Select.displayName = "Select"
+}

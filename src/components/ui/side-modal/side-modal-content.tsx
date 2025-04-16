@@ -1,12 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+"use client"
 import { useEffect, useRef } from "react"
-import { useSideModal } from "./context-modal"
+import { useSideModal } from "./side-modal-context"
 
 interface ContentSideModalProps {
    children: (close: () => void) => React.ReactNode
 }
 
-export function ContentSideModal({ children }: Readonly<ContentSideModalProps>) {
+export function SideModalContent({ children }: Readonly<ContentSideModalProps>) {
    const overlayRef = useRef<HTMLDivElement>(null)
    const { close, isOpen } = useSideModal()
 
