@@ -9,7 +9,7 @@ import {
    SelectButtonTrigger,
    SelectButtonValue,
 } from "@/components/ui"
-import React from "react"
+import { PROJECT_LENGTH_OPTIONS, PROJECT_WORKLOAD_OPTIONS } from "@/config/constants"
 
 export function RequestTiming() {
    return (
@@ -37,14 +37,14 @@ export function RequestTiming() {
                <SelectButtonValue placeholder="Duración del proyecto" />
             </SelectButtonTrigger>
             <SelectButtonContent>
-               <SelectButtonItem value="single_day">Solo por un día</SelectButtonItem>
-               <SelectButtonItem value="few_days">Pocos días (2-3)</SelectButtonItem>
-               <SelectButtonItem value="1_week">Menos de 1 semana</SelectButtonItem>
-               <SelectButtonItem value="2_4_weeks">2-4 semanas</SelectButtonItem>
-               <SelectButtonItem value="1_3_months">1 a 3 meses</SelectButtonItem>
-               <SelectButtonItem value="3_6_months">3 a 6 meses</SelectButtonItem>
-               <SelectButtonItem value="gt6_months">Más de 6 meses</SelectButtonItem>
-               <SelectButtonItem value="indefinite">Sin duración definida</SelectButtonItem>
+               <SelectButtonItem value={PROJECT_LENGTH_OPTIONS[0].value}>{PROJECT_LENGTH_OPTIONS[0].label}</SelectButtonItem>
+               <SelectButtonItem value={PROJECT_LENGTH_OPTIONS[1].value}>{PROJECT_LENGTH_OPTIONS[1].label}</SelectButtonItem>
+               <SelectButtonItem value={PROJECT_LENGTH_OPTIONS[2].value}>{PROJECT_LENGTH_OPTIONS[2].label}</SelectButtonItem>
+               <SelectButtonItem value={PROJECT_LENGTH_OPTIONS[3].value}>{PROJECT_LENGTH_OPTIONS[3].label}</SelectButtonItem>
+               <SelectButtonItem value={PROJECT_LENGTH_OPTIONS[4].value}>{PROJECT_LENGTH_OPTIONS[4].label}</SelectButtonItem>
+               <SelectButtonItem value={PROJECT_LENGTH_OPTIONS[5].value}>{PROJECT_LENGTH_OPTIONS[5].label}</SelectButtonItem>
+               <SelectButtonItem value={PROJECT_LENGTH_OPTIONS[6].value}>{PROJECT_LENGTH_OPTIONS[6].label}</SelectButtonItem>
+               <SelectButtonItem value={PROJECT_LENGTH_OPTIONS[7].value}>{PROJECT_LENGTH_OPTIONS[7].label}</SelectButtonItem>
             </SelectButtonContent>
          </SelectButton>
          <SelectButton
@@ -54,13 +54,13 @@ export function RequestTiming() {
                <SelectButtonValue placeholder="Carga de trabajo" />
             </SelectButtonTrigger>
             <SelectButtonContent>
-               <SelectButtonItem value="lt10">Menos de 10 horas/semana</SelectButtonItem>
-               <SelectButtonItem value="10_20">Entre 10 y 20 horas/semana</SelectButtonItem>
-               <SelectButtonItem value="20_30">Entre 20 y 30 horas/semana</SelectButtonItem>
-               <SelectButtonItem value="30_40">Entre 30 y 40 horas/semana</SelectButtonItem>
-               <SelectButtonItem value="gt40">Más de 40 horas/semana</SelectButtonItem>
-               <SelectButtonItem value="variable">Carga horaria variable semana a semana</SelectButtonItem>
-               <SelectButtonItem value="flexible">Horario flexible / depende del avance del proyecto</SelectButtonItem>
+               <SelectButtonItem value={PROJECT_WORKLOAD_OPTIONS[0].value}>{PROJECT_WORKLOAD_OPTIONS[0].label}</SelectButtonItem>
+               <SelectButtonItem value={PROJECT_WORKLOAD_OPTIONS[1].value}>{PROJECT_WORKLOAD_OPTIONS[1].label}</SelectButtonItem>
+               <SelectButtonItem value={PROJECT_WORKLOAD_OPTIONS[2].value}>{PROJECT_WORKLOAD_OPTIONS[2].label}</SelectButtonItem>
+               <SelectButtonItem value={PROJECT_WORKLOAD_OPTIONS[3].value}>{PROJECT_WORKLOAD_OPTIONS[3].label}</SelectButtonItem>
+               <SelectButtonItem value={PROJECT_WORKLOAD_OPTIONS[4].value}>{PROJECT_WORKLOAD_OPTIONS[4].label}</SelectButtonItem>
+               <SelectButtonItem value={PROJECT_WORKLOAD_OPTIONS[5].value}>{PROJECT_WORKLOAD_OPTIONS[5].label}</SelectButtonItem>
+               <SelectButtonItem value={PROJECT_WORKLOAD_OPTIONS[6].value}>{PROJECT_WORKLOAD_OPTIONS[6].label}</SelectButtonItem>
             </SelectButtonContent>
          </SelectButton>
       </div>
