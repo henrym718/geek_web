@@ -1,7 +1,7 @@
 "use client"
 
 import { Box, Typography, InputCurrency, Select, SelectOption, Checkbox } from "@/components/ui"
-import { BUDGET_TYPE_OPTIONS, BudgetType } from "@/config/constants"
+import { BUDGET_UNIT_OPTIONS, BudgetType } from "@/config/constants"
 import { useCreateRequestUserDataStore } from "@/stores/use-create-request-user-data.store"
 
 export function RequestBudget() {
@@ -21,7 +21,7 @@ export function RequestBudget() {
       if (e.target.checked) {
          setRequestData({ quotation: e.target.checked, budget: 0, budgetUnit: undefined })
       } else {
-         setRequestData({ quotation: e.target.checked, budget: 0, budgetUnit: BUDGET_TYPE_OPTIONS[0].value })
+         setRequestData({ quotation: e.target.checked, budget: 0, budgetUnit: BUDGET_UNIT_OPTIONS[0].value })
       }
    }
 
@@ -53,11 +53,11 @@ export function RequestBudget() {
                id="currency"
                value={requestData.budgetUnit}
                onChange={handleChangeBudgetUnit}>
-               <SelectOption value={BUDGET_TYPE_OPTIONS[0].value}>{BUDGET_TYPE_OPTIONS[0].label}</SelectOption>
-               <SelectOption value={BUDGET_TYPE_OPTIONS[1].value}>{BUDGET_TYPE_OPTIONS[1].label}</SelectOption>
-               <SelectOption value={BUDGET_TYPE_OPTIONS[2].value}>{BUDGET_TYPE_OPTIONS[2].label}</SelectOption>
-               <SelectOption value={BUDGET_TYPE_OPTIONS[3].value}>{BUDGET_TYPE_OPTIONS[3].label}</SelectOption>
-               <SelectOption value={BUDGET_TYPE_OPTIONS[4].value}>{BUDGET_TYPE_OPTIONS[4].label}</SelectOption>
+               <SelectOption value={BUDGET_UNIT_OPTIONS[0].value}>{BUDGET_UNIT_OPTIONS[0].label}</SelectOption>
+               <SelectOption value={BUDGET_UNIT_OPTIONS[1].value}>{BUDGET_UNIT_OPTIONS[1].label}</SelectOption>
+               <SelectOption value={BUDGET_UNIT_OPTIONS[2].value}>{BUDGET_UNIT_OPTIONS[2].label}</SelectOption>
+               <SelectOption value={BUDGET_UNIT_OPTIONS[3].value}>{BUDGET_UNIT_OPTIONS[3].label}</SelectOption>
+               <SelectOption value={BUDGET_UNIT_OPTIONS[4].value}>{BUDGET_UNIT_OPTIONS[4].label}</SelectOption>
             </Select>
             <Checkbox
                checked={requestData.quotation}
