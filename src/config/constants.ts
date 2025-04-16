@@ -22,6 +22,13 @@ export const BUDGET_UNIT_OPTIONS = [
 
 export type BudgetType = (typeof BUDGET_UNIT_OPTIONS)[number]["value"]
 
+export const PROJECT_TYPE_OPTIONS = [
+   { value: "unique", label: "Único" },
+   { value: "recurring", label: "Recurrente" },
+] as const
+
+export type ProjectType = (typeof PROJECT_TYPE_OPTIONS)[number]["value"]
+
 export const PROJECT_LENGTH_OPTIONS = [
    { value: "single_day", label: "Solo por un día" },
    { value: "few_days", label: "Pocos días (2-3)" },
@@ -33,7 +40,7 @@ export const PROJECT_LENGTH_OPTIONS = [
    { value: "indefinite", label: "Sin duración definida" },
 ] as const
 
-export type ProjectDurationType = (typeof PROJECT_LENGTH_OPTIONS)[number]["value"]
+export type ProjectLengthType = (typeof PROJECT_LENGTH_OPTIONS)[number]["value"]
 
 export const PROJECT_WORKLOAD_OPTIONS = [
    { value: "lt10", label: "Menos de 10 horas/semana" },

@@ -19,7 +19,7 @@ export function RequestBudget() {
 
    const handleChangeQuotation = (e: React.ChangeEvent<HTMLInputElement>) => {
       if (e.target.checked) {
-         setRequestData({ quotation: e.target.checked, budget: 0, budgetUnit: undefined })
+         setRequestData({ quotation: e.target.checked, budget: 0, budgetUnit: null })
       } else {
          setRequestData({ quotation: e.target.checked, budget: 0, budgetUnit: BUDGET_UNIT_OPTIONS[0].value })
       }
@@ -51,7 +51,7 @@ export function RequestBudget() {
                className="absolute data-[visible=false]:block hidden top-11 right-2 -translate-y-1/2 cursor-pointer focus:outline-none focus:ring-0"
                name="currency"
                id="currency"
-               value={requestData.budgetUnit}
+               value={requestData.budgetUnit ?? ""}
                onChange={handleChangeBudgetUnit}>
                <SelectOption value={BUDGET_UNIT_OPTIONS[0].value}>{BUDGET_UNIT_OPTIONS[0].label}</SelectOption>
                <SelectOption value={BUDGET_UNIT_OPTIONS[1].value}>{BUDGET_UNIT_OPTIONS[1].label}</SelectOption>
