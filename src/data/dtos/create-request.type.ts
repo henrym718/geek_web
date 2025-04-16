@@ -1,10 +1,13 @@
-import { BudgetType } from "@/config/constants"
+import { BudgetType, ProjectLengthType, ProjectType, ProjectWorkloadType } from "@/config/constants"
 
 export interface CreateRequestRequest {
    title: string
    description: string
    budget: number
-   budgetUnit: BudgetType | undefined
+   budgetUnit: BudgetType | null
+   projectType: ProjectType | null
+   projectLength: ProjectLengthType | null
+   projectWorkload: ProjectWorkloadType | null
    quotation: boolean
    scope: string
    clientId: string
