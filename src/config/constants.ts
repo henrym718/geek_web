@@ -2,6 +2,7 @@ export const ROLE = {
    CLIENT: "CLIENT",
    VENDOR: "VENDOR",
 } as const
+
 export type RoleType = (typeof ROLE)[keyof typeof ROLE]
 
 export const AUTH_FORM = {
@@ -20,6 +21,31 @@ export const BUDGET_UNIT_OPTIONS = [
 ] as const
 
 export type BudgetType = (typeof BUDGET_UNIT_OPTIONS)[number]["value"]
+
+export const PROJECT_LENGTH_OPTIONS = [
+   { value: "single_day", label: "Solo por un día" },
+   { value: "few_days", label: "Pocos días (2-3)" },
+   { value: "1_week", label: "Menos de 1 semana" },
+   { value: "2_4_weeks", label: "2-4 semanas" },
+   { value: "1_3_months", label: "1 a 3 meses" },
+   { value: "3_6_months", label: "3 a 6 meses" },
+   { value: "gt6_months", label: "Más de 6 meses" },
+   { value: "indefinite", label: "Sin duración definida" },
+] as const
+
+export type ProjectDurationType = (typeof PROJECT_LENGTH_OPTIONS)[number]["value"]
+
+export const PROJECT_WORKLOAD_OPTIONS = [
+   { value: "lt10", label: "Menos de 10 horas/semana" },
+   { value: "10_20", label: "Entre 10 y 20 horas/semana" },
+   { value: "20_30", label: "Entre 20 y 30 horas/semana" },
+   { value: "30_40", label: "Entre 30 y 40 horas/semana" },
+   { value: "gt40", label: "Más de 40 horas/semana" },
+   { value: "variable", label: "Carga horaria variable semana a semana" },
+   { value: "flexible", label: "Horario flexible / depende del avance del proyecto" },
+] as const
+
+export type ProjectWorkloadType = (typeof PROJECT_WORKLOAD_OPTIONS)[number]["value"]
 
 export const AUTH_ENDPOINTS = {
    LOGIN: "/authenticate/login",
