@@ -6,6 +6,7 @@ import { fetchSkillsByCategoryId } from "@/data/api/services/skill.service"
 import { useCreateRequestFormDataStore } from "@/stores/use-create-request-form-data.store"
 import { useEffect } from "react"
 import useSWR from "swr"
+import { useCreateRequestUserDataStore } from "@/stores/use-create-request-user-data.store"
 
 export function SkillsSelector() {
    const {
@@ -19,6 +20,8 @@ export function SkillsSelector() {
       removeSkillsSelected,
    } = useCreateRequestFormDataStore((state) => state)
 
+   const { addSkill, removeSkill } = useCreateRequestUserDataStore((state) => state)
+
    const skillSWRKey = selectedCategory?.id ? `skills/${selectedCategory.id}` : null
    const { data: skillApiResponse } = useSWR(skillSWRKey, () => fetchSkillsByCategoryId({ categoryId: selectedCategory.id }))
 
@@ -31,11 +34,13 @@ export function SkillsSelector() {
    const handleSelectedSkills = (skill: GetSkillsByCategoryIdResponse) => {
       removeSkillsOptions(skill)
       addSkillsSelected(skill)
+      addSkill(skill)
    }
 
    const handleUnselectedSkills = (skill: GetSkillsByCategoryIdResponse) => {
       removeSkillsSelected(skill)
       addSkillsOptions(skill)
+      removeSkill(skill)
    }
 
    return (
