@@ -14,7 +14,6 @@ export function WizardFooter() {
 
    const handleCreateProfile = async () => {
       if (!user?.vendor) return
-      console.log(vendorProfile, "vendorProfile")
       const response = await createVendorProfile(vendorProfile)
       if (response.success) {
          resetVendorProfile()
