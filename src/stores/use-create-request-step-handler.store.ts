@@ -10,7 +10,7 @@ interface CreateRequestStepHandlerStore {
 
 export const useCreateRequestStepHandlerStore = create<CreateRequestStepHandlerStore>((set) => ({
    step: 1,
-   totalSteps: 7,
+   totalSteps: 6,
    nextStep: () => set((state) => ({ step: state.step + 1 })),
    previousStep: () => set((state) => ({ step: state.step - 1 })),
    resetStep: () => set({ step: 1 }),
