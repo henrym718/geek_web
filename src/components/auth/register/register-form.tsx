@@ -4,7 +4,7 @@ import useValidateRegisterForm from "@/lib/hooks/auth/register/useValidateRegist
 import useActionRegisterForm from "@/lib/hooks/auth/register/useActionRegisterForm"
 
 export function RegisterForm() {
-   const { register, control, handleSubmit, errors } = useValidateRegisterForm()
+   const { register, handleSubmit, errors, control } = useValidateRegisterForm()
    const { state, pending, onSubmitHandler } = useActionRegisterForm()
 
    return (
@@ -59,10 +59,10 @@ export function RegisterForm() {
             options={[{ id: "2", label: "manuela" }]}
             limit={5}
             error={errors.city?.id?.message ?? errors.city?.label?.message}
-            name="city"
-            control={control}
             sizing="default"
             label="Ciudad"
+            control={control}
+            name="city"
          />
 
          <InputField
