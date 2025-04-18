@@ -9,9 +9,37 @@ import {
    SelectButtonTrigger,
    SelectButtonValue,
 } from "@/components/ui"
-import { PROJECT_LENGTH_OPTIONS, PROJECT_WORKLOAD_OPTIONS } from "@/config/constants"
+import {
+   PROJECT_LENGTH_OPTIONS,
+   PROJECT_TYPE_OPTIONS,
+   PROJECT_WORKLOAD_OPTIONS,
+   ProjectLengthType,
+   ProjectType,
+   ProjectWorkloadType,
+} from "@/config/constants"
+import { useCreateRequestFormDataStore } from "@/stores/use-create-request-form-data.store"
+import { useCreateRequestUserDataStore } from "@/stores/use-create-request-user-data.store"
 
 export function RequestTiming() {
+   const { setRequestData, requestData } = useCreateRequestUserDataStore((state) => state)
+   const { selectedProjectLength, setSelectedProjectLength, selectedProjectWorkload, setSelectedProjectWorkload } = useCreateRequestFormDataStore(
+      (state) => state
+   )
+
+   const handleProjectType = (e: React.ChangeEvent<HTMLInputElement>) => {
+      setRequestData({ projectType: e.target.value as ProjectType })
+   }
+
+   const handleSelectedProjectLength = (value: { id: string; name: string }) => {
+      setSelectedProjectLength(value.id, value.name)
+      setRequestData({ projectLength: value.id as ProjectLengthType })
+   }
+
+   const handleSelectedProjectWorkload = (value: { id: string; name: string }) => {
+      setSelectedProjectWorkload(value.id, value.name)
+      setRequestData({ projectWorkload: value.id as ProjectWorkloadType })
+   }
+
    return (
       <div className="flex flex-col gap-4 w-1/2">
          <Typography variant="subtitulo2">
@@ -21,18 +49,22 @@ export function RequestTiming() {
          <Box className="flex gap-4">
             <InputRadio
                name="project_type"
-               value="unique">
-               Proyecto único
+               checked={requestData.projectType === PROJECT_TYPE_OPTIONS[0].value}
+               value={PROJECT_TYPE_OPTIONS[0].value}
+               onChange={handleProjectType}>
+               {PROJECT_TYPE_OPTIONS[0].label}
             </InputRadio>
             <InputRadio
                name="project_type"
-               value="recurrent">
-               Proyecto recurrente
+               checked={requestData.projectType === PROJECT_TYPE_OPTIONS[1].value}
+               value={PROJECT_TYPE_OPTIONS[1].value}
+               onChange={handleProjectType}>
+               {PROJECT_TYPE_OPTIONS[1].label}
             </InputRadio>
          </Box>
          <SelectButton
-            onChange={() => {}}
-            value={{ id: "", name: "" }}>
+            onChange={handleSelectedProjectLength}
+            selected={selectedProjectLength}>
             <SelectButtonTrigger>
                <SelectButtonValue placeholder="Duración del proyecto" />
             </SelectButtonTrigger>
@@ -48,8 +80,8 @@ export function RequestTiming() {
             </SelectButtonContent>
          </SelectButton>
          <SelectButton
-            onChange={() => {}}
-            value={{ id: "", name: "" }}>
+            onChange={handleSelectedProjectWorkload}
+            selected={selectedProjectWorkload}>
             <SelectButtonTrigger>
                <SelectButtonValue placeholder="Carga de trabajo" />
             </SelectButtonTrigger>
