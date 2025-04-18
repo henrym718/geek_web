@@ -14,8 +14,8 @@ export default function CreateRequestPage() {
             requestDetails: <RequestDetails />,
             requestBudget: <RequestBudget />,
             requestTiming: <RequestTiming />,
-            requestScope: <RequestScope />,
             groupCategorySkillsSelector: <GroupCategorySkillsSelector />,
+            requestScope: <RequestScope />,
          }}
       />
    )
