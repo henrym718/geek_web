@@ -1,8 +1,10 @@
+import { BudgetType, ProjectLengthType, ProjectType, ProjectWorkloadType, RoleType, StatusType } from "@/config/constants"
+
 export interface User {
    id: string
    username: string
    email: string
-   role: "client" | "vendor"
+   role: RoleType
    profileCompleted: boolean
    isActive: boolean
    createdAt: string
@@ -41,8 +43,12 @@ export interface ProformaRequest {
    title: string
    description: string
    budget: number
+   budgetUnit: BudgetType
+   projectType: ProjectType
+   projectLength: ProjectLengthType
+   projectWorkload: ProjectWorkloadType
    scope: string
-   status: "ACTIVE" | "CANCELED" | "FINISHED" | "ACCEPTED" | "REJECTED"
+   status: StatusType
    createdAt?: Date
 }
 
@@ -50,7 +56,7 @@ export interface ProformaResponse {
    id: string
    budget?: number
    message: string
-   status: "ACTIVE" | "CANCELED" | "FINISHED" | "ACCEPTED" | "REJECTED"
+   status: StatusType
    createdAt?: Date
 }
 
