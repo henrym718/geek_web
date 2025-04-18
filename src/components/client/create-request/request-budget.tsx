@@ -7,8 +7,6 @@ import { useCreateRequestUserDataStore } from "@/stores/use-create-request-user-
 export function RequestBudget() {
    const { setRequestData, requestData } = useCreateRequestUserDataStore((state) => state)
 
-   console.log(requestData)
-
    const handleChangeCurrency = (value: string) => {
       setRequestData({ budget: Number(value) })
    }
