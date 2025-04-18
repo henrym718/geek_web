@@ -26,16 +26,18 @@ interface InputSearchProps<T extends FieldValues> extends Omit<InputFieldProps, 
    limit?: number
    name: Path<T>
    control?: Control<T>
+   onSelected?: (option: CityOption) => void
+   value?: string
 }
 
 export const InputSearch = <T extends FieldValues>(props: InputSearchProps<T>) => {
-   const { options, limit, name, control, ...rest } = props
+   const { options, limit, name, control, onSelected, value, ...rest } = props
 
    // Estados para controlar el comportamiento del componente
    const [isDropdownOpen, setIsDropdownOpen] = useState(false)
    const [highlightedIndex, setHighlightedIndex] = useState(-1)
    const [filteredOptions, setFilteredOptions] = useState<CityOption[]>([])
-   const [inputValue, setInputValue] = useState("")
+   const [inputValue, setInputValue] = useState(value || "")
    const [isOptionSelected, setIsOptionSelected] = useState(false)
 
    // Referencia para acceder al método onChange de react-hook-form
@@ -57,6 +59,11 @@ export const InputSearch = <T extends FieldValues>(props: InputSearchProps<T>) =
       setInputValue(option.label)
       // Cierra el dropdown
       setIsDropdownOpen(false)
+
+      // Notificar valor seleccionado a través del callback
+      if (onSelected) {
+         onSelected(option)
+      }
    }
 
    // Maneja la navegación por teclado
@@ -101,6 +108,10 @@ export const InputSearch = <T extends FieldValues>(props: InputSearchProps<T>) =
          onChangeRef.current?.({ label: value, id: "" })
       }
 
+      if (onSelected) {
+         onSelected({ label: "", id: "" })
+      }
+
       setIsDropdownOpen(true)
       setHighlightedIndex(-1)
       handleFilterOptions(value)
@@ -117,7 +128,7 @@ export const InputSearch = <T extends FieldValues>(props: InputSearchProps<T>) =
                onChangeRef.current = field.onChange
 
                // Determina el valor a mostrar en el input
-               const displayValue = field.value?.label || ""
+               const displayValue = field.value?.label || inputValue || ""
 
                return (
                   <InputField
