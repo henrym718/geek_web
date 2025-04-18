@@ -22,6 +22,17 @@ interface CreateRequestFormDataStore {
    addSkillsSelected: (skillsSelected: GetSkillsByCategoryIdResponse) => void
    removeSkillsSelected: (skillsSelected: GetSkillsByCategoryIdResponse) => void
    cleanSkillsSelected: () => void
+
+   selectedProjectLength: { id: string; name: string }
+   setSelectedProjectLength: (id: string, name: string) => void
+
+   selectedProjectWorkload: { id: string; name: string }
+   setSelectedProjectWorkload: (id: string, name: string) => void
+
+   resetFormData: () => void
+
+   selectedScope: string
+   setSelectedScope: (scope: string) => void
 }
 
 export const useCreateRequestFormDataStore = create<CreateRequestFormDataStore>((set) => ({
@@ -44,4 +55,25 @@ export const useCreateRequestFormDataStore = create<CreateRequestFormDataStore>(
    removeSkillsSelected: (skillsSelected) =>
       set((state) => ({ skillsSelected: state.skillsSelected.filter((skill) => skill.id !== skillsSelected.id) })),
    cleanSkillsSelected: () => set({ skillsSelected: [] }),
+
+   selectedProjectLength: { id: "", name: "" },
+   setSelectedProjectLength: (id, name) => set({ selectedProjectLength: { id, name } }),
+
+   selectedProjectWorkload: { id: "", name: "" },
+   setSelectedProjectWorkload: (id, name) => set({ selectedProjectWorkload: { id, name } }),
+
+   resetFormData: () =>
+      set({
+         groups: [],
+         selectedGroup: { id: "", name: "" },
+         categories: [],
+         selectedCategory: { id: "", name: "" },
+         skillsOptions: [],
+         skillsSelected: [],
+         selectedProjectLength: { id: "", name: "" },
+         selectedProjectWorkload: { id: "", name: "" },
+      }),
+
+   selectedScope: "",
+   setSelectedScope: (scope) => set({ selectedScope: scope }),
 }))
