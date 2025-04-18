@@ -69,36 +69,44 @@ export const mapAxiosErrorToApiResponse = (error: AxiosError): ApiResponse<never
 }
 
 // Métodos CRUD genéricos
-export async function apiGet<T>(endpoint: string, params?: Record<string, string | number | boolean | string[]>): Promise<ApiResponse<T>> {
+export async function apiGet<T>(
+   endpoint: string,
+   params?: Record<string, string | number | boolean | string[]>,
+   config?: AxiosRequestConfig
+): Promise<ApiResponse<T>> {
    try {
-      const response = await apiClient.get<ApiResponse<T>>(endpoint, { params })
+      const response = await apiClient.get<ApiResponse<T>>(endpoint, { params, ...config })
       return response.data
    } catch (error) {
       return mapAxiosErrorToApiResponse(error as AxiosError)
    }
 }
 
-export async function apiPost<T, D>(endpoint: string, data?: D): Promise<ApiResponse<T>> {
+export async function apiPost<T, D>(endpoint: string, data?: D, config?: AxiosRequestConfig): Promise<ApiResponse<T>> {
    try {
-      const response = await apiClient.post<ApiResponse<T>>(endpoint, data)
+      const response = await apiClient.post<ApiResponse<T>>(endpoint, data, { ...config })
       return response.data
    } catch (error) {
       return mapAxiosErrorToApiResponse(error as AxiosError)
    }
 }
 
-export async function apiPut<T, D>(endpoint: string, data?: D): Promise<ApiResponse<T>> {
+export async function apiPut<T, D>(endpoint: string, data?: D, config?: AxiosRequestConfig): Promise<ApiResponse<T>> {
    try {
-      const response = await apiClient.put<ApiResponse<T>>(endpoint, data)
+      const response = await apiClient.put<ApiResponse<T>>(endpoint, data, { ...config })
       return response.data
    } catch (error) {
       return mapAxiosErrorToApiResponse(error as AxiosError)
    }
 }
 
-export async function apiDelete<T>(endpoint: string, params?: Record<string, string | number | boolean | string[]>): Promise<ApiResponse<T>> {
+export async function apiDelete<T>(
+   endpoint: string,
+   params?: Record<string, string | number | boolean | string[]>,
+   config?: AxiosRequestConfig
+): Promise<ApiResponse<T>> {
    try {
-      const response = await apiClient.delete<ApiResponse<T>>(endpoint, { params })
+      const response = await apiClient.delete<ApiResponse<T>>(endpoint, { params, ...config })
       return response.data
    } catch (error) {
       return mapAxiosErrorToApiResponse(error as AxiosError)
