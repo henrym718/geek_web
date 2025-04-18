@@ -10,7 +10,6 @@ export interface CreateRequestRequest {
    projectWorkload: ProjectWorkloadType | null
    quotation: boolean
    scope: string
-   clientId: string
    categoryId: string
    skills: string[]
 }
