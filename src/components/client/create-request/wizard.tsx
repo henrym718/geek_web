@@ -8,8 +8,8 @@ interface WizardProps {
       requestDetails: React.ReactNode
       requestBudget: React.ReactNode
       requestTiming: React.ReactNode
-      requestScope: React.ReactNode
       groupCategorySkillsSelector: React.ReactNode
+      requestScope: React.ReactNode
    }
 }
 
@@ -21,8 +21,8 @@ export function Wizard({ steps }: Readonly<WizardProps>) {
       2: steps.requestDetails,
       3: steps.requestBudget,
       4: steps.requestTiming,
-      5: steps.requestScope,
-      6: steps.groupCategorySkillsSelector,
+      5: steps.groupCategorySkillsSelector,
+      6: steps.requestScope,
    }
 
    return RenderStep[step]
