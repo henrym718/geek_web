@@ -5,7 +5,7 @@ import { SelectButtonContext } from "./select-button-context"
 
 interface SelectProps {
    children: React.ReactNode
-   value: { id: string; name: string }
+   selected: { id: string; name: string }
    onChange: (value: { id: string; name: string }) => void
 }
 
@@ -13,7 +13,7 @@ export interface SelectRef {
    close: () => void
 }
 
-export const SelectButton = forwardRef<SelectRef, SelectProps>(({ children, value, onChange }, ref) => {
+export const SelectButton = forwardRef<SelectRef, SelectProps>(({ children, selected, onChange }, ref) => {
    const [isOpen, setIsOpen] = useState(false)
    const triggerRef = useRef<HTMLButtonElement | null>(null)
 
@@ -23,13 +23,13 @@ export const SelectButton = forwardRef<SelectRef, SelectProps>(({ children, valu
 
    const contextValue = useMemo(
       () => ({
-         selected: value,
-         setSelected: onChange,
+         selected,
+         onChange,
          isOpen,
          setIsOpen,
          triggerRef,
       }),
-      [value, isOpen]
+      [selected, isOpen]
    )
    return (
       <SelectButtonContext.Provider value={contextValue}>

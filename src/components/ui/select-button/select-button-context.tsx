@@ -4,7 +4,7 @@ import { createContext, useContext } from "react"
 
 interface SelectButtonContextProps {
    selected: { id: string; name: string }
-   setSelected: (selected: { id: string; name: string }) => void
+   onChange: (value: { id: string; name: string }) => void
    isOpen: boolean
    setIsOpen: (isOpen: boolean) => void
    triggerRef: React.RefObject<HTMLButtonElement | null>

@@ -12,11 +12,11 @@ interface SelectItemProps {
 }
 
 export function SelectButtonItem({ value, className, children, ...props }: Readonly<SelectItemProps>) {
-   const { setIsOpen, setSelected, selected } = useSelect()
+   const { setIsOpen, selected, onChange } = useSelect()
    const [isHovered, setIsHovered] = useState("")
 
    const handleClick = () => {
-      setSelected({ id: value, name: children as string })
+      onChange({ id: value, name: children as string })
       setIsOpen(false)
    }
 
