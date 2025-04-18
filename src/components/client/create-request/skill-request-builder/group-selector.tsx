@@ -32,7 +32,7 @@ export function GroupSelector() {
 
    return (
       <SelectButton
-         value={selectedGroup}
+         selected={selectedGroup}
          onChange={handleGroupSelect}>
          <SelectButtonTrigger>
             <SelectButtonValue placeholder="Seleccione un grupo" />
