@@ -1,20 +1,17 @@
 import { cn } from "@/lib/utils/cn"
 
-interface InputRadioProps {
+interface InputRadioProps extends React.InputHTMLAttributes<HTMLInputElement> {
    children: React.ReactNode
-   name: string
-   value: string
    className?: string
 }
 
-export function InputRadio({ children, name, value, className }: Readonly<InputRadioProps>) {
+export function InputRadio({ children, className, ...props }: Readonly<InputRadioProps>) {
    return (
       <label className="items-center gap-2 cursor-pointer inline-flex">
          <input
             type="radio"
-            name={name}
-            value={value}
             className={cn("accent-black", className)}
+            {...props}
          />
          {children}
       </label>
