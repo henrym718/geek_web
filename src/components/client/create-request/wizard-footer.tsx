@@ -1,10 +1,21 @@
 "use client"
 import { Box, Button, ProgressBar } from "@/components/ui"
 import { useCreateRequestStepHandlerStore } from "@/stores/use-create-request-step-handler.store"
-import React from "react"
+import { SubmitButton } from "./submit-button"
+import { useCreateRequestUserDataStore } from "@/stores/use-create-request-user-data.store"
 
 export function WizardFooter() {
    const { step, totalSteps, nextStep, previousStep } = useCreateRequestStepHandlerStore((state) => state)
+   const { requestData } = useCreateRequestUserDataStore((state) => state)
+
+   const isDisabled = () => {
+      if (step === 1) return !requestData.title.trim()
+      if (step === 2) return !requestData.description.trim()
+      if (step === 3) return !requestData.quotation && requestData.budget === 0
+      if (step === 4) return !requestData.projectType || !requestData.projectLength || !requestData.projectWorkload
+      if (step === 5) return !requestData.categoryId || !requestData.skills.length
+   }
+
    return (
       <Box className="flex flex-col justify-between gap-4 pb-4">
          <ProgressBar
@@ -23,16 +34,15 @@ export function WizardFooter() {
                data-step={step < totalSteps}
                className="data-[step=false]:hidden"
                variant="primary"
-               onClick={() => nextStep()}>
+               onClick={() => nextStep()}
+               disabled={isDisabled()}>
                Continuar
             </Button>
-            <Button
-               data-step={step === totalSteps}
-               className="data-[step=false]:hidden data-[step=true]:block"
-               variant="primary"
-               onClick={() => nextStep()}>
-               Crear solicitud
-            </Button>
+            <SubmitButton
+               step={step}
+               totalSteps={totalSteps}
+               isDisabled={!requestData.scope}
+            />
          </Box>
       </Box>
    )
