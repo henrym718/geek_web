@@ -1,9 +1,14 @@
 import { ApiResponse } from "@/data/dtos/api-response.types"
 import { CheckResponseExistsRes, CheckResponseExistsReq } from "@/data/dtos/check-reaponse-exists"
 import { CreateResponse, CreateResponseRequest } from "@/data/dtos/create-proforma-response"
-import { apiGet, apiPost } from "../api.client"
+import { apiGet, apiPost, apiPut } from "../api.client"
 import { PROFORMA_RESPONSE_ENDPOINTS } from "@/config/constants"
-import { GetResponsesByRequestIdRequest, GetResponsesByRequestIdResponse } from "@/data/types/api/response.types"
+import {
+   GetResponsesByRequestIdRequest,
+   GetResponsesByRequestIdResponse,
+   UpdateStatusByClientRequest,
+   UpdateStatusByClientResponse,
+} from "@/data/types/api/response.types"
 
 export const createProformaResponse = async (request: CreateResponseRequest): Promise<ApiResponse<CreateResponse>> => {
    return await apiPost<CreateResponse, CreateResponseRequest>(PROFORMA_RESPONSE_ENDPOINTS.CREATE_PROFORMA_RESPONSE, request)
@@ -17,4 +22,8 @@ export const fetchAllResponsesByRequestId = async (
    request: GetResponsesByRequestIdRequest
 ): Promise<ApiResponse<GetResponsesByRequestIdResponse[]>> => {
    return await apiGet<GetResponsesByRequestIdResponse[]>(PROFORMA_RESPONSE_ENDPOINTS.GET_ALL_RESPONSES_BY_REQUESTID(request.requestid))
+}
+
+export const updateStatusByClient = async (request: UpdateStatusByClientRequest): Promise<ApiResponse<UpdateStatusByClientResponse>> => {
+   return await apiPut<UpdateStatusByClientResponse, UpdateStatusByClientRequest>(PROFORMA_RESPONSE_ENDPOINTS.UPDATE_STATUS_BY_CLIENT, request)
 }
