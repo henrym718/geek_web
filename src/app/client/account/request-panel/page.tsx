@@ -1,8 +1,7 @@
 import { FilterRequestTab } from "@/components/client/request-panel/filter-request-tab"
-import { RequestList } from "@/components/client/request-panel/request-list"
-import { ProposalsList } from "@/components/client/request-panel/proposals-list"
 import { Box } from "@/components/ui"
 import { STATUS_REQUEST } from "@/config/constants"
+import { ActiveRequestList } from "@/components/client/request-panel/active-request-list"
 
 const tabs = [
    { label: "Activo", value: STATUS_REQUEST.ACTIVE },
@@ -23,23 +22,21 @@ export default async function RequestPanelPage({ searchParams }: Readonly<Props>
    const search = params.search || "active"
    const requestid = params.requestid || ""
 
+   const Render: Record<string, React.ReactNode> = {
+      active: (
+         <ActiveRequestList
+            search={search}
+            requestid={requestid}
+         />
+      ),
+   }
+
    return (
       <Box className="flex flex-col gap-4 w-7xl mx-auto">
          <Box className="sticky top-0 z-10 bg-white py-2">
             <FilterRequestTab tabs={tabs} />
          </Box>
-         <Box className="flex gap-4">
-            <Box
-               data-search={search === "active"}
-               className="data-[search=true]:w-5/9 data-[search=false]:w-full">
-               <RequestList search={search} />
-            </Box>
-            <Box
-               data-search={search === "active"}
-               className="data-[search=true]:w-4/9 data-[search=false]:hidden">
-               <ProposalsList requestid={requestid} />
-            </Box>
-         </Box>
+         {Render[search]}
       </Box>
    )
 }

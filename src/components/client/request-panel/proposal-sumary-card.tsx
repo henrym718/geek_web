@@ -4,6 +4,8 @@ import { Typography } from "@/components/ui/typography"
 import { IoLocationOutline } from "react-icons/io5"
 import { Skill } from "@/data/types/models/models"
 import { RequestSkills } from "./request-skills"
+import { STATUS_RESPONSE } from "@/config/constants"
+import { Button } from "@/components/ui"
 
 interface Props {
    username: string
@@ -11,11 +13,12 @@ interface Props {
    city: string
    message: string
    skills: Skill[]
+   status: string
 }
 
-export function ProposalSumaryCard({ username, title, city, message, skills }: Readonly<Props>) {
+export function ProposalSumaryCard({ username, title, city, message, skills, status }: Readonly<Props>) {
    return (
-      <Box className="flex flex-col pb-2 border-2 border-gray-200 rounded-lg p-4 hover:bg-gray-100">
+      <Box className="flex flex-col relative pb-2 border-2 border-gray-200 rounded-lg p-4 hover:bg-gray-100">
          <Box className="flex items-center gap-2">
             <Avatar size="5xl" />
             <Box className="flex flex-col">
@@ -33,6 +36,14 @@ export function ProposalSumaryCard({ username, title, city, message, skills }: R
          </Box>
          <Typography variant="parrafo">{message}</Typography>
          <RequestSkills skills={skills} />
+         <Button
+            data-status={status}
+            className="absolute bottom-2 right-2 text-white data-[status=ACCEPTED]:bg-green-500 data-[status=REJECTED]:bg-red-500  data-[status=REJECTED]:text-white data-[status=PENDING]:bg-yellow-500"
+            variant="secundary">
+            {status === STATUS_RESPONSE.ACCEPTED && "Aceptado"}
+            {status === STATUS_RESPONSE.REJECTED && "Rechazado"}
+            {status === STATUS_RESPONSE.PENDING && "Pendiente"}
+         </Button>
       </Box>
    )
 }

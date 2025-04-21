@@ -25,6 +25,7 @@ export function ProposalsList({ requestid }: Readonly<Props>) {
                vendor={data.vendor}
                vendorProfile={data.vendorProfile}
                skills={data.skills}
+               requestid={requestid}
             />
          ))}
       </Box>

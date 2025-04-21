@@ -8,10 +8,11 @@ interface Props {
    vendor: Pick<Vendor, "photo" | "phone" | "city">
    vendorProfile: Pick<VendorProfile, "aboutme" | "title">
    skills: Skill[]
+   requestid: string
 }
 
 export function ProposalsInteractionCard(data: Readonly<Props>) {
-   const { response, user, vendor, vendorProfile, skills } = data
+   const { response, user, vendor, vendorProfile, skills, requestid } = data
 
    return (
       <Box>
@@ -24,6 +25,7 @@ export function ProposalsInteractionCard(data: Readonly<Props>) {
                      city={vendor.city}
                      message={response.message}
                      skills={skills}
+                     status={response.status}
                   />
                </Box>
             </SideModalTrigger>
@@ -37,6 +39,8 @@ export function ProposalsInteractionCard(data: Readonly<Props>) {
                      skills={skills}
                      createdAt={user.createdAt}
                      closeModal={close}
+                     requestid={requestid}
+                     responseid={response.id}
                   />
                )}
             </SideModalContent>
