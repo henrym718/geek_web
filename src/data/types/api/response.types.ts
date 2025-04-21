@@ -1,3 +1,4 @@
+import { StatusResponseType } from "@/config/constants"
 import { ProformaResponse, Skill, User, Vendor, VendorProfile } from "../models/models"
 
 export interface GetResponsesByRequestIdRequest {
@@ -10,4 +11,14 @@ export interface GetResponsesByRequestIdResponse {
    vendor: Pick<Vendor, "photo" | "phone" | "city">
    vendorProfile: Pick<VendorProfile, "aboutme" | "title">
    skills: Skill[]
+}
+
+export interface UpdateStatusByClientRequest {
+   proformaRequestId: string
+   proformaResponseId: string
+   newStatus: StatusResponseType
+}
+
+export interface UpdateStatusByClientResponse {
+   details: string
 }
