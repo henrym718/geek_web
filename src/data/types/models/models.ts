@@ -1,5 +1,12 @@
-import { BudgetType, ProjectLengthType, ProjectType, ProjectWorkloadType, RoleType, StatusType } from "@/config/constants"
-
+import {
+   BudgetUnitType,
+   ProjectLengthType,
+   ProjectType,
+   ProjectWorkloadType,
+   RoleType,
+   StatusRequestType,
+   StatusResponseType,
+} from "@/config/constants"
 export interface User {
    id: string
    username: string
@@ -43,12 +50,14 @@ export interface ProformaRequest {
    title: string
    description: string
    budget: number
-   budgetUnit: BudgetType
+   budgetUnit: BudgetUnitType
+   quotation: boolean
+   scope: string
    projectType: ProjectType
    projectLength: ProjectLengthType
    projectWorkload: ProjectWorkloadType
-   scope: string
-   status: StatusType
+   status: StatusRequestType
+   countResponses: number
    createdAt?: Date
 }
 
@@ -56,7 +65,7 @@ export interface ProformaResponse {
    id: string
    budget?: number
    message: string
-   status: StatusType
+   status: StatusResponseType
    createdAt?: Date
 }
 

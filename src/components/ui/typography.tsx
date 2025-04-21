@@ -134,7 +134,7 @@ const variantToElement: Record<TypographyVariant, React.ElementType> = {
  * Props del componente Typography, excluyendo la propiedad color nativa de HTML
  * e incorporando las variantes definidas con CVA.
  */
-interface TypographyProps extends Omit<React.HTMLAttributes<HTMLElement>, "color">, VariantProps<typeof typographyVariants> {
+export interface TypographyProps extends Omit<React.HTMLAttributes<HTMLElement>, "color">, VariantProps<typeof typographyVariants> {
    className?: string
    children?: React.ReactNode
 }

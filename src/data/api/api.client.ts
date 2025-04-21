@@ -69,13 +69,9 @@ export const mapAxiosErrorToApiResponse = (error: AxiosError): ApiResponse<never
 }
 
 // Métodos CRUD genéricos
-export async function apiGet<T>(
-   endpoint: string,
-   params?: Record<string, string | number | boolean | string[]>,
-   config?: AxiosRequestConfig
-): Promise<ApiResponse<T>> {
+export async function apiGet<T>(endpoint: string, config?: AxiosRequestConfig): Promise<ApiResponse<T>> {
    try {
-      const response = await apiClient.get<ApiResponse<T>>(endpoint, { params, ...config })
+      const response = await apiClient.get<ApiResponse<T>>(endpoint, { ...config })
       return response.data
    } catch (error) {
       return mapAxiosErrorToApiResponse(error as AxiosError)
@@ -100,13 +96,9 @@ export async function apiPut<T, D>(endpoint: string, data?: D, config?: AxiosReq
    }
 }
 
-export async function apiDelete<T>(
-   endpoint: string,
-   params?: Record<string, string | number | boolean | string[]>,
-   config?: AxiosRequestConfig
-): Promise<ApiResponse<T>> {
+export async function apiDelete<T>(endpoint: string, config?: AxiosRequestConfig): Promise<ApiResponse<T>> {
    try {
-      const response = await apiClient.delete<ApiResponse<T>>(endpoint, { params, ...config })
+      const response = await apiClient.delete<ApiResponse<T>>(endpoint, { ...config })
       return response.data
    } catch (error) {
       return mapAxiosErrorToApiResponse(error as AxiosError)

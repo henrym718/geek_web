@@ -13,7 +13,7 @@ export function SideModalContent({ children }: Readonly<ContentSideModalProps>) 
 
    useEffect(() => {
       const handleClickOutside = (event: MouseEvent) => {
-         if (event.target instanceof Node && overlayRef.current === event.target) {
+         if (overlayRef.current === event.target) {
             close()
          }
       }

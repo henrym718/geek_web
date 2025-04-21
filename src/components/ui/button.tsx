@@ -34,8 +34,10 @@ const buttonVariants = cva(
 
       // Ajustes para iconos dentro del botón
       "[&_svg]:pointer-events-none",
-      "[&_svg]:size-4",
+      "[&_svg]:size-5",
       "[&_svg]:shrink-0",
+      "[&_svg]:align-middle",
+      "[&_svg]:translate-y-[1px]",
 
       // Dimensiones y espaciado por defecto
       "h-9",
@@ -54,7 +56,7 @@ const buttonVariants = cva(
          variant: {
             primary: "bg-primary text-primary-foreground hover:bg-primary/95",
             secundary: "bg-secondary text-secondary-foreground hover:bg-secondary/10",
-            outline: "bg-transparent border border-opacity-50",
+            outline: "bg-transparent border border-opacity-50 hover:bg-black/5",
             link: "underline-offset-4 hover:underline shadow-none",
             destructive: "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/80",
          },

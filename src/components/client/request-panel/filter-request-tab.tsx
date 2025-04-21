@@ -1,25 +1,24 @@
-// ProformaRequestTabs.tsx
 "use client"
-import { useEffect, useState } from "react"
-import { usePathname, useSearchParams, useRouter } from "next/navigation"
-import { Tab } from "@/components/ui"
 
-interface Props {
+import { Tab } from "@/components/ui"
+import { usePathname, useRouter, useSearchParams } from "next/navigation"
+import { useEffect, useState } from "react"
+
+interface PropsFilterRequestTab {
    tabs: {
       label: string
       value: string
    }[]
 }
 
-export function FilterRequestsTabs({ tabs }: Props) {
+export function FilterRequestTab({ tabs }: Readonly<PropsFilterRequestTab>) {
    const router = useRouter()
    const pathname = usePathname()
    const searchParams = useSearchParams()
-   const currentSearch = searchParams.get("search") || tabs[0].value
-   const [activeTab, setActiveTab] = useState(currentSearch)
+   const [activeTab, setActiveTab] = useState("")
 
-   const onSelectTab = (tab: string) => {
-      setActiveTab(tab)
+   const handleSelectTab = (tab: string) => {
+      setActiveTab(tab.toLowerCase())
    }
 
    useEffect(() => {
@@ -28,25 +27,27 @@ export function FilterRequestsTabs({ tabs }: Props) {
          const updatedParams = new URLSearchParams(searchParams.toString())
 
          if (!currentSearchParam) {
-            const defaultTabValue = tabs[0].value
+            const defaultTabValue = tabs[0].value.toLowerCase()
+            setActiveTab(defaultTabValue)
             updatedParams.set("search", defaultTabValue)
+            updatedParams.delete("requestid")
             router.push(`${pathname}?${updatedParams}`)
-         }
-
-         if (currentSearchParam !== activeTab) {
+         } else if (currentSearchParam && !activeTab) {
+            setActiveTab(currentSearchParam)
+         } else if (currentSearchParam !== activeTab) {
             updatedParams.set("search", activeTab)
+            updatedParams.delete("requestid")
             router.push(`${pathname}?${updatedParams}`)
          }
       }
-
       setSearchParams()
    }, [searchParams, pathname, router, tabs, activeTab])
 
    return (
       <Tab
          tabs={tabs}
-         onSelectTab={onSelectTab}
-         activeTab={activeTab} // Usar el estado local para feedback inmediato
+         onSelectTab={handleSelectTab}
+         activeTab={activeTab}
       />
    )
 }

@@ -19,7 +19,7 @@ export const Tab = ({ tabs, onSelectTab, activeTab }: TabProps) => {
                   onMouseDown={() => onSelectTab(tab.value)}>
                   <span
                      className="data-[active=true]:text-primary data-[active=true]:font-bold data-[active=true]:underline-offset-4 data-[active=true]:underline"
-                     data-active={tab.value === activeTab}>
+                     data-active={tab.value.toLocaleLowerCase() === activeTab}>
                      {tab.label}
                   </span>
                </button>

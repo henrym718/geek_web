@@ -3,6 +3,7 @@ import { CheckResponseExistsRes, CheckResponseExistsReq } from "@/data/dtos/chec
 import { CreateResponse, CreateResponseRequest } from "@/data/dtos/create-proforma-response"
 import { apiGet, apiPost } from "../api.client"
 import { PROFORMA_RESPONSE_ENDPOINTS } from "@/config/constants"
+import { GetResponsesByRequestIdRequest, GetResponsesByRequestIdResponse } from "@/data/types/api/response.types"
 
 export const createProformaResponse = async (request: CreateResponseRequest): Promise<ApiResponse<CreateResponse>> => {
    return await apiPost<CreateResponse, CreateResponseRequest>(PROFORMA_RESPONSE_ENDPOINTS.CREATE_PROFORMA_RESPONSE, request)
@@ -10,4 +11,10 @@ export const createProformaResponse = async (request: CreateResponseRequest): Pr
 
 export const checkResponseExists = async (request: CheckResponseExistsReq): Promise<ApiResponse<CheckResponseExistsRes>> => {
    return await apiGet<CheckResponseExistsRes>(PROFORMA_RESPONSE_ENDPOINTS.CHECK_RESPONSE_EXISTS(request.proformaRequestId, request.profileVendorId))
+}
+
+export const fetchAllResponsesByRequestId = async (
+   request: GetResponsesByRequestIdRequest
+): Promise<ApiResponse<GetResponsesByRequestIdResponse[]>> => {
+   return await apiGet<GetResponsesByRequestIdResponse[]>(PROFORMA_RESPONSE_ENDPOINTS.GET_ALL_RESPONSES_BY_REQUESTID(request.requestid))
 }

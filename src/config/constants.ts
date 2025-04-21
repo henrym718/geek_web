@@ -12,15 +12,22 @@ export const AUTH_FORM = {
 
 export type AuthFormType = (typeof AUTH_FORM)[keyof typeof AUTH_FORM]
 
-export const STATUS = {
+export const STATUS_REQUEST = {
    ACTIVE: "ACTIVE",
-   CANCELED: "CANCELED",
+   ANNULLED: "ANNULLED",
    FINISHED: "FINISHED",
+   MATCHED: "MATCHED",
+} as const
+
+export type StatusRequestType = (typeof STATUS_REQUEST)[keyof typeof STATUS_REQUEST]
+
+export const STATUS_RESPONSE = {
+   PENDING: "PENDING",
    ACCEPTED: "ACCEPTED",
    REJECTED: "REJECTED",
 } as const
 
-export type StatusType = (typeof STATUS)[keyof typeof STATUS]
+export type StatusResponseType = (typeof STATUS_RESPONSE)[keyof typeof STATUS_RESPONSE]
 
 export const BUDGET_UNIT_OPTIONS = [
    { value: "PROJECT", label: "Proyecto" },
@@ -30,7 +37,11 @@ export const BUDGET_UNIT_OPTIONS = [
    { value: "MONTH", label: "Mes" },
 ] as const
 
-export type BudgetType = (typeof BUDGET_UNIT_OPTIONS)[number]["value"]
+export type BudgetUnitType = (typeof BUDGET_UNIT_OPTIONS)[number]["value"]
+export const budgetUnitMap = BUDGET_UNIT_OPTIONS.reduce((acc, curr) => {
+   acc[curr.value] = curr.label.toLowerCase()
+   return acc
+}, {} as Record<string, string>)
 
 export const PROJECT_TYPE_OPTIONS = [
    { value: "ONE_TIME", label: "Proyecto único" },
@@ -38,6 +49,10 @@ export const PROJECT_TYPE_OPTIONS = [
 ] as const
 
 export type ProjectType = (typeof PROJECT_TYPE_OPTIONS)[number]["value"]
+export const projectTypeMap = PROJECT_TYPE_OPTIONS.reduce((acc, curr) => {
+   acc[curr.value] = curr.label
+   return acc
+}, {} as Record<string, string>)
 
 export const PROJECT_LENGTH_OPTIONS = [
    { value: "SINGLE_DAY", label: "Solo por un día" },
@@ -51,6 +66,10 @@ export const PROJECT_LENGTH_OPTIONS = [
 ] as const
 
 export type ProjectLengthType = (typeof PROJECT_LENGTH_OPTIONS)[number]["value"]
+export const projectLengthMap = PROJECT_LENGTH_OPTIONS.reduce((acc, curr) => {
+   acc[curr.value] = curr.label
+   return acc
+}, {} as Record<string, string>)
 
 export const PROJECT_WORKLOAD_OPTIONS = [
    { value: "LT_TEN", label: "Menos de 10 horas/semana" },
@@ -63,6 +82,10 @@ export const PROJECT_WORKLOAD_OPTIONS = [
 ] as const
 
 export type ProjectWorkloadType = (typeof PROJECT_WORKLOAD_OPTIONS)[number]["value"]
+export const projectWorkloadMap = PROJECT_WORKLOAD_OPTIONS.reduce((acc, curr) => {
+   acc[curr.value] = curr.label
+   return acc
+}, {} as Record<string, string>)
 
 export const AUTH_ENDPOINTS = {
    LOGIN: "/authenticate/login",
@@ -87,11 +110,13 @@ export const GROUP_ENDPOINTS = {
 export const PROFORMA_REQUEST_ENDPOINTS = {
    CREATE_REQUEST: "/proforma-request",
    PROFORMA_REQUEST_BY_VENDOR_PROFILE_ID: (vendorProfileId: string) => `/proforma-request/vendor/${vendorProfileId}`,
+   PROFORMA_REQUEST_BY_CLIENT_ID: () => `/proforma-request/client`,
 } as const
 
 export const PROFORMA_RESPONSE_ENDPOINTS = {
    CREATE_PROFORMA_RESPONSE: "/proforma-response",
    CHECK_RESPONSE_EXISTS: (proformaRequestId: string, profileVendorId: string) => `/proforma-response/exists/${proformaRequestId}/${profileVendorId}`,
+   GET_ALL_RESPONSES_BY_REQUESTID: (requestId: string) => `/proforma-response/${requestId}`,
 } as const
 
 export const VENDOR_PROFILE_ENDPOINTS = {
