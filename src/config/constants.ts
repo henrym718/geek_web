@@ -117,6 +117,7 @@ export const PROFORMA_RESPONSE_ENDPOINTS = {
    CREATE_PROFORMA_RESPONSE: "/proforma-response",
    CHECK_RESPONSE_EXISTS: (proformaRequestId: string, profileVendorId: string) => `/proforma-response/exists/${proformaRequestId}/${profileVendorId}`,
    GET_ALL_RESPONSES_BY_REQUESTID: (requestId: string) => `/proforma-response/${requestId}`,
+   UPDATE_STATUS_BY_CLIENT: "/proforma-response",
 } as const
 
 export const VENDOR_PROFILE_ENDPOINTS = {
