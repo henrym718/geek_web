@@ -18,7 +18,7 @@ export const Tab = ({ tabs, onSelectTab, activeTab }: TabProps) => {
                   className="flex-1 cursor-pointer gap-2"
                   onMouseDown={() => onSelectTab(tab.value)}>
                   <span
-                     className="data-[active=true]:text-primary data-[active=true]:font-bold data-[active=true]:underline-offset-4 data-[active=true]:underline"
+                     className="data-[active=true]:text-secondary data-[active=true]:font-bold data-[active=true]:underline-offset-4 data-[active=true]:underline"
                      data-active={tab.value.toLocaleLowerCase() === activeTab}>
                      {tab.label}
                   </span>

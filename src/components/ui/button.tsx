@@ -17,13 +17,18 @@ import { Loader2 } from "lucide-react"
  */
 const buttonVariants = cva(
    [
+      //Estilos de animacion
+      "transition-all",
+      "duration-300",
+      "ease-in-out",
+
       // Estilos base del botón
       "inline-flex",
       "items-center",
       "justify-center",
       "gap-2",
       "whitespace-nowrap",
-      "rounded-md",
+      "rounded-lg",
       "text-sm",
       "font-medium",
 
@@ -43,7 +48,6 @@ const buttonVariants = cva(
       "h-9",
       "px-4",
       "py-2",
-      "shadow",
       "cursor-pointer",
 
       // Estados deshabilitados
@@ -55,10 +59,12 @@ const buttonVariants = cva(
          // Variantes visuales del botón
          variant: {
             primary: "bg-primary text-primary-foreground hover:bg-primary/95",
-            secundary: "bg-secondary text-secondary-foreground hover:bg-secondary/10",
+            secundary: "bg-secondary font-bold text-secondary-foreground hover:bg-secondary-hover transition-all duration-300",
+            tertiary: "bg-tertiary text-tertiary-foreground hover:bg-tertiary/10",
             outline: "bg-transparent border border-opacity-50 hover:bg-black/5",
             link: "underline-offset-4 hover:underline shadow-none",
             destructive: "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/80",
+            ghost: "bg-transparent hover:bg-black/5 hover:rounded-lg font-bold",
          },
 
          rounded: {

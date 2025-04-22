@@ -53,8 +53,7 @@ export function RequestCard(props: Readonly<Props>) {
 
    return (
       <Box
-         data-selected={searchParams.get("requestid") === id}
-         className="flex flex-col relative border rounded-md border-black/10 gap-4 px-4 py-4 data-[selected=true]:bg-black/5 hover:bg-black/5 hover:cursor-pointer hover:border-black/5 transition-all duration-300"
+         className="group flex flex-col bg-white relative border-2 rounded-xl border-black/10 gap-4 px-6 py-4 hover:cursor-pointer hover:border-black/20 hover:shadow-md transition-all duration-300"
          onClick={handleSeeProposals}>
          <Box>
             <RequestHeader

@@ -14,17 +14,16 @@ export default function TextCollapse({ maxLength, children, ...props }: Readonly
    const text = showFullDescription || !shouldShowMore ? childrenString : childrenString.slice(0, maxLength) + "..."
 
    return (
-      <Box>
-         <Typography {...props}>
-            {text}
+      <Box className="flex flex-col gap-1">
+         <Typography {...props}>{text}</Typography>
+         {shouldShowMore && (
             <Typography
-               data-collapsed={shouldShowMore}
-               className="cursor-pointer data-[collapsed=true]:block data-[collapsed=false]:hidden"
+               className="inline-flex cursor-pointer w-fit"
                variant="enlace"
                onClick={() => setShowFullDescription(!showFullDescription)}>
                {showFullDescription ? "Ver menos" : "Ver más"}
             </Typography>
-         </Typography>
+         )}
       </Box>
    )
 }

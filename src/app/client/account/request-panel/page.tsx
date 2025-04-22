@@ -1,7 +1,11 @@
 import { FilterRequestTab } from "@/components/client/request-panel/filter-request-tab"
-import { Box } from "@/components/ui"
+import { Box, Typography } from "@/components/ui"
 import { STATUS_REQUEST } from "@/config/constants"
 import { ActiveRequestList } from "@/components/client/request-panel/active-request-list"
+import { MatchedRequestView } from "@/components/client/request-panel/matched-request-view"
+import { AnnulledRequestCards } from "@/components/client/request-panel/annulled-request-cards"
+import { StartCreateRequestButton } from "@/components/client/create-request/start-create-request-button"
+import { ProposalsList } from "@/components/client/request-panel/proposals-list"
 
 const tabs = [
    { label: "Activo", value: STATUS_REQUEST.ACTIVE },
@@ -20,23 +24,30 @@ interface Props {
 export default async function RequestPanelPage({ searchParams }: Readonly<Props>) {
    const params = await searchParams
    const search = params.search || "active"
-   const requestid = params.requestid || ""
-
-   const Render: Record<string, React.ReactNode> = {
-      active: (
-         <ActiveRequestList
-            search={search}
-            requestid={requestid}
-         />
-      ),
-   }
+   const requestid = params.requestid
 
    return (
-      <Box className="flex flex-col gap-4 w-7xl mx-auto">
-         <Box className="sticky top-0 z-10 bg-white py-2">
-            <FilterRequestTab tabs={tabs} />
-         </Box>
-         {Render[search]}
+      <Box className="max-w-screen-xl bg-zinc-100 rounded-2xl px-6 pb-10 mt-5 pt-8 flex flex-col gap-4 min-h-[500px]">
+         {requestid ? (
+            <Box className="flex flex-col gap-4">
+               <Typography variant="subtitulo1">Respuestas a la solicitud</Typography>
+               <ProposalsList requestid={requestid} />
+            </Box>
+         ) : (
+            <Box className="flex flex-col gap-4">
+               <Typography variant="subtitulo1">Panel de solicitudes</Typography>
+               <Box className="sticky flex justify-between top-0 z-10 py-2 bg-zinc-100">
+                  <FilterRequestTab tabs={tabs} />
+                  <StartCreateRequestButton />
+               </Box>
+
+               <Box className="overflow-y-auto max-h-[calc(100vh-233px)]">
+                  {search === STATUS_REQUEST.ACTIVE.toLowerCase() && <ActiveRequestList search={search} />}
+                  {search === STATUS_REQUEST.MATCHED.toLowerCase() && <MatchedRequestView />}
+                  {search === STATUS_REQUEST.ANNULLED.toLowerCase() && <AnnulledRequestCards />}
+               </Box>
+            </Box>
+         )}
       </Box>
    )
 }

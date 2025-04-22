@@ -8,7 +8,7 @@ import React, { useActionState, useEffect } from "react"
 import { RequestSkills } from "./request-skills"
 import { timeAgo } from "@/lib/utils/timeAgo"
 import { Skill } from "@/data/types/models/models"
-import { IoIosArrowRoundBack, IoIosCheckmarkCircleOutline, IoIosCloseCircleOutline } from "react-icons/io"
+import { IoIosCheckmarkCircleOutline, IoIosCloseCircleOutline } from "react-icons/io"
 import { Button } from "@/components/ui"
 import { updateStatusByClientAction } from "@/app/client/account/request-panel/actions"
 import { STATUS_RESPONSE } from "@/config/constants"
@@ -42,12 +42,7 @@ export function ProposalActionModal({ username, title, city, message, skills, cr
    }, [state.success, closeModal, requestid])
 
    return (
-      <Box className="flex flex-col p-10 gap-4 cursor-default w-[700px] min-h-[100vh] overflow-y-auto">
-         <IoIosArrowRoundBack
-            className="cursor-pointer hover:rounded-full hover:bg-gray-100 p-2"
-            size={40}
-            onClick={closeModal}
-         />
+      <Box className="flex flex-col px-4 gap-4 cursor-default overflow-y-auto">
          <Box className="flex items-center gap-2">
             <Avatar size="7xl" />
             <Box className="flex flex-col">
@@ -91,20 +86,21 @@ export function ProposalActionModal({ username, title, city, message, skills, cr
             </Box>
          </Box>
          <Divider />
-         <Box className="flex gap-10  pt-10 justify-center">
-            <form action={action}>
-               <input
-                  type="hidden"
-                  name="requestid"
-                  value={requestid}
-               />
-               <input
-                  type="hidden"
-                  name="responseid"
-                  value={responseid}
-               />
+         <form action={action}>
+            <input
+               type="hidden"
+               name="requestid"
+               value={requestid}
+            />
+            <input
+               type="hidden"
+               name="responseid"
+               value={responseid}
+            />
+            <Box className="flex gap-8 justify-center mt-6">
                <Button
-                  variant="secundary"
+                  className="flex-1"
+                  variant="outline"
                   size="lg"
                   name="status"
                   value={STATUS_RESPONSE.ACCEPTED}
@@ -113,7 +109,8 @@ export function ProposalActionModal({ username, title, city, message, skills, cr
                   <IoIosCheckmarkCircleOutline size={24} />
                </Button>
                <Button
-                  variant="secundary"
+                  className="flex-1"
+                  variant="outline"
                   size="lg"
                   name="status"
                   value={STATUS_RESPONSE.REJECTED}
@@ -121,8 +118,8 @@ export function ProposalActionModal({ username, title, city, message, skills, cr
                   Rechazar Propuesta
                   <IoIosCloseCircleOutline size={24} />
                </Button>
-            </form>
-         </Box>
+            </Box>
+         </form>
       </Box>
    )
 }

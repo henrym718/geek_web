@@ -24,7 +24,6 @@ export function ProposalsInteractionCard(data: Readonly<Props>) {
                      title={vendorProfile.title}
                      city={vendor.city}
                      message={response.message}
-                     skills={skills}
                      status={response.status}
                   />
                </Box>
