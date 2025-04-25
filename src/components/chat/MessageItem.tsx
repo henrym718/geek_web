@@ -8,7 +8,7 @@ interface MessageProps {
    isSender: boolean
 }
 
-export function MessageBubble({ text, isSender }: Readonly<MessageProps>) {
+export function MessageItem({ text, isSender }: Readonly<MessageProps>) {
    return (
       <Box className={cn("flex", isSender ? "justify-end" : "justify-start")}>
          <Typography className={cn("rounded-xl py-2 px-3 max-w-[50%] !text-white inline-block", isSender ? "bg-primary/80" : "bg-secondary")}>
