@@ -37,7 +37,8 @@ const inputVariants = cva(
          sizing: {
             default: "text-md h-10 px-3",
             sm: "text-sm h-8 px-2",
-            lg: "text-lg h-12 px-4",
+            lg: "text-md h-9 px-4",
+            xl: "text-md h-10 px-6",
          },
          rounded: {
             none: "rounded-none",
@@ -93,7 +94,6 @@ export const InputField = (props: InputFieldProps) => {
       <div className={cn("relative flex flex-col w-full", classNameWrapper)}>
          {/* Etiqueta opcional */}
          {label && <span className="text-sm pb-1">{label}</span>}
-
          {/* Input con estilos configurables */}
          <input
             className={cn(inputVariants({ variant, sizing, rounded, background, fullWidth, error: !!error }), className)}
@@ -101,9 +101,8 @@ export const InputField = (props: InputFieldProps) => {
             {...rest}
             {...register}
          />
-
          {/* Contenedor de altura fija para mensajes de error (evita saltos) */}
-         <div className="h-2 mt-1">{error && <p className="text-xs text-red-500">{error}</p>}</div>
+         <div className={cn({ "h-2 mt-1": error, "h-0": !error })}>{error && <p className="text-xs text-red-500">{error}</p>}</div>{" "}
       </div>
    )
 }

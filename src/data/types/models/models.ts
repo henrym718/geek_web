@@ -88,3 +88,18 @@ export interface Suggestion {
    id: string
    text: string
 }
+
+export interface Message {
+   id: string
+   message: string
+   chatId: string
+   senderId: string
+   createdAt: Date
+}
+
+export interface Chat {
+   id: string
+   clientId: string
+   vendorId: string
+   createdAt: Date
+}
