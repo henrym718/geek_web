@@ -37,7 +37,7 @@ export function Avatar(props: Readonly<AvatarProps>) {
    return (
       <img
          className={cn(avatarVariants({ size }), className)}
-         src={src ?? avatarPlaceholder.src}
+         src={src || avatarPlaceholder.src}
          alt={alt}
          {...rest}
       />
