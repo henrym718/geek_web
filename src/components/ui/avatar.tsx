@@ -2,6 +2,7 @@
 import { cn } from "@/lib/utils/cn"
 import { cva, type VariantProps } from "class-variance-authority"
 import avatarPlaceholder from "../../../public/avatar-placeholder.svg"
+import { UserRound } from "lucide-react"
 
 const avatarVariants = cva(["rounded-full", "object-cover", "object-center", "border-2", "border-white"], {
    variants: {
@@ -30,16 +31,30 @@ interface AvatarProps extends React.ImgHTMLAttributes<HTMLImageElement> {
    size?: VariantProps<typeof avatarVariants>["size"]
    src?: string
    alt?: string
+   user?: string
 }
 
 export function Avatar(props: Readonly<AvatarProps>) {
    const { size, className, src, alt, ...rest } = props
    return (
-      <img
-         className={cn(avatarVariants({ size }), className)}
-         src={src || avatarPlaceholder.src}
-         alt={alt}
-         {...rest}
-      />
+      <>
+         {src ? (
+            <div className="rounded-full bg-primary/60 p-1 text-white flex items-center justify-center">
+               <img
+                  className={cn(avatarVariants({ size }), className)}
+                  src={src || avatarPlaceholder.src}
+                  alt={alt}
+                  {...rest}
+               />
+            </div>
+         ) : (
+            <div className="rounded-full bg-primary/60 p-1 text-white flex items-center justify-center">
+               <UserRound
+                  size={24}
+                  strokeWidth={2}
+               />
+            </div>
+         )}
+      </>
    )
 }

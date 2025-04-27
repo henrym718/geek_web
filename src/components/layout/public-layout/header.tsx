@@ -1,34 +1,19 @@
 "use client"
-import { useRouter } from "next/navigation"
-import { Box, Button, Typography } from "@/components/ui"
-import { useRegistrationStore } from "@/stores/use-registration.store"
-import { AUTH_FORM } from "@/config/constants"
+import { Box, Typography } from "@/components/ui"
+import { UserMenu } from "@/components/UserMenu/UserMenu"
 
 export function Header() {
-   const router = useRouter()
-   const { setForm } = useRegistrationStore((state) => state)
-
    return (
       <Box className="flex items-center justify-between p-4">
          <Box>
-            <Typography variant="subtitulo2">Logo</Typography>
+            <Typography
+               variant="subtitulo2"
+               color="secundario">
+               Logo
+            </Typography>
          </Box>
-         <Box className="flex items-center gap-2">
-            <Button
-               variant="link"
-               onClick={() => router.push("/login")}>
-               Login
-            </Button>
-            <Button
-               variant="primary"
-               color="primary"
-               onClick={() => {
-                  setForm(AUTH_FORM.ROLE)
-                  router.push("/register")
-               }}>
-               Unete
-            </Button>
-         </Box>
+
+         <UserMenu />
       </Box>
    )
 }

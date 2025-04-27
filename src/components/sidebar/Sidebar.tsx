@@ -27,11 +27,13 @@ export function Sidebar({ user, dashboardLink, navigationLinks }: Readonly<Props
    return (
       <aside className="flex flex-col gap-4 w-1/6 min-w-[250px] pl-3">
          {/* Logo */}
-         <Typography
-            variant="subtitulo1"
-            className="text-center">
-            AppGeek S.A.
-         </Typography>
+         <Link href="/">
+            <Typography
+               variant="subtitulo1"
+               className="text-center">
+               AppGeek S.A.
+            </Typography>
+         </Link>
 
          {/* User Info */}
          <div className="flex items-center gap-2 py-10">

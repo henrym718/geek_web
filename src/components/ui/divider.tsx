@@ -13,7 +13,7 @@ const dividerVariants = cva(["w-full text-white"], {
          thick: "h-[3px]",
       },
       color: {
-         gray: "bg-black/10",
+         gray: "bg-border",
          white: "bg-white",
          black: "bg-black",
       },
@@ -56,10 +56,11 @@ interface DividerProps {
    marginHorizontal?: VariantProps<typeof dividerVariants>["marginHorizontal"]
    orientation?: VariantProps<typeof dividerVariants>["orientation"]
    length?: VariantProps<typeof dividerVariants>["length"]
+   className?: string
 }
 
 export const Divider = (props: DividerProps) => {
-   const { variant, thickness, color, marginVertical, marginHorizontal, orientation, length } = props
+   const { variant, thickness, color, marginVertical, marginHorizontal, orientation, length, className } = props
 
-   return <div className={cn(dividerVariants({ variant, thickness, color, marginVertical, marginHorizontal, orientation, length }))}>.</div>
+   return <div className={cn(dividerVariants({ variant, thickness, color, marginVertical, marginHorizontal, orientation, length }), className)}></div>
 }

@@ -5,18 +5,26 @@
     --color-primary: hsl(240 5.9% 10%);
     --color-primary-foreground: hsl(0 0% 98%);
 
-    --color-secondary: hsl(2 100% 67%);
+    --color-secondary: hsl(350, 100%, 61%);
     --color-secondary-foreground: hsl(0 0% 98%);
     --color-secondary-hover: hsl(2 100% 62%);
 
     --color-tertiary: hsl(257 100% 63%);
     --color-tertiary-foreground: hsl(0 0% 98%);
+    
+    --color-quaternary: hsl(154, 88%, 46%);
 
     --color-input: hsl(240 5.9% 90%);
 
     --color-accent: hsl(240 4.8% 95.9%);
     --color-accent-foreground: hsl(240 5.9% 10%);
 
+    --color-selected: hsl(0 0% 96%);
+
+    --color-border: hsla(0, 0%, 0%, 0.1);
+
 }
+
+/* --color-secondary: hsl(2 100% 67%) */
 
 

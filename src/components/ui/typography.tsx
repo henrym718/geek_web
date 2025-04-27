@@ -51,7 +51,7 @@ const typographyVariants = cva(["focus-visible:outline-none", "focus-visible:rin
 
       color: {
          primario: "text-primary dark:text-primary",
-         secundario: "text-gray-600 dark:text-gray-300",
+         secundario: "text-secondary",
          muted: "text-gray-500 dark:text-gray-400",
          enlace: "text-blue-600 dark:text-blue-400 hover:underline",
          exito: "text-green-600 dark:text-green-400",

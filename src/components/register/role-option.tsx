@@ -1,5 +1,5 @@
 "use client"
-import { cn } from "../../../lib/utils/cn"
+import { cn } from "@/lib/utils/cn"
 
 interface RoleOptionProps extends React.InputHTMLAttributes<HTMLInputElement> {
    Icon: React.ReactElement
