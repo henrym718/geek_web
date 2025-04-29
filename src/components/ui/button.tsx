@@ -64,13 +64,15 @@ const buttonVariants = cva(
             outline: "bg-transparent border border-opacity-50 hover:bg-black/5",
             link: "underline-offset-4 hover:underline shadow-none",
             destructive: "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/80",
-            ghost: "bg-transparent hover:bg-black/5 hover:rounded-lg font-bold",
+            ghost: "bg-transparent hover:bg-black/5 hover:rounded-lg font-bold transition-all duration-300",
          },
 
          rounded: {
             sm: "rounded-sm",
             md: "rounded-md",
             lg: "rounded-lg",
+            xl: "rounded-xl",
+            "2xl": "rounded-2xl",
             full: "rounded-full",
          },
 

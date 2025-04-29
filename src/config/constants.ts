@@ -107,6 +107,10 @@ export const GROUP_ENDPOINTS = {
    ALL_GROUPS: "/group",
 } as const
 
+export const SUGGESTION_ENDPOINTS = {
+   SUGGESTIONS: "/suggestion",
+} as const
+
 export const PROFORMA_REQUEST_ENDPOINTS = {
    CREATE_REQUEST: "/proforma-request",
    PROFORMA_REQUEST_BY_VENDOR_PROFILE_ID: (vendorProfileId: string) => `/proforma-request/vendor/${vendorProfileId}`,

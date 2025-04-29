@@ -1,31 +1,18 @@
 import { CardListGroup } from "@/components/CardListGroup/CardListGroup"
 import { RequestSkills } from "@/components/client/request-panel/request-skills"
-import { Search } from "@/components/search/Search"
+import { SearchGroups } from "@/components/SearchGroups/SearchGroups"
 import { Box, Button, Divider } from "@/components/ui"
+import { fecthSuggestions } from "@/data/api/services/suggestions.service"
 import { ListFilter } from "lucide-react"
 
-export default function HomePage() {
-   const options = [
-      { label: "Opción 1", value: "opcion1" },
-      { label: "Opción 2", value: "opcion2" },
-      { label: "Opción 3", value: "opcion3" },
-      { label: "Opción 4", value: "opcion4" },
-      { label: "Opción 5", value: "opcion5" },
-      { label: "Opción 6", value: "opcion6" },
-      { label: "Opción 7", value: "opcion7" },
-      { label: "Opción 8", value: "opcion8" },
-      { label: "Opción 9", value: "opcion9" },
-      { label: "Opción 10", value: "opcion10" },
-   ]
+export default async function HomePage() {
+   const suggestions = await fecthSuggestions()
+
+   const suggestionsData = suggestions.success ? suggestions.data : []
 
    return (
       <Box className="flex flex-col w-full h-full items-center gap-5">
-         <Box className="w-[700px]">
-            <Search
-               options={options}
-               limit={5}
-            />
-         </Box>
+         <SearchGroups suggestions={suggestionsData} />
 
          {/* Divider fuera del layout limitado */}
          <Box className="w-screen">

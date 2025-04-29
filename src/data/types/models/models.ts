@@ -84,11 +84,6 @@ export interface Group {
    name: string
 }
 
-export interface Suggestion {
-   id: string
-   text: string
-}
-
 export interface Message {
    id: string
    message: string
@@ -102,4 +97,9 @@ export interface Chat {
    clientId: string
    vendorId: string
    createdAt: Date
+}
+
+export interface Suggestion {
+   suggestions: string
+   skill: string
 }

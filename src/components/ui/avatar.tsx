@@ -1,7 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { cn } from "@/lib/utils/cn"
 import { cva, type VariantProps } from "class-variance-authority"
-import avatarPlaceholder from "../../../public/avatar-placeholder.svg"
 import { UserRound } from "lucide-react"
 
 const avatarVariants = cva(["rounded-full", "object-cover", "object-center", "border-2", "border-white"], {
@@ -31,30 +30,39 @@ interface AvatarProps extends React.ImgHTMLAttributes<HTMLImageElement> {
    size?: VariantProps<typeof avatarVariants>["size"]
    src?: string
    alt?: string
-   user?: string
+   name?: string
 }
 
 export function Avatar(props: Readonly<AvatarProps>) {
-   const { size, className, src, alt, ...rest } = props
+   const { size, className, src, alt, name, ...rest } = props
+
+   if (src) {
+      return (
+         <div className="rounded-full bg-primary/60 p-1 text-white flex items-center justify-center">
+            <img
+               className={cn(avatarVariants({ size }), className)}
+               src={src}
+               alt={alt}
+               {...rest}
+            />
+         </div>
+      )
+   }
+
+   if (name) {
+      return (
+         <div className="rounded-full bg-primary w-10 h-10 text-white flex items-center justify-center">
+            <span>{name.split("")[0]}</span>
+         </div>
+      )
+   }
+
    return (
-      <>
-         {src ? (
-            <div className="rounded-full bg-primary/60 p-1 text-white flex items-center justify-center">
-               <img
-                  className={cn(avatarVariants({ size }), className)}
-                  src={src || avatarPlaceholder.src}
-                  alt={alt}
-                  {...rest}
-               />
-            </div>
-         ) : (
-            <div className="rounded-full bg-primary/60 p-1 text-white flex items-center justify-center">
-               <UserRound
-                  size={24}
-                  strokeWidth={2}
-               />
-            </div>
-         )}
-      </>
+      <div className="rounded-full bg-primary/60 p-1 text-white flex items-center justify-center">
+         <UserRound
+            size={24}
+            strokeWidth={2}
+         />
+      </div>
    )
 }

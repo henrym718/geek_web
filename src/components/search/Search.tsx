@@ -1,30 +1,63 @@
 "use client"
+
 import { cn } from "@/lib/utils/cn"
-import { useRouter } from "next/navigation"
 import { useEffect, useRef, useState } from "react"
 import { Typewriter } from "react-simple-typewriter"
 import { FaSearch } from "react-icons/fa"
+import { Typography } from "../ui"
 
 type Option = {
-   label: string
-   value: string
+   id: string
+   name: string
 }
 
 interface Props {
    options: Option[]
    limit?: number
+   isVisibleIcon?: boolean
+   isVisibleTyping?: boolean
+   label?: string
+   activeIndex?: number
+   index: number
+   placeholder?: string
+   value?: string
+   openOptionsFocus?: boolean
+   isScrollable?: boolean
+   setActiveIndex?: (index: number) => void
+   onSelect?: (optionId: string, optionName: string) => void
+   onChange?: (search: string) => void
 }
 
-export function Search({ options = [], limit = 2 }: Readonly<Props>) {
-   const router = useRouter()
+export function Search({
+   options = [],
+   limit = 10,
+   isVisibleIcon = true,
+   isVisibleTyping = true,
+   label = "",
+   activeIndex,
+   index,
+   placeholder = "",
+   openOptionsFocus = false,
+   isScrollable = false,
+   setActiveIndex,
+   onSelect,
+   onChange,
+   value,
+}: Readonly<Props>) {
    const inputRef = useRef<HTMLInputElement>(null)
-   const [search, setSearch] = useState("")
    const [isTyping, setIsTyping] = useState(true)
    const [isOpenOptions, setIsOpenOptions] = useState(false)
    const [activeOption, setActiveOption] = useState(-1)
 
-   const filteredOptions = options.filter((opt) => opt.label.toLowerCase().includes(search.toLowerCase()))
+   const filteredOptions = options.filter((option) => option.name.toLowerCase().includes(value?.toLowerCase() ?? ""))
    const limitedOptions = filteredOptions.slice(0, limit)
+
+   useEffect(() => {
+      setActiveOption(-1)
+      if (value == null) {
+         setIsOpenOptions(false)
+      }
+   }, [options, value])
 
    const highlight = (label: string, search: string) => {
       if (!search) return label
@@ -45,7 +78,7 @@ export function Search({ options = [], limit = 2 }: Readonly<Props>) {
 
    useEffect(() => {
       const handlePressEnter = (e: KeyboardEvent) => {
-         if (e.key === "Escape") {
+         if (e.key === "Escape" && isOpenOptions) {
             setIsTyping(false)
             setActiveOption(-1)
             setIsOpenOptions(false)
@@ -53,18 +86,17 @@ export function Search({ options = [], limit = 2 }: Readonly<Props>) {
       }
       document.addEventListener("keydown", handlePressEnter)
       return () => document.removeEventListener("keydown", handlePressEnter)
-   }, [])
+   }, [isOpenOptions])
 
    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      const value = e.target.value
-      setSearch(value)
+      const newValue = e.target.value
+      onChange?.(newValue)
       setActiveOption(-1)
       setIsTyping(false)
-
-      if (!value.trim()) {
-         setIsOpenOptions(false)
-      } else {
+      if (openOptionsFocus && !newValue.trim()) {
          setIsOpenOptions(true)
+      } else {
+         setIsOpenOptions(!!newValue.trim())
       }
    }
 
@@ -83,67 +115,102 @@ export function Search({ options = [], limit = 2 }: Readonly<Props>) {
 
       if (e.key === "Enter" && activeOption !== -1) {
          e.preventDefault()
-         const params = new URLSearchParams()
          const opt = limitedOptions[activeOption]
          setIsTyping(false)
          setIsOpenOptions(false)
-         setSearch(opt.label)
-         params.set("search", opt.value.toString())
-         router.push(`/vendors?${params}`)
+         onSelect?.(opt.id, opt.name)
       }
    }
 
-   const handleClick = () => {
-      setIsTyping(false)
-      inputRef.current?.focus()
+   const handleOnBlur = () => {
+      setIsTyping(!value?.trim())
+      setIsOpenOptions(false)
+      if (!value?.trim()) {
+         setActiveIndex?.(-1)
+      }
    }
 
    return (
       <div
-         onClick={handleClick}
-         className="relative w-full flex flex-col gap-1">
-         <input
-            ref={inputRef}
-            className="h-12 px-4 focus-visible:outline-none focus-visible:border-border rounded-xl border-1 border-black/10 shadow "
-            value={search}
-            onChange={handleChange}
-            onKeyDown={handleKeyDown}
-            onBlur={() => setIsTyping(true)}
-         />
-         <div className="absolute top-2 right-4 p-2 rounded-full bg-secondary">
+         onClick={() => {
+            setActiveIndex?.(index)
+            setIsTyping(false)
+            inputRef.current?.focus()
+            if (openOptionsFocus) {
+               setIsOpenOptions(true)
+            }
+         }}
+         className={cn(
+            "relative w-full flex flex-col gap-1 transition-all duration-300 rounded-full hover:bg-black/10",
+            activeIndex === index && "bg-white hover:bg-white"
+         )}>
+         <div className="h-16 relative flex flex-col justify-end px-5">
+            <Typography
+               variant="label"
+               className="text-zinc-900 absolute top-2 left-9">
+               {label}
+            </Typography>
+            <input
+               ref={inputRef}
+               className="h-12 px-4 focus-visible:outline-none cursor-pointer"
+               value={value}
+               onChange={handleChange}
+               onKeyDown={handleKeyDown}
+               onBlur={handleOnBlur}
+               onFocus={() => {
+                  setActiveIndex?.(index)
+               }}
+               placeholder={placeholder}
+            />
+         </div>
+
+         <div
+            data-visible={isVisibleIcon}
+            className="absolute top-3 right-4 p-2 rounded-full bg-secondary data-[visible=true]:block data-[visible=false]:hidden">
             <FaSearch
                className="text-white"
-               size={19}
+               size={22}
             />
          </div>
+
          <div
             data-typing={isTyping}
-            className="absolute top-3 left-3 data-[typing=true]:visible data-[typing=false]:invisible text-zinc-900">
-            <Typewriter
-               words={["Editar un video", "Organizar un evento", "Pintar tu habitaciòn", "Clases de Ingles"]}
-               loop={5}
-               typeSpeed={90}
-               deleteSpeed={50}
-               delaySpeed={1000}
-            />
+            className="absolute top-8 left-9 data-[typing=true]:visible data-[typing=false]:invisible text-zinc-900">
+            {isVisibleTyping && (
+               <Typewriter
+                  words={["Editar un video", "Organizar un evento", "Pintar tu habitación", "Clases de Inglés"]}
+                  loop={5}
+                  typeSpeed={90}
+                  deleteSpeed={50}
+                  delaySpeed={1000}
+               />
+            )}
          </div>
-         {isOpenOptions && (
-            <ul className="absolute top-13 w-full flex flex-col shadow rounded-xl p-4 bg-white border border-border">
-               {limitedOptions.length > 0 ? (
-                  limitedOptions.map((opt, index) => (
-                     <li
-                        className={cn("cursor-pointer py-2 text-zinc-500 px-1", index === activeOption && "bg-selected rounded-lg")}
-                        key={opt.value}
-                        onMouseEnter={() => setActiveOption(index)}
-                        onMouseLeave={() => setActiveOption(-1)}>
-                        {highlight(opt.label, search)}
-                     </li>
-                  ))
-               ) : (
-                  <li>No existen coincidencias</li>
-               )}
-            </ul>
-         )}
+
+         <ul
+            className={cn(
+               "absolute top-17 w-full flex flex-col shadow-lg rounded-4xl p-4 bg-white border border-border transition-all duration-200 ease-in-out",
+               isOpenOptions ? "opacity-100 scale-100 visible" : "opacity-0 scale-95 invisible pointer-events-none",
+               isScrollable && "max-h-[300px] overflow-y-auto"
+            )}>
+            {limitedOptions.length > 0 ? (
+               limitedOptions.map((opt, index) => (
+                  <li
+                     className={cn("cursor-pointer py-2 text-zinc-500 px-1", index === activeOption && "bg-selected rounded-lg")}
+                     key={`${opt.id}-${opt.name}`}
+                     onMouseEnter={() => setActiveOption(index)}
+                     onMouseLeave={() => setActiveOption(-1)}
+                     onMouseDown={() => {
+                        onSelect?.(opt.id, opt.name)
+                        setIsOpenOptions(false)
+                     }}>
+                     {highlight(opt.name, value ?? "")}
+                  </li>
+               ))
+            ) : (
+               <li className="text-zinc-400 italic">No existen coincidencias</li>
+            )}
+         </ul>
       </div>
    )
 }

@@ -42,13 +42,18 @@ export function UserMenu() {
       }
    }, [isOpen])
 
+   const name = user?.client?.firstName || user?.vendor?.firstName
+
    return (
       <Box className="relative z-50">
          <Box
             className="flex justify-between items-center gap-3 px-3 border border-border rounded-full p-2 hover:shadow-md transition-all duration-300 cursor-pointer"
             onClick={() => setIsOpen(!isOpen)}>
             <Menu size={17} />
-            <Avatar size="lg" />
+            <Avatar
+               size="lg"
+               name={name}
+            />
          </Box>
          {isOpen && (
             <div
