@@ -9,6 +9,7 @@ import { Typography } from "../ui"
 type Option = {
    id: string
    name: string
+   value?: string
 }
 
 interface Props {
@@ -24,8 +25,9 @@ interface Props {
    openOptionsFocus?: boolean
    isScrollable?: boolean
    setActiveIndex?: (index: number) => void
-   onSelect?: (optionId: string, optionName: string) => void
+   onSelect?: (optionId: string, optionName: string, optionValue?: string) => void
    onChange?: (search: string) => void
+   findOptions?: () => void
 }
 
 export function Search({
@@ -42,6 +44,7 @@ export function Search({
    setActiveIndex,
    onSelect,
    onChange,
+   findOptions,
    value,
 }: Readonly<Props>) {
    const inputRef = useRef<HTMLInputElement>(null)
@@ -113,12 +116,16 @@ export function Search({
          setActiveOption((prev) => Math.max(prev - 1, 0))
       }
 
-      if (e.key === "Enter" && activeOption !== -1) {
-         e.preventDefault()
-         const opt = limitedOptions[activeOption]
-         setIsTyping(false)
-         setIsOpenOptions(false)
-         onSelect?.(opt.id, opt.name)
+      if (e.key === "Enter") {
+         if (activeOption !== -1) {
+            e.preventDefault()
+            const opt = limitedOptions[activeOption]
+            setIsTyping(false)
+            setIsOpenOptions(false)
+            onSelect?.(opt.id, opt.name, opt?.value)
+         } else {
+            findOptions?.()
+         }
       }
    }
 
@@ -168,6 +175,7 @@ export function Search({
             data-visible={isVisibleIcon}
             className="absolute top-3 right-4 p-2 rounded-full bg-secondary data-[visible=true]:block data-[visible=false]:hidden">
             <FaSearch
+               onClick={() => findOptions?.()}
                className="text-white"
                size={22}
             />
@@ -190,10 +198,10 @@ export function Search({
          <ul
             className={cn(
                "absolute top-17 w-full flex flex-col shadow-lg rounded-4xl p-4 bg-white border border-border transition-all duration-200 ease-in-out",
-               isOpenOptions ? "opacity-100 scale-100 visible" : "opacity-0 scale-95 invisible pointer-events-none",
+               isOpenOptions && limitedOptions.length > 0 ? "opacity-100 scale-100 visible" : "opacity-0 scale-95 invisible pointer-events-none",
                isScrollable && "max-h-[300px] overflow-y-auto"
             )}>
-            {limitedOptions.length > 0 ? (
+            {limitedOptions.length > 0 &&
                limitedOptions.map((opt, index) => (
                   <li
                      className={cn("cursor-pointer py-2 text-zinc-500 px-1", index === activeOption && "bg-selected rounded-lg")}
@@ -201,15 +209,12 @@ export function Search({
                      onMouseEnter={() => setActiveOption(index)}
                      onMouseLeave={() => setActiveOption(-1)}
                      onMouseDown={() => {
-                        onSelect?.(opt.id, opt.name)
+                        onSelect?.(opt.id, opt.name, opt?.value)
                         setIsOpenOptions(false)
                      }}>
                      {highlight(opt.name, value ?? "")}
                   </li>
-               ))
-            ) : (
-               <li className="text-zinc-400 italic">No existen coincidencias</li>
-            )}
+               ))}
          </ul>
       </div>
    )

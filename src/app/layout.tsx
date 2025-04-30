@@ -8,7 +8,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
       <html lang="es">
          <UserInitializer>
             <body className={cn("", lato.className, "antialiased")}>
-               <div className="max-w-[1375px] mx-auto md:px-6 lg:px-8">{children}</div>{" "}
+               <div className="max-w-[1300px] min-h-screen mx-auto">{children}</div>{" "}
             </body>
          </UserInitializer>
       </html>

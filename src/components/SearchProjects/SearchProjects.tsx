@@ -6,8 +6,8 @@ import { cn } from "@/lib/utils/cn"
 import useSWR from "swr"
 import { fetchAllGroups } from "@/data/api/services/group.service"
 import { fetchCategoriesByGroupId } from "@/data/api/services/category.service"
-import { fecthSuggestions } from "@/data/api/services/suggestions.service"
 import { useRouter } from "next/navigation"
+import { fetchSkillsByCategoryId } from "@/data/api/services/skill.service"
 
 export function SearchProjects() {
    const router = useRouter()
@@ -18,15 +18,14 @@ export function SearchProjects() {
 
    const [groupId, setGroupId] = useState("")
    const [categoryId, setCategoryId] = useState("")
-   const [skillId, setSkillId] = useState("")
 
    const { data: groups } = useSWR(["groups"], fetchAllGroups)
    const { data: categories } = useSWR(groupId ? ["categories", groupId] : null, () => fetchCategoriesByGroupId(groupId))
-   const { data: suggestions } = useSWR(categoryId ? ["suggestions", categoryId] : null, () => fecthSuggestions())
+   const { data: skills } = useSWR(categoryId ? ["skills", categoryId] : null, () => fetchSkillsByCategoryId({ categoryId }))
 
    const groupsOptions = groups?.success ? groups.data : []
    const categoriesOptions = categories?.success ? categories.data : []
-   const suggestionsOptions = suggestions?.success ? suggestions.data : []
+   const skillsOptions = skills?.success ? skills.data : []
 
    const handleGroupSelect = (groupId: string, groupName: string) => {
       setGroupId(groupId)
@@ -37,21 +36,27 @@ export function SearchProjects() {
       setGroupSearchText(searchText)
       setCategoryId("")
       setCategorySearchText("")
-      setSkillId("")
       setSkillSearchText("")
    }
 
    const handleCategorySelect = (categoryId: string, categoryName: string) => {
       setCategoryId(categoryId)
       setCategorySearchText(categoryName)
-      setSkillId("")
+      setSkillSearchText("")
+   }
+
+   const handleChangeCategory = (searchText: string) => {
+      setCategorySearchText(searchText)
       setSkillSearchText("")
    }
 
    const handleSkillSelect = (skillId: string, skillName: string) => {
-      setSkillId(skillId)
       setSkillSearchText(skillName)
       router.push(`/talents?q=${skillId}`) // Cambiado de /search a /talents
+   }
+
+   const handleChangeSkill = (searchText: string) => {
+      setSkillSearchText(searchText)
    }
 
    return (
@@ -88,12 +93,12 @@ export function SearchProjects() {
             setActiveIndex={setActiveIndex}
             onSelect={handleCategorySelect}
             value={categorySearchText}
-            onChange={(searchText) => setCategorySearchText(searchText)}
+            onChange={handleChangeCategory}
             openOptionsFocus={true}
             isScrollable={true}
          />
          <Search
-            options={groupsOptions}
+            options={skillsOptions}
             label="Habilidad"
             limit={5}
             isVisibleIcon={true}
@@ -103,7 +108,7 @@ export function SearchProjects() {
             setActiveIndex={setActiveIndex}
             onSelect={handleSkillSelect}
             value={skillSearchText}
-            onChange={(searchText) => setSkillSearchText(searchText)}
+            onChange={handleChangeSkill}
             openOptionsFocus={true}
             isScrollable={true}
          />

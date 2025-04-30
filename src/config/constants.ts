@@ -127,6 +127,7 @@ export const PROFORMA_RESPONSE_ENDPOINTS = {
 export const VENDOR_PROFILE_ENDPOINTS = {
    VENDOR_PROFILE_BY_ACCESS_TOKEN: "/vendor-profile/me",
    CREATE_VENDOR_PROFILE: "/vendor-profile",
+   GET_TALENTS: "/vendor-profile/talents",
 } as const
 
 export const CHAT_ENDPOINTS = {

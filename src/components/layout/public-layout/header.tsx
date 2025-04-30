@@ -4,7 +4,7 @@ import { UserMenu } from "@/components/UserMenu/UserMenu"
 
 export function Header() {
    return (
-      <Box className="flex items-center justify-between p-4">
+      <Box className="w-full flex items-center justify-between py-4">
          <Box>
             <Typography
                variant="subtitulo2"

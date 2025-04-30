@@ -101,5 +101,14 @@ export interface Chat {
 
 export interface Suggestion {
    suggestions: string
-   skill: string
+   skillId: string
+   skillName: string
+}
+
+export interface Pagination {
+   results: number
+   currentPage: number
+   pages: number
+   nextPage: number | null
+   prevPage: number | null
 }
