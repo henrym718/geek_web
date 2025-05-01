@@ -4,6 +4,7 @@ import { HomeIcon } from "lucide-react"
 import { Avatar, Button, Typography } from "../ui"
 import { usePathname } from "next/navigation"
 import Link from "next/link"
+import { useSessionDataStore } from "@/stores/user-session-data.store"
 
 interface Props {
    user: {
@@ -23,7 +24,7 @@ interface Props {
 
 export function Sidebar({ user, dashboardLink, navigationLinks }: Readonly<Props>) {
    const pathname = usePathname()
-
+   const { logout } = useSessionDataStore()
    return (
       <aside className="flex flex-col gap-4 w-1/6 min-w-[250px] pl-3">
          {/* Logo */}
@@ -89,7 +90,8 @@ export function Sidebar({ user, dashboardLink, navigationLinks }: Readonly<Props
                variant="outline"
                size="md"
                rounded="md"
-               className="w-full">
+               className="w-full"
+               onClick={() => logout()}>
                Cerrar Sesión
             </Button>
          </div>
