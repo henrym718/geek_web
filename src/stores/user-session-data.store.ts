@@ -1,24 +1,17 @@
 import { create } from "zustand"
-import { fetchAuthenticatedUser } from "../data/api/services/auth.service"
+import { fetchAuthenticatedUser, logoutUser } from "../data/api/services/auth.service"
 import { GetUserResponse } from "@/data/dtos/get-user.types"
 
 interface State {
    user: GetUserResponse | null
    loadUser: () => Promise<void>
-   logout: () => void
+   logout: () => Promise<void>
    setUser: (userData: GetUserResponse) => void
 }
 
-/**
- * Hook de Zustand para manejar los datos de authentication de usuario.
- */
 export const useSessionDataStore = create<State>((set) => ({
    user: null,
 
-   /**
-    * Carga la información del usuario autenticado desde la API.
-    * @returns {Promise<boolean>} - `true` si el usuario se carga correctamente, `false` si falla.
-    */
    loadUser: async () => {
       const response = await fetchAuthenticatedUser()
       if (response.success) {
@@ -28,14 +21,10 @@ export const useSessionDataStore = create<State>((set) => ({
       }
    },
 
-   /**
-    * Establece manualmente la información del usuario en el store.
-    * @param userData - Datos del usuario autenticado.
-    */
    setUser: (userData: GetUserResponse) => set({ user: userData }),
 
-   /**
-    * Cierra sesión limpiando la información del usuario.
-    */
-   logout: () => set({ user: null }),
+   logout: async () => {
+      set({ user: null })
+      await logoutUser()
+   },
 }))
