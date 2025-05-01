@@ -48,8 +48,8 @@ export function Search({
    value,
 }: Readonly<Props>) {
    const inputRef = useRef<HTMLInputElement>(null)
-   const [isTyping, setIsTyping] = useState(true)
-   const [isOpenOptions, setIsOpenOptions] = useState(false)
+   const [showTypingAnimation, setShowTypingAnimation] = useState(true)
+   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
    const [activeOption, setActiveOption] = useState(-1)
 
    const filteredOptions = options.filter((option) => option.name.toLowerCase().includes(value?.toLowerCase() ?? ""))
@@ -58,11 +58,11 @@ export function Search({
    useEffect(() => {
       setActiveOption(-1)
       if (value == null) {
-         setIsOpenOptions(false)
+         setIsDropdownOpen(false)
       }
    }, [options, value])
 
-   const highlight = (label: string, search: string) => {
+   const highlightMatchedText = (label: string, search: string) => {
       if (!search) return label
       const parts = label.split(new RegExp(`(${search})`, "gi"))
 
@@ -81,30 +81,30 @@ export function Search({
 
    useEffect(() => {
       const handlePressEnter = (e: KeyboardEvent) => {
-         if (e.key === "Escape" && isOpenOptions) {
-            setIsTyping(false)
+         if (e.key === "Escape" && isDropdownOpen) {
+            setShowTypingAnimation(false)
             setActiveOption(-1)
-            setIsOpenOptions(false)
+            setIsDropdownOpen(false)
          }
       }
       document.addEventListener("keydown", handlePressEnter)
       return () => document.removeEventListener("keydown", handlePressEnter)
-   }, [isOpenOptions])
+   }, [isDropdownOpen])
 
    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const newValue = e.target.value
       onChange?.(newValue)
       setActiveOption(-1)
-      setIsTyping(false)
+      setShowTypingAnimation(false)
       if (openOptionsFocus && !newValue.trim()) {
-         setIsOpenOptions(true)
+         setIsDropdownOpen(true)
       } else {
-         setIsOpenOptions(!!newValue.trim())
+         setIsDropdownOpen(!!newValue.trim())
       }
    }
 
    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-      if (!isOpenOptions) return
+      if (!isDropdownOpen) return
 
       if (e.key === "ArrowDown") {
          e.preventDefault()
@@ -120,8 +120,8 @@ export function Search({
          if (activeOption !== -1) {
             e.preventDefault()
             const opt = limitedOptions[activeOption]
-            setIsTyping(false)
-            setIsOpenOptions(false)
+            setShowTypingAnimation(false)
+            setIsDropdownOpen(false)
             onSelect?.(opt.id, opt.name, opt?.value)
          } else {
             findOptions?.()
@@ -130,8 +130,8 @@ export function Search({
    }
 
    const handleOnBlur = () => {
-      setIsTyping(!value?.trim())
-      setIsOpenOptions(false)
+      setShowTypingAnimation(!value?.trim())
+      setIsDropdownOpen(false)
       if (!value?.trim()) {
          setActiveIndex?.(-1)
       }
@@ -141,10 +141,10 @@ export function Search({
       <div
          onClick={() => {
             setActiveIndex?.(index)
-            setIsTyping(false)
+            setShowTypingAnimation(false)
             inputRef.current?.focus()
             if (openOptionsFocus) {
-               setIsOpenOptions(true)
+               setIsDropdownOpen(true)
             }
          }}
          className={cn(
@@ -182,7 +182,7 @@ export function Search({
          </div>
 
          <div
-            data-typing={isTyping}
+            data-typing={showTypingAnimation}
             className="absolute top-8 left-9 data-[typing=true]:visible data-[typing=false]:invisible text-zinc-900">
             {isVisibleTyping && (
                <Typewriter
@@ -198,7 +198,7 @@ export function Search({
          <ul
             className={cn(
                "absolute top-17 w-full flex flex-col shadow-lg rounded-4xl p-4 bg-white border border-border transition-all duration-200 ease-in-out",
-               isOpenOptions && limitedOptions.length > 0 ? "opacity-100 scale-100 visible" : "opacity-0 scale-95 invisible pointer-events-none",
+               isDropdownOpen && limitedOptions.length > 0 ? "opacity-100 scale-100 visible" : "opacity-0 scale-95 invisible pointer-events-none",
                isScrollable && "max-h-[300px] overflow-y-auto"
             )}>
             {limitedOptions.length > 0 &&
@@ -210,9 +210,9 @@ export function Search({
                      onMouseLeave={() => setActiveOption(-1)}
                      onMouseDown={() => {
                         onSelect?.(opt.id, opt.name, opt?.value)
-                        setIsOpenOptions(false)
+                        setIsDropdownOpen(false)
                      }}>
-                     {highlight(opt.name, value ?? "")}
+                     {highlightMatchedText(opt.name, value ?? "")}
                   </li>
                ))}
          </ul>

@@ -1,5 +1,5 @@
 "use client"
-import { useState } from "react"
+import { useMemo, useState } from "react"
 import { Search } from "../Search/Search"
 import { Box } from "../ui"
 import { cn } from "@/lib/utils/cn"
@@ -14,27 +14,29 @@ interface Props {
 export function SearchTalents({ suggestions }: Readonly<Props>) {
    const router = useRouter()
    const [activeIndex, setActiveIndex] = useState(-1)
-   const [searchText, setSearchText] = useState("")
+   const [query, setQuery] = useState("")
 
-   console.log(suggestions)
+   const formattedSuggestions = useMemo(
+      () =>
+         suggestions.map(({ skillId, skillName, suggestions }) => ({
+            id: skillId,
+            name: suggestions,
+            value: skillName,
+         })),
+      [suggestions]
+   )
 
-   const suggestionsOptions: { id: string; name: string; value: string }[] = suggestions.map(({ skillId, skillName, suggestions }) => ({
-      id: skillId,
-      name: suggestions,
-      value: skillName,
-   }))
-
-   const handleOnChange = async (search: string) => {
-      setSearchText(search)
+   const handleInputChange = async (search: string) => {
+      setQuery(search)
    }
 
-   const handleOnSelect = (optionId: string, optionName: string, optionValue?: string) => {
-      setSearchText(optionName)
+   const handleSelectSuggestion = (_: string, optionName: string, optionValue?: string) => {
+      setQuery(optionName)
       router.push(`/talents?skills=${formatURLParam(optionValue ?? "")}`)
    }
 
    const handleButtonFindOptions = () => {
-      router.push(`/talents?query=${formatURLParam(searchText)}`)
+      router.push(`/talents?query=${formatURLParam(query)}`)
    }
 
    return (
@@ -44,16 +46,16 @@ export function SearchTalents({ suggestions }: Readonly<Props>) {
             activeIndex !== -1 ? "bg-black/5" : "bg-white"
          )}>
          <Search
-            options={suggestionsOptions}
+            options={formattedSuggestions}
             label="Escribe lo que buscas"
             limit={10}
             isVisibleTyping={true}
             index={0}
             activeIndex={activeIndex}
             setActiveIndex={setActiveIndex}
-            onChange={handleOnChange}
-            value={searchText}
-            onSelect={handleOnSelect}
+            onChange={handleInputChange}
+            value={query}
+            onSelect={handleSelectSuggestion}
             findOptions={handleButtonFindOptions}
          />
       </Box>

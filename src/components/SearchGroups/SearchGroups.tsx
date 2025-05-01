@@ -2,37 +2,33 @@
 import { useState } from "react"
 import { SearchProjects } from "../SearchProjects/SearchProjects"
 import { SearchTalents } from "../SearchTalents/SearchTalents"
-import { Box, Button } from "../ui"
+import { Box } from "../ui"
 import { Suggestion } from "@/data/types/models/models"
+import { SEARCH_TYPE, SearchType } from "@/config/constants"
+import { TabButton } from "./TabButton"
 
 interface Props {
    suggestions: Suggestion[]
 }
 
 export function SearchGroups({ suggestions }: Readonly<Props>) {
-   const [activeIndex, setActiveIndex] = useState(0)
+   const [activeTab, setActiveTab] = useState<SearchType>(SEARCH_TYPE.TALENT)
 
    return (
-      <Box className="flex flex-col gap-5 -mt-15">
+      <Box className="flex flex-col gap-5 -mt-12">
          <Box className="flex gap-5 justify-center">
-            <Button
-               data-active={activeIndex === 0}
-               variant="ghost"
-               size="md"
-               className="hover:rounded-2xl font-light data-[active=true]:font-bold data-[active=true]:hover:bg-white transition-all duration-300"
-               onClick={() => setActiveIndex(0)}>
-               Buscar Talento
-            </Button>
-            <Button
-               data-active={activeIndex === 1}
-               variant="ghost"
-               size="md"
-               className="hover:rounded-2xl font-light data-[active=true]:font-bold data-[active=true]:hover:bg-white transition-all duration-300"
-               onClick={() => setActiveIndex(1)}>
-               Buscar proyectos
-            </Button>
+            <TabButton
+               isActive={activeTab === SEARCH_TYPE.TALENT}
+               label="Buscar talento"
+               onClick={() => setActiveTab(SEARCH_TYPE.TALENT)}
+            />
+            <TabButton
+               isActive={activeTab === SEARCH_TYPE.PROJECT}
+               label="Buscar proyectos"
+               onClick={() => setActiveTab(SEARCH_TYPE.PROJECT)}
+            />
          </Box>
-         {activeIndex === 0 ? <SearchTalents suggestions={suggestions} /> : <SearchProjects />}
+         {activeTab === SEARCH_TYPE.TALENT ? <SearchTalents suggestions={suggestions} /> : <SearchProjects />}
       </Box>
    )
 }

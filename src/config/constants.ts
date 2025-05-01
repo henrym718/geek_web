@@ -12,6 +12,13 @@ export const AUTH_FORM = {
 
 export type AuthFormType = (typeof AUTH_FORM)[keyof typeof AUTH_FORM]
 
+export const SEARCH_TYPE = {
+   TALENT: "TALENT",
+   PROJECT: "PROJECT",
+} as const
+
+export type SearchType = (typeof SEARCH_TYPE)[keyof typeof SEARCH_TYPE]
+
 export const STATUS_REQUEST = {
    ACTIVE: "ACTIVE",
    ANNULLED: "ANNULLED",
