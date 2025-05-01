@@ -1,6 +1,6 @@
 "use client"
 
-import { Sidebar } from "@/components/sidebar/Sidebar"
+import { Sidebar } from "@/components/Sidebar/Sidebar"
 import { useSessionDataStore } from "@/stores/user-session-data.store"
 import { FaRegMessage } from "react-icons/fa6"
 import { FiGitPullRequest } from "react-icons/fi"

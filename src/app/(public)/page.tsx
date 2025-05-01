@@ -6,7 +6,6 @@ import { fecthSuggestions } from "@/data/api/services/suggestions.service"
 
 export default async function HomePage() {
    const suggestions = await fecthSuggestions()
-
    const suggestionsData = suggestions.success ? suggestions.data : []
 
    return (
@@ -15,9 +14,7 @@ export default async function HomePage() {
          <SearchGroups suggestions={suggestionsData} />
 
          {/* Divisor */}
-         <Box className="w-screen">
-            <Divider />
-         </Box>
+         <Divider className="w-screen" />
 
          {/* Lista de grupos */}
          <CardListGroup />

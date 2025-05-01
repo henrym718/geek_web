@@ -16,7 +16,7 @@ export function SubmitButton({ step, totalSteps, isDisabled }: Readonly<SubmitBu
    const [state, formAction, isPending] = useActionState(createRequestAction, initialState)
 
    if (!state.success) {
-      //TODO: Manejar un toast para mostrar el error
+      return <></>
    }
 
    return (
