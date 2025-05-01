@@ -14,22 +14,24 @@ export function UserMenu() {
    const [isOpen, setIsOpen] = useState(false)
    const userType = user?.user.role || "PUBLIC"
 
+   const closeMenu = () => setIsOpen(false)
+
    const RenderMenu: Record<string, React.ReactElement> = {
       PUBLIC: <PublicMenu />,
-      CLIENT: <ClientMenu />,
-      VENDOR: <VendorMenu />,
+      CLIENT: <ClientMenu closeMenu={closeMenu} />,
+      VENDOR: <VendorMenu closeMenu={closeMenu} />,
    }
 
    useEffect(() => {
       const handleClickOutside = (e: MouseEvent) => {
          if (!containerRef.current?.contains(e.target as Node)) {
-            setIsOpen(false)
+            closeMenu()
          }
       }
 
       const handleEscapeKey = (e: KeyboardEvent) => {
          if (e.key === "Escape") {
-            setIsOpen(false)
+            closeMenu()
          }
       }
 
@@ -52,7 +54,7 @@ export function UserMenu() {
             <Menu size={17} />
             <Avatar
                size="lg"
-               name={name}
+               name={user ? name : ""}
             />
          </Box>
          {isOpen && (

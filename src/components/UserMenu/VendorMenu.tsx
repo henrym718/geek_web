@@ -1,6 +1,10 @@
 import Link from "next/link"
 
-export function VendorMenu() {
+interface Props {
+   closeMenu: () => void
+}
+
+export function VendorMenu({ closeMenu }: Readonly<Props>) {
    return (
       <ul>
          <li>
@@ -9,6 +13,10 @@ export function VendorMenu() {
          <li>
             <Link href="/register">Register</Link>
          </li>
+
+         <Link href="/">
+            <li onClick={closeMenu}>Logout</li>
+         </Link>
       </ul>
    )
 }
