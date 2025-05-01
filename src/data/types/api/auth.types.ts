@@ -52,3 +52,7 @@ export interface CheckEmailExistsRequest {
 export interface CheckEmailExistsResponse {
    exists: boolean
 }
+
+export interface LogoutResponse {
+   details: string
+}
