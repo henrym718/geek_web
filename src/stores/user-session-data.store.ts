@@ -24,7 +24,7 @@ export const useSessionDataStore = create<State>((set) => ({
    setUser: (userData: GetUserResponse) => set({ user: userData }),
 
    logout: async () => {
-      set({ user: null })
       await logoutUser()
+      set({ user: null })
    },
 }))
