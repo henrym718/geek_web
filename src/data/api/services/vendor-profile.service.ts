@@ -2,7 +2,7 @@ import { ApiResponse } from "@/data/dtos/api-response.types"
 import { GetVendorProfileResponse } from "@/data/dtos/get-vendor-profile"
 import { CreateVendorProfileRequest, CreateVendorProfileResponse } from "@/data/dtos/create-vendor-profile.types"
 import { apiGet, apiPost } from "../api.client"
-import { VENDOR_PROFILE_ENDPOINTS } from "@/config/constants"
+import { VENDOR_PROFILE_ENDPOINTS } from "@/config/endpoints"
 import { GetTalentsRequest, GetTalentsResponse, GetVendorProfileByIdResponse } from "@/data/types/api/profiles.types"
 
 export const fetchVendorProfilesByAccessToken = async (): Promise<ApiResponse<GetVendorProfileResponse[]>> => {

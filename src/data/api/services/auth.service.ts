@@ -5,7 +5,8 @@ import { GetUserResponse } from "@/data/dtos/get-user.types"
 import { CheckEmailExistsRequest, CheckEmailExistsResponse } from "@/data/dtos/check-email.types"
 import { CheckUsernameExistsRequest, CheckUsernameExistsResponse } from "@/data/dtos/check-username.types"
 import { apiGet, apiPost } from "@/data/api/api.client"
-import { AUTH_ENDPOINTS } from "@/config/constants"
+import { AUTH_ENDPOINTS } from "@/config/endpoints"
+import { LogoutResponse } from "@/data/types/api/auth.types"
 
 export const loginUser = async (credentials: LoginRequest): Promise<ApiResponse<LoginResponse>> => {
    return await apiPost<LoginResponse, LoginRequest>(AUTH_ENDPOINTS.LOGIN, credentials)
@@ -25,4 +26,8 @@ export const checkEmailExists = async (request: CheckEmailExistsRequest): Promis
 
 export const checkUsernameExists = async (request: CheckUsernameExistsRequest): Promise<ApiResponse<CheckUsernameExistsResponse>> => {
    return await apiPost<CheckUsernameExistsResponse, CheckUsernameExistsRequest>(AUTH_ENDPOINTS.CHECK_USERNAME, request)
+}
+
+export const logoutUser = async (): Promise<ApiResponse<LogoutResponse>> => {
+   return await apiGet<LogoutResponse>(AUTH_ENDPOINTS.LOGOUT)
 }

@@ -2,7 +2,7 @@ import { ApiResponse } from "@/data/dtos/api-response.types"
 import { CheckResponseExistsRes, CheckResponseExistsReq } from "@/data/dtos/check-reaponse-exists"
 import { CreateResponse, CreateResponseRequest } from "@/data/dtos/create-proforma-response"
 import { apiGet, apiPost, apiPut } from "../api.client"
-import { PROFORMA_RESPONSE_ENDPOINTS } from "@/config/constants"
+import { PROFORMA_RESPONSE_ENDPOINTS } from "@/config/endpoints"
 import {
    GetResponsesByRequestIdRequest,
    GetResponsesByRequestIdResponse,
