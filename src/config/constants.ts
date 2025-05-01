@@ -128,6 +128,7 @@ export const VENDOR_PROFILE_ENDPOINTS = {
    VENDOR_PROFILE_BY_ACCESS_TOKEN: "/vendor-profile/me",
    CREATE_VENDOR_PROFILE: "/vendor-profile",
    GET_TALENTS: "/vendor-profile/talents",
+   GET_TALENT_BY_ID: (id: string) => `/vendor-profile/talent/${id}`,
 } as const
 
 export const CHAT_ENDPOINTS = {

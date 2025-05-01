@@ -1,3 +1,4 @@
+import { formatURLParam } from "@/lib/utils/formatURLParams"
 import { Button } from "../ui"
 import { useRouter } from "next/navigation"
 
@@ -10,7 +11,7 @@ export default function CardCategory({ id, title }: Readonly<Props>) {
    const router = useRouter()
 
    const handleSelectCategory = () => {
-      router.push(`/talents?categoryId=${id}`)
+      router.push(`/talents?category=${formatURLParam(title)}&categoryId=${id}`)
    }
 
    return (

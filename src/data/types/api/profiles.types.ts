@@ -1,4 +1,4 @@
-import { Pagination, Skill, Vendor, VendorProfile } from "../models/models"
+import { Category, Pagination, Skill, User, Vendor, VendorProfile } from "../models/models"
 
 export type GetTalentsRequest = {
    order?: "asc" | "desc"
@@ -20,4 +20,12 @@ export interface GetTalentsResponse {
       city: string
       title: string
    }[]
+}
+
+export interface GetVendorProfileByIdResponse {
+   user: Pick<User, "id" | "username">
+   vendor: Pick<Vendor, "firstName" | "lastName" | "photo" | "phone" | "city">
+   vendorProfile: Pick<VendorProfile, "title" | "aboutme" | "createdAt">
+   category: Category
+   skills: Skill[]
 }

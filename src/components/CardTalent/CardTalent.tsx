@@ -1,8 +1,13 @@
-import React from "react"
+"use client"
+
+import { useState } from "react"
 import { Avatar, Box, Typography } from "../ui"
 import { MapPinCheckInside } from "lucide-react"
+import { usePathname } from "next/navigation"
+import { formatURLParam } from "@/lib/utils/formatURLParams"
 
 interface Props {
+   id: string
    firstName: string
    lastName: string
    photo: string
@@ -10,11 +15,25 @@ interface Props {
    title: string
 }
 
-export function CardTalent({ firstName, lastName, photo, city, title }: Readonly<Props>) {
+export function CardTalent({ id, firstName, lastName, photo, city, title }: Readonly<Props>) {
+   const pathname = usePathname()
+   const [hoveringImageOrTitle, setHoveringImageOrTitle] = useState(false)
+
+   function handleOpenProfile(title: string) {
+      window.open(`${pathname}/profile?category=${formatURLParam(title)}&id=${id}`)
+   }
+
    return (
-      <Box className="flex flex-col w-[302px] h-[366px] gap-1">
-         <div className="w-[302px] h-[182px] bg-gray-200 rounded-lg" />
-         <Box className="flex items-center gap-1 pt-2">
+      <Box className="flex flex-col w-[302px] h-[366px] gap-1 relative">
+         <div
+            className="w-[302px] h-[182px] bg-gray-200 rounded-lg"
+            onMouseEnter={() => setHoveringImageOrTitle(true)}
+            onMouseLeave={() => setHoveringImageOrTitle(false)}
+            style={{ cursor: "pointer" }}
+            onClick={() => handleOpenProfile(title)}
+         />
+
+         <Box className="flex items-center gap-2 pt-2">
             <Avatar
                name={firstName.toUpperCase() || photo}
                size="sm"
@@ -25,7 +44,16 @@ export function CardTalent({ firstName, lastName, photo, city, title }: Readonly
                {firstName} {lastName}
             </Typography>
          </Box>
-         <Typography variant="label">{title}</Typography>
+
+         <Typography
+            variant="label"
+            className={`transition duration-200 ${hoveringImageOrTitle ? "underline cursor-pointer" : ""}`}
+            onMouseEnter={() => setHoveringImageOrTitle(true)}
+            onMouseLeave={() => setHoveringImageOrTitle(false)}
+            onClick={() => handleOpenProfile(title)}>
+            {title}
+         </Typography>
+
          <Box className="flex gap-2 pt-4">
             <MapPinCheckInside size={16} />
             <Typography variant="etiqueta">{city}</Typography>

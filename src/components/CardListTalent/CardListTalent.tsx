@@ -18,6 +18,7 @@ export function CardListTalent({ talents }: Readonly<Props>) {
          {talents.map((talent) => (
             <CardTalent
                key={talent.id}
+               id={talent.id}
                firstName={talent.firstName}
                lastName={talent.lastName}
                photo={talent.photo}

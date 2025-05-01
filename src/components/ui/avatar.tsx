@@ -17,6 +17,13 @@ const avatarVariants = cva(["rounded-full", "object-cover", "object-center", "fl
          "6xl": "w-22 h-22",
          "7xl": "w-24 h-24",
          "8xl": "w-26 h-26",
+         "9xl": "w-28 h-28",
+         "10xl": "w-30 h-30",
+         "11xl": "w-32 h-32",
+         "12xl": "w-34 h-34",
+         "13xl": "w-36 h-36",
+         "14xl": "w-38 h-38",
+         "15xl": "w-40 h-40",
       },
    },
    defaultVariants: {
@@ -50,7 +57,7 @@ export function Avatar(props: Readonly<AvatarProps>) {
    if (name) {
       return (
          <div className={cn(avatarVariants({ size }), "rounded-full bg-primary text-white flex items-center justify-center", className)}>
-            <span>{name.split("")[0]}</span>
+            <span>{name.split("")[0].toUpperCase()}</span>
          </div>
       )
    }
