@@ -18,7 +18,7 @@ export function WizardFooter() {
       if (response.success) {
          resetVendorProfile()
          resetStep()
-         router.push(`/vendor/${user.user.username}/profiles`)
+         router.push(`/talent/account/profiles`)
       }
    }
 

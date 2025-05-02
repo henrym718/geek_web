@@ -37,7 +37,7 @@ export const PROFORMA_RESPONSE_ENDPOINTS = {
 } as const
 
 export const VENDOR_PROFILE_ENDPOINTS = {
-   VENDOR_PROFILE_BY_ACCESS_TOKEN: "/vendor-profile/me",
+   VENDOR_PROFILE_BY_ACCESS_TOKEN: "/vendor-profile/access-token",
    CREATE_VENDOR_PROFILE: "/vendor-profile",
    GET_TALENTS: "/vendor-profile/talents",
    GET_TALENT_BY_ID: (id: string) => `/vendor-profile/talent/${id}`,

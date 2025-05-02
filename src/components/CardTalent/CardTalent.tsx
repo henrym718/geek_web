@@ -3,7 +3,6 @@
 import { useState } from "react"
 import { Avatar, Box, Typography } from "../ui"
 import { MapPinCheckInside } from "lucide-react"
-import { usePathname } from "next/navigation"
 import { formatURLParam } from "@/lib/utils/formatURLParams"
 
 interface Props {
@@ -16,11 +15,10 @@ interface Props {
 }
 
 export function CardTalent({ id, firstName, lastName, photo, city, title }: Readonly<Props>) {
-   const pathname = usePathname()
    const [hoveringImageOrTitle, setHoveringImageOrTitle] = useState(false)
 
    function handleOpenProfile(title: string) {
-      window.open(`${pathname}/profile?category=${formatURLParam(title)}&id=${id}`)
+      window.open(`/talents/profile?category=${formatURLParam(title)}&id=${id}`, "_blank")
    }
 
    return (

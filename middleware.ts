@@ -29,17 +29,20 @@ async function getUserRole(request: NextRequest) {
 export async function middleware(request: NextRequest) {
    const routeType = getRouteType(request.nextUrl.pathname)
    const userRole = await getUserRole(request)
-
+   {
+      /**
    if (routeType === RouteType.VENDOR && userRole !== "VENDOR") {
       return NextResponse.redirect(new URL("/", request.url))
    }
-
+   
    if (routeType === RouteType.CLIENT && userRole !== "CLIENT") {
       return NextResponse.redirect(new URL("/", request.url))
    }
-
+   
    if (routeType === RouteType.NO_AUTH_ONLY && userRole) {
       return NextResponse.redirect(new URL(`/${userRole}/dashboard`, request.url))
+   }
+   */
    }
 
    return NextResponse.next()

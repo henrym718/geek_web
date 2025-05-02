@@ -41,7 +41,13 @@ interface AvatarProps extends React.ImgHTMLAttributes<HTMLImageElement> {
 export function Avatar(props: Readonly<AvatarProps>) {
    const { size, className, src, alt, name, ...rest } = props
 
-   if (src) {
+   if (name) {
+      return (
+         <div className={cn(avatarVariants({ size }), "rounded-full bg-primary text-white flex items-center justify-center", className)}>
+            <span>{name.split("")[0].toUpperCase()}</span>
+         </div>
+      )
+   } else if (src) {
       return (
          <div className={cn(avatarVariants({ size }), "rounded-full bg-primary/60 p-1 text-white flex items-center justify-center", className)}>
             <img
@@ -52,22 +58,14 @@ export function Avatar(props: Readonly<AvatarProps>) {
             />
          </div>
       )
-   }
-
-   if (name) {
+   } else {
       return (
-         <div className={cn(avatarVariants({ size }), "rounded-full bg-primary text-white flex items-center justify-center", className)}>
-            <span>{name.split("")[0].toUpperCase()}</span>
+         <div className={cn(avatarVariants({ size }), "rounded-full bg-primary/60 p-1 text-white flex items-center justify-center", className)}>
+            <UserRound
+               size={24}
+               strokeWidth={2}
+            />
          </div>
       )
    }
-
-   return (
-      <div className={cn(avatarVariants({ size }), "rounded-full bg-primary/60 p-1 text-white flex items-center justify-center", className)}>
-         <UserRound
-            size={24}
-            strokeWidth={2}
-         />
-      </div>
-   )
 }

@@ -3,7 +3,7 @@
 import { useSessionDataStore } from "@/stores/user-session-data.store"
 import { ClientMenu } from "./ClientMenu"
 import { PublicMenu } from "./PublicMenu"
-import { VendorMenu } from "./VendorMenu"
+import { TalentMenu } from "./TalentMenu"
 import { Menu } from "lucide-react"
 import { Avatar, Box } from "../ui"
 import { useEffect, useRef, useState } from "react"
@@ -19,7 +19,7 @@ export function UserMenu() {
    const RenderMenu: Record<string, React.ReactElement> = {
       PUBLIC: <PublicMenu />,
       CLIENT: <ClientMenu closeMenu={closeMenu} />,
-      VENDOR: <VendorMenu closeMenu={closeMenu} />,
+      VENDOR: <TalentMenu closeMenu={closeMenu} />,
    }
 
    useEffect(() => {

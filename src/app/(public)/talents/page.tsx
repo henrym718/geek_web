@@ -38,7 +38,13 @@ export default async function TalentsPage({ searchParams }: TalentsPageProps) {
          </Box>
 
          {/* Lista de talentos */}
-         {talents.length > 0 ? <CardListTalent talents={talents} /> : <Typography variant="parrafo">No se encontraron talentos</Typography>}
+         {talents.length > 0 ? (
+            <Box className="grid grid-cols-4 gap-x-4 w-full h-full place-items-center">
+               <CardListTalent talents={talents} />
+            </Box>
+         ) : (
+            <Typography variant="parrafo">No se encontraron talentos</Typography>
+         )}
       </Box>
    )
 }

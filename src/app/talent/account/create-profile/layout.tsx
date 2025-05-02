@@ -1,5 +1,5 @@
 import { Box } from "@/components/ui"
-import { WizardFooter } from "@/components/vendor/create-profile/wizard-footer"
+import { WizardFooter } from "@/components/CreateNewTalentProfile/wizard-footer"
 
 export default function CreatedProfileLayout({ children }: React.PropsWithChildren) {
    return (

@@ -1,8 +1,8 @@
 "use client"
-import { RegisterForm } from "@/components/register/register-form"
+import { RegisterForm } from "@/components/Register/register-form"
 import { useRegistrationStore } from "@/stores/use-registration.store"
 import { AUTH_FORM } from "@/config/constants"
-import { RoleOptionSelector } from "@/components/register/role-pption-selector"
+import { RoleOptionSelector } from "@/components/Register/role-pption-selector"
 
 export default function RegsiterPage() {
    const { currentForm } = useRegistrationStore((state) => state)

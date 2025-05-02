@@ -26,7 +26,7 @@ export function Sidebar({ user, dashboardLink, navigationLinks }: Readonly<Props
    const pathname = usePathname()
    const { logout } = useSessionDataStore()
    return (
-      <aside className="flex flex-col gap-4 w-1/6 min-w-[250px] pl-3">
+      <aside className="flex flex-col gap-4 w-1/6 min-w-[250px] h-full pl-3">
          {/* Logo */}
          <Link href="/">
             <Typography
@@ -41,6 +41,7 @@ export function Sidebar({ user, dashboardLink, navigationLinks }: Readonly<Props
             <Avatar
                size="2xl"
                src={user.avatarUrl}
+               name={user.name}
             />
             <div className="flex flex-col gap-1">
                <Typography
@@ -85,7 +86,7 @@ export function Sidebar({ user, dashboardLink, navigationLinks }: Readonly<Props
          </div>
 
          {/* Logout at the bottom */}
-         <div className="mt-auto">
+         <div className="mt-auto pb-10">
             <Button
                variant="outline"
                size="md"

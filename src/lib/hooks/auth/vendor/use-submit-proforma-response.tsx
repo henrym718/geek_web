@@ -1,5 +1,5 @@
 "use client"
-import { createRequestResponseAction } from "@/app/vendor/account/request-panel/action"
+import { createRequestResponseAction } from "@/app/talent/account/projects/action"
 import { useActionState, useEffect, startTransition } from "react"
 import { FieldValues } from "react-hook-form"
 import { mutate } from "swr"

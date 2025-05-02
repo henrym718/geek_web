@@ -29,3 +29,12 @@ export interface GetVendorProfileByIdResponse {
    category: Category
    skills: Skill[]
 }
+
+export interface GetAllProfilesByTokenResponse {
+   id: string
+   firstName: string
+   lastName: string
+   photo: string
+   city: string
+   title: string
+}
