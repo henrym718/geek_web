@@ -6,18 +6,17 @@ import { ProjectBudgetInfo } from "../ProjectCard/ProjectBudgetInfo"
 import { ProjectDescription } from "../ProjectCard/ProjectDescription"
 import { ProjectSkillsList } from "../ProjectCard/ProjectSkillsList"
 import { ProjectMetadata } from "../ProjectCard/ProjectMetadata"
-import { Category, City, ProformaRequest, Skill } from "@/data/types/models/models"
+import { City, ProformaRequest, Skill } from "@/data/types/models/models"
 import { cn } from "@/lib/utils/cn"
 
 interface Props {
    project: ProformaRequest
    skills: Skill[]
-   category: Category
    city: City
    exists: boolean
 }
 
-export function ProjectCardTalent({ project, skills, category, city, exists }: Readonly<Props>) {
+export function ProjectCardTalent({ project, skills, city, exists }: Readonly<Props>) {
    return (
       <Box
          className={cn(
@@ -40,7 +39,6 @@ export function ProjectCardTalent({ project, skills, category, city, exists }: R
             projectLength={project.projectLength}
             projectWorkload={project.projectWorkload}
             city={city.name}
-            category={category.name}
             countResponses={project.countResponses}
          />
       </Box>

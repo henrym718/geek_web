@@ -15,7 +15,7 @@ interface Props {
 }
 
 export default async function ProjectsPage({ searchParams }: Readonly<Props>) {
-   const { profile } = await searchParams
+   const profile = (await searchParams).profile
 
    // Obtener el accessToken de las cookies
    const accessToken = (await cookies()).get(TOKEN_NAME)?.value

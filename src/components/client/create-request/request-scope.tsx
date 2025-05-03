@@ -4,15 +4,29 @@ import { Box, InputSearch, Typography } from "@/components/ui"
 import { useCreateRequestUserDataStore } from "@/stores/use-create-request-user-data.store"
 import { useForm } from "react-hook-form"
 import { useCreateRequestFormDataStore } from "@/stores/use-create-request-form-data.store"
+import useSWR from "swr"
+import { fetchAllCities } from "@/data/api/services/city.service"
 
 export function RequestScope() {
    const { setRequestData } = useCreateRequestUserDataStore((state) => state)
    const { selectedScope, setSelectedScope } = useCreateRequestFormDataStore((state) => state)
 
+   //Obtenemos las ciudades
+   const { data: response } = useSWR(["cities"], fetchAllCities)
+
+   //Validamos si la respuesta es exitosa
+   const cities = response?.success ? response.data : []
+
+   //Parseamos las ciudades
+   const citiesOptions = cities.map((city) => ({
+      id: city.id,
+      label: city.name,
+   }))
+
    const { control } = useForm()
 
    const handleScopeSelected = (option: { id: string; label: string }) => {
-      setRequestData({ scope: option.id })
+      setRequestData({ city: option.id })
       setSelectedScope(option.label)
    }
 
@@ -23,12 +37,7 @@ export function RequestScope() {
          <InputSearch
             label="Alcance"
             placeholder="Describe el alcance de la solicitud"
-            options={[
-               { id: "09a48491-e0f4-4f56-9194-59c4f8d02084", label: "El Piedrero" },
-               { id: "09a48491-e0f4-4f56-9194-59c4f8d02085", label: "El Triunfo" },
-               { id: "09a48491-e0f4-4f56-9194-59c4f8d02086", label: "Pueblo Nuevo" },
-               { id: "09a48491-e0f4-4f56-9194-59c4f8d02087", label: "San pedro" },
-            ]}
+            options={citiesOptions}
             name="scope"
             control={control}
             onSelected={handleScopeSelected}

@@ -43,7 +43,6 @@ export function ProjectTalentItem({ project, skills, category, city, profileId }
             <ProjectCardTalent
                project={project}
                skills={skills}
-               category={category}
                city={city}
                exists={exists}
             />

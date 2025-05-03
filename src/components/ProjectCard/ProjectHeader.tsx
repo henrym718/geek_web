@@ -16,8 +16,8 @@ export function ProjectHeader({ createdAt, title }: Readonly<Props>) {
             variant="subtitulo1">
             {title}
          </Typography>
-         <span className="absolute top-0 right-0">
-            <GrNext className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+         <span className="absolute top-4 right-0">
+            <GrNext className="w-8 h-8 opacity-0 group-hover:opacity-80 transition-opacity duration-300" />
          </span>
       </Box>
    )

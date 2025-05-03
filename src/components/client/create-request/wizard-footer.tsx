@@ -41,7 +41,7 @@ export function WizardFooter() {
             <SubmitButton
                step={step}
                totalSteps={totalSteps}
-               isDisabled={!requestData.scope}
+               isDisabled={!requestData.city}
             />
          </Box>
       </Box>

@@ -46,3 +46,7 @@ export const VENDOR_PROFILE_ENDPOINTS = {
 export const CHAT_ENDPOINTS = {
    GET_CHATS_BY_ACCESS_TOKEN: "/chat",
 } as const
+
+export const CITY_ENDPOINTS = {
+   ALL_CITIES: "/city",
+} as const

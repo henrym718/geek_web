@@ -36,8 +36,6 @@ export function ProjectListTalent({ profileId }: Readonly<Props>) {
 
    const projects = response?.success ? response.data : []
 
-   console.log(projects)
-
    return (
       <Box className="flex flex-col gap-4">
          {projects?.map((data) => (
