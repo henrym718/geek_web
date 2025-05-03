@@ -1,7 +1,7 @@
 import { Box } from "@/components/ui"
 import { WizardFooter } from "@/components/project/CreateNewTalentProfile/wizard-footer"
 
-export default function CreatedProfileLayout({ children }: React.PropsWithChildren) {
+export default function CreatedProfileLayout({ children }: Readonly<React.PropsWithChildren>) {
    return (
       <Box className="flex flex-col h-screen ">
          <header className="p-4">
