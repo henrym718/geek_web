@@ -1,11 +1,11 @@
-import { FilterRequestTab } from "@/components/client/request-panel/filter-request-tab"
+import { FilterRequestTab } from "@/components/project/client/request-panel/filter-request-tab"
 import { Box, Typography } from "@/components/ui"
 import { STATUS_REQUEST } from "@/config/constants"
-import { ActiveRequestList } from "@/components/client/request-panel/active-request-list"
-import { MatchedRequestView } from "@/components/client/request-panel/matched-request-view"
-import { AnnulledRequestCards } from "@/components/client/request-panel/annulled-request-cards"
-import { StartCreateRequestButton } from "@/components/client/create-request/start-create-request-button"
-import { ProposalsList } from "@/components/client/request-panel/proposals-list"
+import { ActiveRequestList } from "@/components/project/client/request-panel/active-request-list"
+import { MatchedRequestView } from "@/components/project/client/request-panel/matched-request-view"
+import { AnnulledRequestCards } from "@/components/project/client/request-panel/annulled-request-cards"
+import { StartCreateRequestButton } from "@/components/project/client/create-request/start-create-request-button"
+import { ProposalsList } from "@/components/project/client/request-panel/proposals-list"
 
 const tabs = [
    { label: "Activo", value: STATUS_REQUEST.ACTIVE },

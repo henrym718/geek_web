@@ -1,4 +1,4 @@
-import { TalentPublicProfile } from "@/components/TalentPublicprofile/TalentPublicProfile"
+import { TalentPublicProfile } from "@/components/project/TalentPublicprofile/TalentPublicProfile"
 import { fetchVendorProfileById } from "@/data/api/services/vendor-profile.service"
 import { timeAgo } from "@/lib/utils/timeAgo"
 

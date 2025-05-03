@@ -1,5 +1,5 @@
 import { Box } from "@/components/ui"
-import { Wizard } from "@/components/CreateNewTalentProfile/wizard"
+import { Wizard } from "@/components/project/CreateNewTalentProfile/wizard"
 
 export default function CreateVendorProfilePage() {
    return (

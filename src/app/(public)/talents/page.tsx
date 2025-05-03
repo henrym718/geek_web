@@ -1,5 +1,5 @@
-import { CardListTalent } from "@/components/CardListTalent/CardListTalent"
-import { FilterTalentForm } from "@/components/FilterTalentForm/FilterTalentForm"
+import { CardListTalent } from "@/components/project/CardListTalent/CardListTalent"
+import { FilterTalentForm } from "@/components/project/FilterTalentForm/FilterTalentForm"
 import { Box, Typography } from "@/components/ui"
 import { fetchTalents } from "@/data/api/services/vendor-profile.service"
 import { formatApiParams } from "@/lib/utils/formatURLParams"

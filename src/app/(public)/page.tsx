@@ -1,6 +1,6 @@
-import { CardListCategory } from "@/components/CardListCategory/CardListCategory"
-import { CardListGroup } from "@/components/CardListGroup/CardListGroup"
-import { SearchGroups } from "@/components/SearchGroups/SearchGroups"
+import { CardListCategory } from "@/components/project/CardListCategory/CardListCategory"
+import { CardListGroup } from "@/components/project/CardListGroup/CardListGroup"
+import { SearchGroups } from "@/components/project/SearchGroups/SearchGroups"
 import { Box, Divider } from "@/components/ui"
 import { fecthSuggestions } from "@/data/api/services/suggestions.service"
 

@@ -1,4 +1,4 @@
-import { WizardFooter } from "@/components/client/create-request/wizard-footer"
+import { WizardFooter } from "@/components/project/client/create-request/wizard-footer"
 import { Box } from "@/components/ui"
 
 export default function CreateRequestLayout({ children }: Readonly<React.PropsWithChildren>) {

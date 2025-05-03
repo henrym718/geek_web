@@ -1,12 +1,12 @@
 // RequestPage.tsx
 import { Box, Typography } from "@/components/ui"
-import { ProfileTalentSelectorButton } from "@/components/ProfileTalentSelectorButton/ProfileTalentSelectorButton"
+import { ProfileTalentSelectorButton } from "@/components/project/ProfileTalentSelectorButton/ProfileTalentSelectorButton"
 import { TALENT_TABS, TOKEN_NAME } from "@/config/constants"
-import { TalentProjectFilterTabs } from "@/components/TalentProjectFilterTabs/TalentProjectFilterTabs"
+import { TalentProjectFilterTabs } from "@/components/project/TalentProjectFilterTabs/TalentProjectFilterTabs"
 import { cookies } from "next/headers"
 import { fetchVendorProfilesByAccessToken } from "@/data/api/services/vendor-profile.service"
 import { Suspense } from "react"
-import { ProjectListTalent } from "@/components/ProjectListTalent/ProjectListTalent"
+import { ProjectListTalent } from "@/components/project/ProjectListTalent/ProjectListTalent"
 
 interface Props {
    searchParams: {
