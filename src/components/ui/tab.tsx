@@ -1,10 +1,12 @@
 "use client"
 
+export interface GenericTab {
+   label: string
+   value: string
+}
+
 interface TabProps {
-   tabs: {
-      label: string
-      value: string
-   }[]
+   tabs: readonly GenericTab[]
    onSelectTab: (tab: string) => void
    activeTab: string
 }

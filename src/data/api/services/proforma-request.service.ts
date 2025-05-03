@@ -5,8 +5,13 @@ import { apiGet, apiPost } from "../api.client"
 import { CreateRequestRequest, CreateRequestResponse } from "@/data/dtos/create-request.type"
 import { GetRequestsByClientIdResponse } from "@/data/types/api/request.types"
 
-export async function fetchProformaRequestByProfileId(vendorProfileId: string): Promise<ApiResponse<GetRequestByProfileIdResponse[]>> {
-   return await apiGet<GetRequestByProfileIdResponse[]>(PROFORMA_REQUEST_ENDPOINTS.PROFORMA_REQUEST_BY_VENDOR_PROFILE_ID(vendorProfileId))
+export async function fetchProformaRequestByProfileId(
+   vendorProfileId: string,
+   accessToken?: string
+): Promise<ApiResponse<GetRequestByProfileIdResponse[]>> {
+   return await apiGet<GetRequestByProfileIdResponse[]>(PROFORMA_REQUEST_ENDPOINTS.PROFORMA_REQUEST_BY_VENDOR_PROFILE_ID(vendorProfileId), {
+      headers: { Authorization: `Bearer ${accessToken}` },
+   })
 }
 
 export async function createRequest(request: CreateRequestRequest, token: string): Promise<ApiResponse<CreateRequestResponse>> {

@@ -1,6 +1,6 @@
 "use client"
 
-import { InputTag } from "@/components/ui/input-tag copy"
+import { InputTagCopy } from "@/components/ui/input-tag.copy"
 import { GetSkillsByCategoryIdResponse } from "@/data/dtos/get-skills-by-categoryId"
 import { fetchSkillsByCategoryId } from "@/data/api/services/skill.service"
 import { useCreateRequestFormDataStore } from "@/stores/use-create-request-form-data.store"
@@ -44,7 +44,7 @@ export function SkillsSelector() {
    }
 
    return (
-      <InputTag
+      <InputTagCopy
          maxVisibleOptions={10}
          maxSelectedTags={10}
          optionsTags={skillsOptions}

@@ -1,24 +1,27 @@
 "use client"
 import { Box, Button, Typography, Badge, Divider, TextArea } from "@/components/ui"
-import { GetRequestByProfileIdResponse } from "@/data/dtos/get-request-by-vendor-profile-id"
 import { timeAgo } from "@/lib/utils/timeAgo"
 import { IoAlertCircleOutline, IoLocationOutline, IoPricetagOutline, IoTimeOutline } from "react-icons/io5"
 import { TfiAnnouncement } from "react-icons/tfi"
 import { IoIosArrowRoundBack } from "react-icons/io"
 import { useForm } from "react-hook-form"
 import useSubmitRequestResponse from "@/lib/hooks/auth/vendor/use-submit-proforma-response"
+import { Category, City, ProformaRequest, Skill } from "@/data/types/models/models"
 
 interface Props {
-   request: GetRequestByProfileIdResponse
+   project: ProformaRequest
+   skills: Skill[]
+   category: Category
+   city: City
    profileId: string
    exists: boolean
    closeModal: () => void
 }
 
-export function RequestResponseForm({ request, profileId, exists, closeModal }: Props) {
+export function ProjectsResponseForm({ project, skills, category, city, profileId, exists, closeModal }: Readonly<Props>) {
    const { register, handleSubmit, formState: { errors } } = useForm() // prettier-ignore
 
-   const { onSubmitHandler, state, pending } = useSubmitRequestResponse(request.id, profileId, closeModal)
+   const { onSubmitHandler, state, pending } = useSubmitRequestResponse(project.id, profileId, closeModal)
 
    return (
       <Box className="flex flex-col p-10 gap-4 cursor-default w-[700px] min-h-[100vh] overflow-y-auto">
@@ -26,13 +29,14 @@ export function RequestResponseForm({ request, profileId, exists, closeModal }: 
          <Typography
             className="pb-2"
             variant="subtitulo1">
-            {request.title}
+            {project.title}
          </Typography>
          <Box className="flex items-center gap-4">
-            <Typography variant="etiqueta">{`Publicado: ${timeAgo(request.createdAt ?? new Date())}`}</Typography>
+            <Typography variant="etiqueta">{`Publicado: ${timeAgo(project.createdAt ?? new Date())}`}</Typography>
             <Box className="flex gap-1 items-center">
                <IoLocationOutline size={20} />
-               <Typography variant="label">{request.scope}</Typography>
+               <Typography variant="label">{city.name}</Typography>
+               <Typography variant="label">{category.name}</Typography>
             </Box>
          </Box>
          <Box className="flex gap-4">
@@ -49,14 +53,14 @@ export function RequestResponseForm({ request, profileId, exists, closeModal }: 
          <Typography
             className="pb-4"
             variant="mensaje">
-            {request.description}
+            {project.description}
          </Typography>
          <Divider />
          <Box className="flex gap-36">
             <Box className="flex gap-1">
                <IoPricetagOutline size={22} />
                <Box className="flex flex-col items-center">
-                  <Typography variant="etiqueta">{`$${request.budget.toFixed(2)}`}</Typography>
+                  <Typography variant="etiqueta">{`$${project.budget.toFixed(2)}`}</Typography>
                   <Typography
                      variant="etiqueta"
                      className="font-light">
@@ -79,7 +83,7 @@ export function RequestResponseForm({ request, profileId, exists, closeModal }: 
          <Divider />
          <Typography variant="subtitulo2">Hablidades y experiencia</Typography>
          <Box className="flex gap-2 pb-4">
-            {request.skills.map((skill) => (
+            {skills.map((skill) => (
                <Badge key={skill.id}>{skill.name}</Badge>
             ))}
          </Box>

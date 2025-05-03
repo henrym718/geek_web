@@ -13,7 +13,7 @@ interface InputTagProps {
    setUnselectedTags: (tags: { id: string; name: string }) => void
 }
 
-export function InputTag(props: Readonly<InputTagProps>) {
+export function InputTagCopy(props: Readonly<InputTagProps>) {
    const { maxSelectedTags, maxVisibleOptions, className, optionsTags, selectedTags, setSelectedTags, setUnselectedTags } = props
 
    const [selectedTagIndex, setSelectedTagIndex] = useState(-1)

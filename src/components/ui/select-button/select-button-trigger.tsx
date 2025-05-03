@@ -1,7 +1,7 @@
 "use client"
 
 import { cn } from "@/lib/utils/cn"
-import { useSelect } from "./select-button-context"
+import { useSelect } from "./context"
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
 
 interface SelectTriggerProps extends React.HTMLAttributes<HTMLButtonElement> {

@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client"
 import React, { forwardRef, useImperativeHandle, useMemo, useRef, useState } from "react"
-import { SelectButtonContext } from "./select-button-context"
+import { SelectButtonContext } from "./context"
 
 interface SelectProps {
    children: React.ReactNode

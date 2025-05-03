@@ -1,3 +1,5 @@
+export const TOKEN_NAME = "accessToken"
+
 export const ROLE = {
    CLIENT: "CLIENT",
    VENDOR: "VENDOR",
@@ -93,3 +95,11 @@ export const projectWorkloadMap = PROJECT_WORKLOAD_OPTIONS.reduce((acc, curr) =>
    acc[curr.value] = curr.label
    return acc
 }, {} as Record<string, string>)
+
+export const TALENT_TABS = [
+   { label: "Recomendados", value: "recommended" },
+   { label: "Recientes", value: "recent" },
+   { label: "Guardados", value: "saved" },
+] as const
+
+export type TalentTabType = (typeof TALENT_TABS)[number]

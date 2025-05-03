@@ -1,4 +1,4 @@
-import { Category, ProformaRequest, Skill } from "../models/models"
+import { Category, City, ProformaRequest, Skill } from "../models/models"
 
 export interface CreateRequestRequest {
    title: string
@@ -23,4 +23,5 @@ export interface GetRequestsByClientIdResponse {
    request: ProformaRequest
    skills: Skill[]
    category: Category
+   city: City
 }

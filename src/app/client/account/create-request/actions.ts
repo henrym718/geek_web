@@ -14,8 +14,10 @@ export async function createRequestAction(prevState: { success: boolean; error: 
 
    await sleep(3000)
    const response = await createRequest(requestData, token)
+
+   console.log(response)
    if (response.success) {
-      redirect("/")
+      redirect("/client/account/request")
    }
 
    return { success: false, error: response.message }

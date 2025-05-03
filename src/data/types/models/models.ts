@@ -52,7 +52,6 @@ export interface ProformaRequest {
    budget: number
    budgetUnit: BudgetUnitType
    quotation: boolean
-   scope: string
    projectType: ProjectType
    projectLength: ProjectLengthType
    projectWorkload: ProjectWorkloadType
@@ -70,6 +69,11 @@ export interface ProformaResponse {
 }
 
 export interface Skill {
+   id: string
+   name: string
+}
+
+export interface City {
    id: string
    name: string
 }

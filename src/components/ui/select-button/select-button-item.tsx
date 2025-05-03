@@ -1,7 +1,7 @@
 "use client"
 
 import { cn } from "@/lib/utils/cn"
-import { useSelect } from "./select-button-context"
+import { useSelect } from "./context"
 import { useState } from "react"
 import { IoCheckmarkOutline } from "react-icons/io5"
 

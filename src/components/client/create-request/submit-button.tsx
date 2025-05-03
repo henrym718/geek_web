@@ -16,8 +16,9 @@ export function SubmitButton({ step, totalSteps, isDisabled }: Readonly<SubmitBu
    const [state, formAction, isPending] = useActionState(createRequestAction, initialState)
 
    if (!state.success) {
-      return <></>
+      //TODO: Manejar un toast para mostrar el error
    }
+   if (step !== totalSteps) return null
 
    return (
       <form action={formAction}>
@@ -27,8 +28,6 @@ export function SubmitButton({ step, totalSteps, isDisabled }: Readonly<SubmitBu
             value={JSON.stringify(requestData)}
          />
          <Button
-            data-step={step === totalSteps}
-            className="data-[step=false]:hidden data-[step=true]:block"
             variant="primary"
             disabled={isPending || isDisabled}
             isLoading={isPending}

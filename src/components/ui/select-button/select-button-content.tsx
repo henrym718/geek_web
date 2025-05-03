@@ -2,7 +2,7 @@
 "use client"
 
 import { cn } from "@/lib/utils/cn"
-import { useSelect } from "./select-button-context"
+import { useSelect } from "./context"
 import { useEffect, useRef } from "react"
 
 interface SelectContentProps {

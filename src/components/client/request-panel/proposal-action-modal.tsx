@@ -10,7 +10,7 @@ import { timeAgo } from "@/lib/utils/timeAgo"
 import { Skill } from "@/data/types/models/models"
 import { IoIosCheckmarkCircleOutline, IoIosCloseCircleOutline } from "react-icons/io"
 import { Button } from "@/components/ui"
-import { updateStatusByClientAction } from "@/app/client/account/request-panel/actions"
+import { updateStatusByClientAction } from "@/app/client/account/request/actions"
 import { STATUS_RESPONSE } from "@/config/constants"
 import { mutate } from "swr"
 

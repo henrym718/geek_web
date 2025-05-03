@@ -1,7 +1,7 @@
 "use client"
 
 import { Box, Typography, InputCurrency, Select, SelectOption, Checkbox } from "@/components/ui"
-import { BUDGET_UNIT_OPTIONS, BudgetType } from "@/config/constants"
+import { BUDGET_UNIT_OPTIONS, BudgetUnitType } from "@/config/constants"
 import { useCreateRequestUserDataStore } from "@/stores/use-create-request-user-data.store"
 
 export function RequestBudget() {
@@ -12,7 +12,7 @@ export function RequestBudget() {
    }
 
    const handleChangeBudgetUnit = (e: React.ChangeEvent<HTMLSelectElement>) => {
-      setRequestData({ budgetUnit: e.target.value as BudgetType })
+      setRequestData({ budgetUnit: e.target.value as BudgetUnitType })
    }
 
    const handleChangeQuotation = (e: React.ChangeEvent<HTMLInputElement>) => {

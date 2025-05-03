@@ -1,7 +1,7 @@
 "use client"
 
 import { cn } from "@/lib/utils/cn"
-import { useSelect } from "./select-button-context"
+import { useSelect } from "./context"
 
 interface SelectValueProps {
    className?: string
