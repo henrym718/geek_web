@@ -16,7 +16,7 @@ export default async function TalentProfilePage({ searchParams }: TalentProfileP
    if (!response.success) {
       return <div>No se encontró el talento</div>
    }
-   const { user, vendor, vendorProfile, category, skills } = response.data
+   const { user, vendor, vendorProfile, category, skills, city } = response.data
 
    return (
       <TalentPublicProfile
@@ -24,7 +24,7 @@ export default async function TalentProfilePage({ searchParams }: TalentProfileP
          firstName={vendor.firstName}
          lastName={vendor.lastName}
          phone={vendor.phone ?? ""}
-         city={vendor.city}
+         city={city.name}
          title={vendorProfile.title}
          aboutme={vendorProfile.aboutme}
          categoryName={category.name}

@@ -8,6 +8,7 @@ interface CreateRequestUserDataStore {
    resetRequestData: () => void
    addSkill: (skill: Skill) => void
    removeSkill: (skill: Skill) => void
+   resetStore: () => void
 }
 
 export const useCreateRequestUserDataStore = create<CreateRequestUserDataStore>((set) => ({
@@ -44,4 +45,20 @@ export const useCreateRequestUserDataStore = create<CreateRequestUserDataStore>(
    addSkill: (skill: Skill) => set((state) => ({ requestData: { ...state.requestData, skills: [...state.requestData.skills, skill.id] } })),
    removeSkill: (skill: Skill) =>
       set((state) => ({ requestData: { ...state.requestData, skills: state.requestData.skills.filter((s) => s !== skill.id) } })),
+   resetStore: () =>
+      set({
+         requestData: {
+            title: "",
+            description: "",
+            budget: 0,
+            budgetUnit: "PROJECT",
+            quotation: false,
+            city: "",
+            categoryId: "",
+            skills: [],
+            projectType: null,
+            projectLength: null,
+            projectWorkload: null,
+         },
+      }),
 }))
