@@ -1,7 +1,6 @@
 "use client"
 
-import { Box, Typography } from "@/components/ui"
-import { InputTagCopy } from "@/components/ui/input-tag.copy"
+import { Box, Typography, InputTag } from "@/components/ui"
 import { CreateVendorProfileRequest } from "@/data/dtos/create-vendor-profile.types"
 import { Skill } from "@/data/types/models/models"
 
@@ -43,7 +42,7 @@ export function SkillsSelector(props: Readonly<Props>) {
                variant="label">
                Tus habilidades
             </Typography>
-            <InputTagCopy
+            <InputTag
                maxVisibleOptions={10}
                maxSelectedTags={10}
                optionsTags={optionsTags}

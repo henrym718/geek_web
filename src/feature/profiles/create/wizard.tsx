@@ -5,7 +5,7 @@ import { Headline } from "./Headline"
 import { Banner } from "./Banner"
 import { SkillsSelector } from "./SkillSelector"
 import { useCreateProfileSteps } from "@/feature/profiles/stores/useCreateProfileSteps"
-import { useCreateProfileData } from "@/feature/profiles/stores/useCreateProfileData"
+import { useCreateProfileRecoveryData } from "@/feature/profiles/stores/useCreateProfileRecoveryData"
 import { Footer } from "./Footer"
 import { Box } from "@/components/ui"
 import useSWR from "swr"
@@ -18,7 +18,7 @@ import { createVendorProfile } from "@/data/api/services/vendor-profile.service"
 import { useState } from "react"
 import { sleep } from "@/lib/utils/sleep"
 import { Toaster, toast } from "sonner"
-import { useCreateProfileRecoveryData } from "../stores/useCreateProfileRecoveryData"
+import { useCreateProfileData } from "../stores/useCreateProfileData"
 
 export function Wizard() {
    const [isPendingCreateProfile, setIsPendingCreateProfile] = useState(false)
@@ -30,7 +30,7 @@ export function Wizard() {
    const { step, previousStep, nextStep } = useCreateProfileSteps((state) => state)
 
    //Store de datos del usuario
-   const { vendorProfile, setVendorProfile } = useCreateProfileRecoveryData((state) => state)
+   const { vendorProfile, setVendorProfile, bannerImage, setBannerImage } = useCreateProfileData((state) => state)
 
    //Store de datos
    const {
@@ -57,9 +57,7 @@ export function Wizard() {
       // Banner image
       bannerImagePreview,
       setBannerImagePreview,
-      bannerImage,
-      setBannerImage,
-   } = useCreateProfileData((state) => state)
+   } = useCreateProfileRecoveryData((state) => state)
 
    //Hook para subir imagenes a cloudinary
    const { uploadImage } = useCloudinary({ file: bannerImage })
@@ -101,21 +99,23 @@ export function Wizard() {
 
    //Funcion para crear el perfil
    const handleCreateProfile = async () => {
-      setIsPendingCreateProfile(true)
-      await sleep(1000)
-      setIsPendingCreateProfile(false)
+      try {
+         setIsPendingCreateProfile(true)
+         await sleep(1000)
+         const bannerImageUrl = await uploadImage()
+         if (!bannerImageUrl) return
 
-      const bannerImageUrl = await uploadImage()
-      if (!bannerImageUrl) return
-
-      const response = await createVendorProfile({
-         ...vendorProfile,
-         bannerImage: bannerImageUrl,
-      })
-      if (response.success) {
-         router.push(`/talent/account/profiles`)
-      } else {
-         toast.error("Error al crear el perfil")
+         const response = await createVendorProfile({
+            ...vendorProfile,
+            bannerImage: bannerImageUrl,
+         })
+         if (response.success) {
+            router.push(`/talent/account/profiles`)
+         } else {
+            toast.error("Error al crear el perfil")
+         }
+      } finally {
+         setIsPendingCreateProfile(false)
       }
    }
 

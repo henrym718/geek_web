@@ -36,6 +36,7 @@ export interface GetAllProfilesByTokenResponse {
    id: string
    firstName: string
    lastName: string
+   bannerImage: string
    photo: string
    city: string
    title: string

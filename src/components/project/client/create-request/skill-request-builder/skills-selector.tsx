@@ -1,6 +1,6 @@
 "use client"
 
-import { InputTagCopy } from "@/components/ui/input-tag.copy"
+import { InputTagCopy } from "@/components/ui/input-tag"
 import { GetSkillsByCategoryIdResponse } from "@/data/dtos/get-skills-by-categoryId"
 import { fetchSkillsByCategoryId } from "@/data/api/services/skill.service"
 import { useCreateRequestFormDataStore } from "@/stores/use-create-request-form-data.store"

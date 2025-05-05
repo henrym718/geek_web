@@ -1,80 +1,36 @@
+import { CreateVendorProfileRequest } from "@/data/dtos/create-vendor-profile.types"
 import { create } from "zustand"
-import { Category, Group, Skill } from "@/data/types/models/models"
 
 interface State {
-   groups: Group[]
-   selectedGroupId: string
-   setGroups: (groups: Group[]) => void
-   setSelectedGroupId: (groupId: string) => void
-
-   categories: Category[]
-   setCategories: (categories: Category[]) => void
-
-   selectedTags: Skill[]
-   addSelectedTag: (tags: Skill) => void
-   removeSelectedTag: (tags: Skill) => void
-   cleanSelectedTags: () => void
-
-   optionsTags: Skill[]
-   setOptionsTags: (tags: Skill[]) => void
-   addOptionsTag: (tags: Skill) => void
-   removeOptionsTag: (tags: Skill) => void
-
-   bannerImagePreview: string
-   setBannerImagePreview: (bannerImagePreview: string) => void
+   vendorProfile: CreateVendorProfileRequest
    bannerImage: File | null
+   setVendorProfile: (data: Partial<CreateVendorProfileRequest>) => void
+   resetProfileData: () => void
    setBannerImage: (file: File | null) => void
 }
 
 export const useCreateProfileData = create<State>((set) => ({
-   groups: [],
-   selectedGroupId: "",
-   categories: [],
-   selectedTags: [],
-   optionsTags: [],
-   bannerImagePreview: "",
+   vendorProfile: {
+      title: "",
+      skills: [],
+      aboutme: "",
+      categoryId: "",
+      bannerImage: "",
+   },
    bannerImage: null,
-   setGroups: (groups: Group[]) => {
-      set({ groups })
-   },
+   setBannerImage: (file: File | null) => set({ bannerImage: file }),
 
-   setSelectedGroupId: (groupId: string) => {
-      set({ selectedGroupId: groupId })
-   },
+   setVendorProfile: (data: Partial<CreateVendorProfileRequest>) => set((state) => ({ vendorProfile: { ...state.vendorProfile, ...data } })),
 
-   setCategories: (categories: Category[]) => {
-      set({ categories })
-   },
-
-   addSelectedTag: (tags: Skill) => {
-      set((state) => ({ selectedTags: [...state.selectedTags, tags] }))
-   },
-
-   removeSelectedTag: (tags: Skill) => {
-      set((state) => ({ selectedTags: state.selectedTags.filter((tag) => tag.id !== tags.id) }))
-   },
-
-   setOptionsTags: (tags: Skill[]) => {
-      set({ optionsTags: tags })
-   },
-
-   addOptionsTag: (tags: Skill) => {
-      set((state) => ({ optionsTags: [...state.optionsTags, tags] }))
-   },
-
-   removeOptionsTag: (tags: Skill) => {
-      set((state) => ({ optionsTags: state.optionsTags.filter((tag) => tag.id !== tags.id) }))
-   },
-
-   setBannerImagePreview: (bannerImagePreview: string) => {
-      set({ bannerImagePreview })
-   },
-
-   cleanSelectedTags: () => {
-      set({ selectedTags: [] })
-   },
-
-   setBannerImage: (file: File | null) => {
-      set({ bannerImage: file })
-   },
+   resetProfileData: () =>
+      set({
+         vendorProfile: {
+            title: "",
+            skills: [],
+            aboutme: "",
+            categoryId: "",
+            bannerImage: "",
+         },
+         bannerImage: null,
+      }),
 }))
