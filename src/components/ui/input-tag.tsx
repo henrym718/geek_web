@@ -16,9 +16,9 @@
 // 📦 Imports
 "use client"
 import { useEffect, useState } from "react"
-import { useWizardCreateProfileFormDataStore } from "@/stores/use-create-profile-form-data.store"
+import { useCreateProfileData } from "@/feature/profiles/stores/useCreateProfileData"
 import { fetchSkillsByCategoryId } from "@/data/api/services/skill.service"
-import { useWizardUserDataStore } from "@/stores/use-create-profile-user-data.store"
+import { useCreateProfileRecoveryData } from "@/feature/profiles/stores/useCreateProfileRecoveryData"
 import { GetSkillsByCategoryIdResponse } from "@/data/dtos/get-skills-by-categoryId"
 import { cn } from "@/lib/utils/cn"
 
@@ -36,9 +36,10 @@ export function InputTag(props: Readonly<InputTagProps>) {
     * - vendorProfile: almacena el perfil general del vendor, incluyendo los IDs de habilidades
     * - selectedTags / optionsTags: manejan las tags visibles/seleccionadas a nivel global durante el flujo
     */
-   const { vendorProfile, setVendorProfile } = useWizardUserDataStore((state) => state)
-   const { selectedTags, optionsTags, addSelectedTag, removeSelectedTag, addOptionsTag, setOptionsTags, removeOptionsTag } =
-      useWizardCreateProfileFormDataStore((state) => state)
+   const { vendorProfile, setVendorProfile } = useCreateProfileRecoveryData((state) => state)
+   const { selectedTags, optionsTags, addSelectedTag, removeSelectedTag, addOptionsTag, setOptionsTags, removeOptionsTag } = useCreateProfileData(
+      (state) => state
+   )
 
    /**
     * 🧠 Local states

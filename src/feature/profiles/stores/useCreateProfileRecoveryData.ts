@@ -9,7 +9,7 @@ interface State {
    setBannerImage: (file: File | null) => void
 }
 
-export const useWizardUserDataStore = create<State>((set) => ({
+export const useCreateProfileRecoveryData = create<State>((set) => ({
    vendorProfile: {
       title: "",
       skills: [],

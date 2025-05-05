@@ -6,7 +6,7 @@ interface Props {
    setVendorProfile: (data: Partial<CreateVendorProfileRequest>) => void
 }
 
-export function ProfileHeadline({ vendorProfile, setVendorProfile }: Readonly<Props>) {
+export function Headline({ vendorProfile, setVendorProfile }: Readonly<Props>) {
    return (
       <Box className="flex flex-col gap-2 w-4/7">
          <Typography variant="titulo3">Lo tengo, Ahora, agrega un titulo para decirle a todos lo que haces</Typography>

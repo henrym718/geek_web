@@ -22,16 +22,18 @@ interface State {
 
    bannerImagePreview: string
    setBannerImagePreview: (bannerImagePreview: string) => void
+   bannerImage: File | null
+   setBannerImage: (file: File | null) => void
 }
 
-export const useWizardCreateProfileFormDataStore = create<State>((set) => ({
+export const useCreateProfileData = create<State>((set) => ({
    groups: [],
    selectedGroupId: "",
    categories: [],
    selectedTags: [],
    optionsTags: [],
    bannerImagePreview: "",
-
+   bannerImage: null,
    setGroups: (groups: Group[]) => {
       set({ groups })
    },
@@ -70,5 +72,9 @@ export const useWizardCreateProfileFormDataStore = create<State>((set) => ({
 
    cleanSelectedTags: () => {
       set({ selectedTags: [] })
+   },
+
+   setBannerImage: (file: File | null) => {
+      set({ bannerImage: file })
    },
 }))

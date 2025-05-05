@@ -1,25 +1,36 @@
 "use client"
-import { useWizardCreateProfileFormDataStore } from "@/stores/use-create-profile-form-data.store"
-import { CategorySelector } from "./category-selector"
-import { ProfileAboutMe } from "./profile-aboutme"
-import { ProfileHeadline } from "./profile-headline"
-import { ProfileBannerImage } from "./ProfileBannerImage"
-import { SkillsSelector } from "./skills-selector"
-import { useWizardCreateProfileStepHandlerStore } from "@/stores/use-create-profile-step-handler.store"
-import { useWizardUserDataStore } from "@/stores/use-create-profile-user-data.store"
-import { WizardFooter } from "./wizard-footer"
+import { CategorySelector } from "./CategorySelector"
+import { AboutMe } from "./AbouMe"
+import { Headline } from "./Headline"
+import { Banner } from "./Banner"
+import { SkillsSelector } from "./SkillSelector"
+import { useCreateProfileSteps } from "@/feature/profiles/stores/useCreateProfileSteps"
+import { useCreateProfileData } from "@/feature/profiles/stores/useCreateProfileData"
+import { Footer } from "./Footer"
 import { Box } from "@/components/ui"
 import useSWR from "swr"
 import { fetchAllGroups } from "@/data/api/services/group.service"
 import { fetchCategoriesByGroupId } from "@/data/api/services/category.service"
 import { fetchSkillsByCategoryId } from "@/data/api/services/skill.service"
+import { useCloudinary } from "@/lib/hooks/cloudinary/useCloudinary"
+import { useRouter } from "next/navigation"
+import { createVendorProfile } from "@/data/api/services/vendor-profile.service"
+import { useState } from "react"
+import { sleep } from "@/lib/utils/sleep"
+import { Toaster, toast } from "sonner"
+import { useCreateProfileRecoveryData } from "../stores/useCreateProfileRecoveryData"
 
 export function Wizard() {
+   const [isPendingCreateProfile, setIsPendingCreateProfile] = useState(false)
+
+   //Router para redireccionar al usuario
+   const router = useRouter()
+
    //Store de steps
-   const { step } = useWizardCreateProfileStepHandlerStore((state) => state)
+   const { step, previousStep, nextStep } = useCreateProfileSteps((state) => state)
 
    //Store de datos del usuario
-   const { vendorProfile, setVendorProfile, setBannerImage } = useWizardUserDataStore((state) => state)
+   const { vendorProfile, setVendorProfile } = useCreateProfileRecoveryData((state) => state)
 
    //Store de datos
    const {
@@ -46,7 +57,12 @@ export function Wizard() {
       // Banner image
       bannerImagePreview,
       setBannerImagePreview,
-   } = useWizardCreateProfileFormDataStore((state) => state)
+      bannerImage,
+      setBannerImage,
+   } = useCreateProfileData((state) => state)
+
+   //Hook para subir imagenes a cloudinary
+   const { uploadImage } = useCloudinary({ file: bannerImage })
 
    //Fetching de groups al iniciar el wizard
    const { isLoading: isLoadingGroups } = useSWR(["groups"], fetchAllGroups, {
@@ -83,6 +99,42 @@ export function Wizard() {
       }
    )
 
+   //Funcion para crear el perfil
+   const handleCreateProfile = async () => {
+      setIsPendingCreateProfile(true)
+      await sleep(1000)
+      setIsPendingCreateProfile(false)
+
+      const bannerImageUrl = await uploadImage()
+      if (!bannerImageUrl) return
+
+      const response = await createVendorProfile({
+         ...vendorProfile,
+         bannerImage: bannerImageUrl,
+      })
+      if (response.success) {
+         router.push(`/talent/account/profiles`)
+      } else {
+         toast.error("Error al crear el perfil")
+      }
+   }
+
+   //Funcion para verificar si el boton de step esta deshabilitado
+   const isDisabledStepButton = () => {
+      if (step === 1 && !vendorProfile.categoryId) return true
+      if (step === 2 && !vendorProfile.skills.length) return true
+      if (step === 3 && !vendorProfile.title) return true
+      if (step === 4 && !vendorProfile.aboutme) return true
+      return false
+   }
+
+   //Funcion para verificar si el boton de crear perfil esta deshabilitado
+   const isDisabledCreateProfileButton = () => {
+      if (isPendingCreateProfile) return true
+      if (step === 5 && !bannerImage) return true
+      return false
+   }
+
    //Renderizado del wizard segun el step, incluyendo el footer
    return (
       <Box className="flex flex-col h-screen w-4/6 mx-auto pt-28">
@@ -117,7 +169,7 @@ export function Wizard() {
 
             {/* Step 3: Headline */}
             {step === 3 && (
-               <ProfileHeadline
+               <Headline
                   vendorProfile={vendorProfile}
                   setVendorProfile={setVendorProfile}
                />
@@ -125,7 +177,7 @@ export function Wizard() {
 
             {/* Step 4: About Me */}
             {step === 4 && (
-               <ProfileAboutMe
+               <AboutMe
                   vendorProfile={vendorProfile}
                   setVendorProfile={setVendorProfile}
                />
@@ -133,7 +185,7 @@ export function Wizard() {
 
             {/* Step 5: Banner Image */}
             {step === 5 && (
-               <ProfileBannerImage
+               <Banner
                   bannerImagePreview={bannerImagePreview}
                   setBannerImagePreview={setBannerImagePreview}
                   setBannerImage={setBannerImage}
@@ -143,8 +195,18 @@ export function Wizard() {
 
          {/* Footer */}
          <footer className="w-screen ml-[-50vw] left-1/2 relative">
-            <WizardFooter />
+            <Footer
+               totalSteps={5}
+               step={step}
+               isDisabledStepButton={isDisabledStepButton()}
+               isDisabledCreateProfileButton={isDisabledCreateProfileButton()}
+               handleCreateProfile={handleCreateProfile}
+               previousStep={previousStep}
+               nextStep={nextStep}
+               isPendingCreateProfile={isPendingCreateProfile}
+            />
          </footer>
+         <Toaster />
       </Box>
    )
 }

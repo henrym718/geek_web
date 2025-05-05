@@ -9,7 +9,7 @@ interface Props {
    setBannerImagePreview: (bannerImagePreview: string) => void
 }
 
-export function ProfileBannerImage({ bannerImagePreview, setBannerImagePreview, setBannerImage }: Readonly<Props>) {
+export function Banner({ bannerImagePreview, setBannerImagePreview, setBannerImage }: Readonly<Props>) {
    const [error, setError] = useState<string | null>(null)
 
    const handleFileReader = (file: File) => {
