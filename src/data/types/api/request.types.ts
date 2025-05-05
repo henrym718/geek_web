@@ -6,7 +6,7 @@ export interface CreateRequestRequest {
    budget: number
    budgetUnit: string
    quotation: boolean
-   scope: string
+   city: string
    projectType: string
    projectLength: string
    projectWorkload: string

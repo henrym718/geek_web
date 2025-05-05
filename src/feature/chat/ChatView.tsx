@@ -1,13 +1,13 @@
 "use client"
 import { Box, Divider } from "@/components/ui"
-import { ChatInputForm } from "@/components/project/Chat/ChatInputForm"
+import { ChatInputForm } from "@/feature/chat/ChatInputForm"
 import { useSocket } from "@/lib/hooks/socket/useSocket"
 import { useChatList } from "@/lib/hooks/chats/useChatList"
 import { useSessionDataStore } from "@/stores/user-session-data.store"
-import { ChatNotData } from "@/components/project/Chat/ChatNotData"
-import { ChatList } from "@/components/project/Chat/ChatList"
-import { ChatAvatar } from "@/components/project/Chat/ChatAvatar"
-import { MessageList } from "@/components/project/Chat/MessageList"
+import { ChatNotData } from "@/feature/chat/ChatNotData"
+import { ChatList } from "@/feature/chat/ChatList"
+import { ChatAvatar } from "@/feature/chat/ChatAvatar"
+import { MessageList } from "@/feature/chat/MessageList"
 
 export function ChatView() {
    const senderId = useSessionDataStore((state) => state.user?.user.id)
@@ -19,7 +19,7 @@ export function ChatView() {
    }
 
    return (
-      <Box className="flex h-[calc(100vh-10rem)] py-4 mt-6 bg-zinc-100 rounded-2xl px-6 gap-6">
+      <Box className="flex h-full py-4 px-6 gap-6">
          {/* Sidebar */}
          <Box className="w-2/5 h-full">
             <ChatList

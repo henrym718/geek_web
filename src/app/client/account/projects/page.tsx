@@ -4,7 +4,7 @@ import { STATUS_REQUEST } from "@/config/constants"
 import { ActiveRequestList } from "@/components/project/client/request-panel/active-request-list"
 import { MatchedRequestView } from "@/components/project/client/request-panel/matched-request-view"
 import { AnnulledRequestCards } from "@/components/project/client/request-panel/annulled-request-cards"
-import { StartCreateRequestButton } from "@/components/project/client/create-request/start-create-request-button"
+import { StartCreateRequestButton } from "@/feature/projects/create/start-create-request-button"
 import { ProposalsList } from "@/components/project/client/request-panel/proposals-list"
 
 const tabs = [

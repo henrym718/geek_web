@@ -4,14 +4,20 @@ import { SelectButton, SelectButtonContent, SelectButtonItem, SelectButtonTrigge
 import { ApiResponse } from "@/data/dtos/api-response.types"
 import { GetAllGroupsResponse } from "@/data/dtos/get-all-groups"
 import { fetchAllGroups } from "@/data/api/services/group.service"
-import { useCreateRequestFormDataStore } from "@/stores/use-create-request-form-data.store"
 import { useEffect, useMemo } from "react"
 import useSWR from "swr"
 
-export function GroupSelector() {
-   const { groups, selectedGroup, setGroups, setSelectedGroup, setSelectedCategory, cleanSkillsSelected } = useCreateRequestFormDataStore(
-      (state) => state
-   )
+interface Props {
+   setSelectedGroup: (group: { id: string; name: string }) => void
+   setSelectedCategory: (category: { id: string; name: string }) => void
+   cleanSkillsSelected: () => void
+   groups: GetAllGroupsResponse[]
+   selectedGroup: GetAllGroupsResponse
+   setGroups: (groups: GetAllGroupsResponse[]) => void
+}
+
+export function GroupSelector(props: Readonly<Props>) {
+   const { setSelectedGroup, setSelectedCategory, cleanSkillsSelected, groups, selectedGroup, setGroups } = props
 
    const { data: groupsApiResponse, isLoading: isLoadingGroups } = useSWR<ApiResponse<GetAllGroupsResponse[]>>("groups", fetchAllGroups)
 

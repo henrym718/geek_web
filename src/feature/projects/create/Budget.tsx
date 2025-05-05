@@ -1,25 +1,30 @@
 "use client"
 
 import { Box, Typography, InputCurrency, Select, SelectOption, Checkbox } from "@/components/ui"
-import { BUDGET_UNIT_OPTIONS, BudgetUnitType } from "@/config/constants"
-import { useCreateRequestUserDataStore } from "@/stores/use-create-request-user-data.store"
+import { BUDGET_UNIT_OPTIONS } from "@/config/constants"
+import { CreateRequestRequest } from "@/data/types/api/request.types"
 
-export function RequestBudget() {
-   const { setRequestData, requestData } = useCreateRequestUserDataStore((state) => state)
+interface Props {
+   setProject: (project: Partial<CreateRequestRequest>) => void
+   budget: number
+   budgetUnit: string
+   quotation: boolean
+}
 
+export function Budget({ setProject, budget, budgetUnit, quotation }: Readonly<Props>) {
    const handleChangeCurrency = (value: string) => {
-      setRequestData({ budget: Number(value) })
+      setProject({ budget: Number(value) })
    }
 
    const handleChangeBudgetUnit = (e: React.ChangeEvent<HTMLSelectElement>) => {
-      setRequestData({ budgetUnit: e.target.value as BudgetUnitType })
+      setProject({ budgetUnit: e.target.value })
    }
 
    const handleChangeQuotation = (e: React.ChangeEvent<HTMLInputElement>) => {
       if (e.target.checked) {
-         setRequestData({ quotation: e.target.checked, budget: 0, budgetUnit: null })
+         setProject({ quotation: e.target.checked, budget: 0, budgetUnit: "" })
       } else {
-         setRequestData({ quotation: e.target.checked, budget: 0, budgetUnit: BUDGET_UNIT_OPTIONS[0].value })
+         setProject({ quotation: e.target.checked, budget: 0, budgetUnit: BUDGET_UNIT_OPTIONS[0].value })
       }
    }
 
@@ -32,24 +37,24 @@ export function RequestBudget() {
          </Typography>
          <Box className="relative">
             <InputCurrency
-               value={requestData.budget.toFixed(2)}
+               value={budget.toFixed(2)}
                label="Presupuesto"
                onSelected={handleChangeCurrency}
-               disabled={requestData.quotation}
+               disabled={quotation}
             />
             <Typography
-               data-visible={requestData.quotation}
+               data-visible={quotation}
                className="absolute data-[visible=false]:block hidden top-11 right-23 -translate-y-1/2 cursor-pointer focus:outline-none focus:ring-0"
                variant="parrafo">
                /
             </Typography>
 
             <Select
-               data-visible={requestData.quotation}
+               data-visible={quotation}
                className="absolute data-[visible=false]:block hidden top-11 right-2 -translate-y-1/2 cursor-pointer focus:outline-none focus:ring-0"
                name="currency"
                id="currency"
-               value={requestData.budgetUnit ?? ""}
+               value={budgetUnit}
                onChange={handleChangeBudgetUnit}>
                <SelectOption value={BUDGET_UNIT_OPTIONS[0].value}>{BUDGET_UNIT_OPTIONS[0].label}</SelectOption>
                <SelectOption value={BUDGET_UNIT_OPTIONS[1].value}>{BUDGET_UNIT_OPTIONS[1].label}</SelectOption>
@@ -58,7 +63,7 @@ export function RequestBudget() {
                <SelectOption value={BUDGET_UNIT_OPTIONS[4].value}>{BUDGET_UNIT_OPTIONS[4].label}</SelectOption>
             </Select>
             <Checkbox
-               checked={requestData.quotation}
+               checked={quotation}
                onChange={handleChangeQuotation}>
                Busco una cotización
             </Checkbox>

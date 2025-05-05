@@ -1,10 +1,13 @@
 "use client"
 import { Box, InputField, Typography } from "@/components/ui"
-import { useCreateRequestUserDataStore } from "@/stores/use-create-request-user-data.store"
+import { CreateRequestRequest } from "@/data/types/api/request.types"
 
-export function RequestHeadline() {
-   const { setRequestData, requestData } = useCreateRequestUserDataStore((state) => state)
+interface Props {
+   title: string
+   setProject: (project: Partial<CreateRequestRequest>) => void
+}
 
+export function Headline({ setProject, title }: Readonly<Props>) {
    return (
       <Box className="flex flex-col gap-2 w-4/7">
          <Typography variant="titulo3">Lo tengo, Ahora, agrega un titulo para decirle a todos lo que haces</Typography>
@@ -20,8 +23,8 @@ export function RequestHeadline() {
             placeholder="Ingeniero en desarrollo web con enfasis en frontend y backend"
             className="mt-4"
             type="search"
-            onChange={(e) => setRequestData({ title: e.target.value })}
-            value={requestData.title}
+            onChange={(e) => setProject({ title: e.target.value })}
+            value={title}
          />
       </Box>
    )

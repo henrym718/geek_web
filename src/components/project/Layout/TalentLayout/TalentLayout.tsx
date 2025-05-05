@@ -3,9 +3,14 @@
 import { Sidebar } from "@/components/project/Sidebar/Sidebar"
 import { Box } from "@/components/ui"
 import { useSessionDataStore } from "@/stores/user-session-data.store"
-import { NotebookPen, UsersRound } from "lucide-react"
+import { MessageCircle, NotebookPen, UsersRound } from "lucide-react"
 
 const TALENT_NAVIGATION_LINKS = [
+   {
+      label: "Mensajes",
+      href: "/talent/account/chat",
+      icon: MessageCircle,
+   },
    {
       label: "Perfiles",
       href: "/talent/account/profiles",

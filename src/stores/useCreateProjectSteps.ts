@@ -1,6 +1,6 @@
 import { create } from "zustand"
 
-interface CreateRequestStepHandlerStore {
+interface State {
    step: number
    totalSteps: number
    nextStep: () => void
@@ -8,7 +8,7 @@ interface CreateRequestStepHandlerStore {
    resetStep: () => void
 }
 
-export const useCreateRequestStepHandlerStore = create<CreateRequestStepHandlerStore>((set) => ({
+export const useCreateProjectSteps = create<State>((set) => ({
    step: 1,
    totalSteps: 6,
    nextStep: () => set((state) => ({ step: state.step + 1 })),

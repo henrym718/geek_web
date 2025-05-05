@@ -35,7 +35,7 @@ interface CreateRequestFormDataStore {
    setSelectedScope: (scope: string) => void
 }
 
-export const useCreateRequestFormDataStore = create<CreateRequestFormDataStore>((set) => ({
+export const useCreateProjectRecoveryData = create<CreateRequestFormDataStore>((set) => ({
    groups: [],
    selectedGroup: { id: "", name: "" },
    setGroups: (groups) => set({ groups }),

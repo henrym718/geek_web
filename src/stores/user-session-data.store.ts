@@ -26,5 +26,6 @@ export const useSessionDataStore = create<State>((set) => ({
    logout: async () => {
       await logoutUser()
       set({ user: null })
+      window.location.replace("/")
    },
 }))

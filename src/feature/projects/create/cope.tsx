@@ -1,15 +1,19 @@
 "use client"
 
 import { Box, InputSearch, Typography } from "@/components/ui"
-import { useCreateRequestUserDataStore } from "@/stores/use-create-request-user-data.store"
 import { useForm } from "react-hook-form"
-import { useCreateRequestFormDataStore } from "@/stores/use-create-request-form-data.store"
 import useSWR from "swr"
 import { fetchAllCities } from "@/data/api/services/city.service"
+import { CreateRequestRequest } from "@/data/types/api/request.types"
 
-export function RequestScope() {
-   const { setRequestData } = useCreateRequestUserDataStore((state) => state)
-   const { selectedScope, setSelectedScope } = useCreateRequestFormDataStore((state) => state)
+interface Props {
+   setProject: (project: Partial<CreateRequestRequest>) => void
+   selectedScope: string
+   setSelectedScope: (scope: string) => void
+}
+
+export function Scope(props: Readonly<Props>) {
+   const { setProject, selectedScope, setSelectedScope } = props
 
    //Obtenemos las ciudades
    const { data: response } = useSWR(["cities"], fetchAllCities)
@@ -26,7 +30,7 @@ export function RequestScope() {
    const { control } = useForm()
 
    const handleScopeSelected = (option: { id: string; label: string }) => {
-      setRequestData({ city: option.id })
+      setProject({ city: option.id })
       setSelectedScope(option.label)
    }
 

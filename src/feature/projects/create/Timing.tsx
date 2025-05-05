@@ -17,27 +17,32 @@ import {
    ProjectType,
    ProjectWorkloadType,
 } from "@/config/constants"
-import { useCreateRequestFormDataStore } from "@/stores/use-create-request-form-data.store"
-import { useCreateRequestUserDataStore } from "@/stores/use-create-request-user-data.store"
+import { CreateRequestRequest } from "@/data/types/api/request.types"
 
-export function RequestTiming() {
-   const { setRequestData, requestData } = useCreateRequestUserDataStore((state) => state)
-   const { selectedProjectLength, setSelectedProjectLength, selectedProjectWorkload, setSelectedProjectWorkload } = useCreateRequestFormDataStore(
-      (state) => state
-   )
+interface Props {
+   projectType: string
+   selectedProjectLength: { id: string; name: string }
+   selectedProjectWorkload: { id: string; name: string }
+   setProject: (project: Partial<CreateRequestRequest>) => void
+   setSelectedProjectLength: (id: string, name: string) => void
+   setSelectedProjectWorkload: (id: string, name: string) => void
+}
+
+export function Timing(props: Readonly<Props>) {
+   const { setProject, projectType, selectedProjectLength, setSelectedProjectLength, selectedProjectWorkload, setSelectedProjectWorkload } = props
 
    const handleProjectType = (e: React.ChangeEvent<HTMLInputElement>) => {
-      setRequestData({ projectType: e.target.value as ProjectType })
+      setProject({ projectType: e.target.value as ProjectType })
    }
 
    const handleSelectedProjectLength = (value: { id: string; name: string }) => {
       setSelectedProjectLength(value.id, value.name)
-      setRequestData({ projectLength: value.id as ProjectLengthType })
+      setProject({ projectLength: value.id as ProjectLengthType })
    }
 
    const handleSelectedProjectWorkload = (value: { id: string; name: string }) => {
       setSelectedProjectWorkload(value.id, value.name)
-      setRequestData({ projectWorkload: value.id as ProjectWorkloadType })
+      setProject({ projectWorkload: value.id as ProjectWorkloadType })
    }
 
    return (
@@ -49,14 +54,14 @@ export function RequestTiming() {
          <Box className="flex gap-4">
             <InputRadio
                name="project_type"
-               checked={requestData.projectType === PROJECT_TYPE_OPTIONS[0].value}
+               checked={projectType === PROJECT_TYPE_OPTIONS[0].value}
                value={PROJECT_TYPE_OPTIONS[0].value}
                onChange={handleProjectType}>
                {PROJECT_TYPE_OPTIONS[0].label}
             </InputRadio>
             <InputRadio
                name="project_type"
-               checked={requestData.projectType === PROJECT_TYPE_OPTIONS[1].value}
+               checked={projectType === PROJECT_TYPE_OPTIONS[1].value}
                value={PROJECT_TYPE_OPTIONS[1].value}
                onChange={handleProjectType}>
                {PROJECT_TYPE_OPTIONS[1].label}

@@ -2,16 +2,25 @@
 
 import { SelectButton, SelectButtonContent, SelectButtonItem, SelectButtonTrigger, SelectButtonValue } from "@/components/ui"
 import { fetchCategoriesByGroupId } from "@/data/api/services/category.service"
-import { useCreateRequestFormDataStore } from "@/stores/use-create-request-form-data.store"
-import { useCreateRequestUserDataStore } from "@/stores/use-create-request-user-data.store"
 import { useEffect, useMemo } from "react"
 import useSWR from "swr"
+import { GetAllGroupsResponse } from "@/data/dtos/get-all-groups"
+import { GetCategoriesByGroupIdResponse } from "@/data/dtos/get-categories-by-groupId"
+import { CreateRequestRequest } from "@/data/types/api/request.types"
 
-export function CategorySelector() {
-   const { categories, selectedGroup, selectedCategory, setCategories, setSelectedCategory, cleanSkillsSelected } = useCreateRequestFormDataStore(
-      (state) => state
-   )
-   const { setRequestData } = useCreateRequestUserDataStore((state) => state)
+interface Props {
+   setSelectedCategory: (category: GetCategoriesByGroupIdResponse) => void
+   cleanSkillsSelected: () => void
+   selectedGroup: GetAllGroupsResponse
+   categories: GetCategoriesByGroupIdResponse[]
+   selectedCategory: GetAllGroupsResponse
+   setCategories: (categories: GetCategoriesByGroupIdResponse[]) => void
+   setProject: (project: Partial<CreateRequestRequest>) => void
+}
+
+export function CategorySelector(props: Readonly<Props>) {
+   const { setSelectedCategory, cleanSkillsSelected, selectedGroup, categories, selectedCategory, setCategories, setProject } = props
+
    const categorySWRKey = selectedGroup?.id ? `categories/${selectedGroup.id}` : null
    const { data: categoriesApiResponse, isLoading: isLoadingCategories } = useSWR(categorySWRKey, () => fetchCategoriesByGroupId(selectedGroup.id))
 
@@ -27,7 +36,7 @@ export function CategorySelector() {
       if (!value) return
       setSelectedCategory(value)
       cleanSkillsSelected()
-      setRequestData({ categoryId: value.id })
+      setProject({ categoryId: value.id })
    }
 
    return (

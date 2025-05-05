@@ -1,12 +1,12 @@
 "use client"
 
-import { InputTagCopy } from "@/components/ui/input-tag"
+import { InputTag } from "@/components/ui/input-tag"
 import { GetSkillsByCategoryIdResponse } from "@/data/dtos/get-skills-by-categoryId"
 import { fetchSkillsByCategoryId } from "@/data/api/services/skill.service"
-import { useCreateRequestFormDataStore } from "@/stores/use-create-request-form-data.store"
+import { useCreateProjectRecoveryData } from "@/stores/useCreateProjectRecoveryData"
 import { useEffect } from "react"
 import useSWR from "swr"
-import { useCreateRequestUserDataStore } from "@/stores/use-create-request-user-data.store"
+import { useCreateProjectData } from "@/stores/useCreateProjectData"
 
 export function SkillsSelector() {
    const {
@@ -18,9 +18,9 @@ export function SkillsSelector() {
       removeSkillsOptions,
       addSkillsSelected,
       removeSkillsSelected,
-   } = useCreateRequestFormDataStore((state) => state)
+   } = useCreateProjectRecoveryData((state) => state)
 
-   const { addSkill, removeSkill } = useCreateRequestUserDataStore((state) => state)
+   const { addSkill, removeSkill } = useCreateProjectData((state) => state)
 
    const skillSWRKey = selectedCategory?.id ? `skills/${selectedCategory.id}` : null
    const { data: skillApiResponse } = useSWR(skillSWRKey, () => fetchSkillsByCategoryId({ categoryId: selectedCategory.id }))
@@ -44,7 +44,7 @@ export function SkillsSelector() {
    }
 
    return (
-      <InputTagCopy
+      <InputTag
          maxVisibleOptions={10}
          maxSelectedTags={10}
          optionsTags={skillsOptions}

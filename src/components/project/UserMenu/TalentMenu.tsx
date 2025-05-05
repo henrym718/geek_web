@@ -24,7 +24,7 @@ export function TalentMenu({ closeMenu }: Readonly<Props>) {
             <li className="hover:bg-gray-100 transition-all duration-300 rounded-md px-3 py-2.5">Ofrecer mis servicios</li>
          </Link>
 
-         <Link href="/chat">
+         <Link href="/talent/account/chat">
             <li className="hover:bg-gray-100 transition-all duration-300 rounded-md px-3 py-2.5">Mensajes</li>
          </Link>
 
@@ -36,7 +36,7 @@ export function TalentMenu({ closeMenu }: Readonly<Props>) {
 
          <Divider />
 
-         <Link href="/login">
+         <Link href="/help">
             <li className="hover:bg-gray-100 transition-all duration-300 rounded-md px-3 py-2.5">Centro de ayuda</li>
          </Link>
 
