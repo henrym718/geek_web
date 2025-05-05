@@ -1,12 +1,18 @@
 "use client"
 import { Box, Button, Typography, Badge, Divider, TextArea } from "@/components/ui"
 import { timeAgo } from "@/lib/utils/timeAgo"
-import { IoAlertCircleOutline, IoLocationOutline, IoPricetagOutline, IoTimeOutline } from "react-icons/io5"
+import { IoAlertCircleOutline, IoPricetagOutline, IoTimeOutline } from "react-icons/io5"
 import { TfiAnnouncement } from "react-icons/tfi"
 import { IoIosArrowRoundBack } from "react-icons/io"
-import { useForm } from "react-hook-form"
-import useSubmitRequestResponse from "@/lib/hooks/auth/vendor/use-submit-proforma-response"
+import { FieldValues, useForm } from "react-hook-form"
 import { Category, City, ProformaRequest, Skill } from "@/data/types/models/models"
+import { useState } from "react"
+import { mutate } from "swr"
+import { createProformaResponse } from "@/data/api/services/proforma-response.service"
+import { sleep } from "@/lib/utils/sleep"
+import { budgetUnitMap, projectLengthMap, projectTypeMap, projectWorkloadMap } from "@/config/constants"
+import { MdOutlineCalendarToday } from "react-icons/md"
+import { RiBuilding4Line } from "react-icons/ri"
 
 interface Props {
    project: ProformaRequest
@@ -18,28 +24,42 @@ interface Props {
    closeModal: () => void
 }
 
-export function ProjectsResponseForm({ project, skills, category, city, profileId, exists, closeModal }: Readonly<Props>) {
+export function ProjectsResponseForm({ project, skills, city, profileId, exists, closeModal }: Readonly<Props>) {
    const { register, handleSubmit, formState: { errors } } = useForm() // prettier-ignore
+   const [loading, setLoading] = useState(false)
 
-   const { onSubmitHandler, state, pending } = useSubmitRequestResponse(project.id, profileId, closeModal)
+   const onSubmit = async (values: FieldValues) => {
+      setLoading(true)
+      try {
+         await sleep(1000)
+         await createProformaResponse({
+            message: values.message,
+            profileVendorId: profileId,
+            proformaRequestId: project.id,
+         })
+         mutate(["request-list", profileId], { revalidate: true })
+         closeModal()
+      } finally {
+         setLoading(false)
+      }
+   }
 
    return (
       <Box className="flex flex-col p-10 gap-4 cursor-default w-[700px] min-h-[100vh] overflow-y-auto">
-         <IoIosArrowRoundBack size={30} />
+         <IoIosArrowRoundBack
+            className="cursor-pointer hover:rounded-full hover:bg-gray-100"
+            size={30}
+            onClick={closeModal}
+         />
          <Typography
             className="pb-2"
             variant="subtitulo1">
             {project.title}
          </Typography>
-         <Box className="flex items-center gap-4">
-            <Typography variant="etiqueta">{`Publicado: ${timeAgo(project.createdAt ?? new Date())}`}</Typography>
-            <Box className="flex gap-1 items-center">
-               <IoLocationOutline size={20} />
-               <Typography variant="label">{city.name}</Typography>
-               <Typography variant="label">{category.name}</Typography>
-            </Box>
+         <Box className="flex items-center gap-4 justify-between">
+            <Typography variant="etiqueta">{`Publicado: ${timeAgo(project.createdAt ?? new Date())} - ${city.name}`}</Typography>
          </Box>
-         <Box className="flex gap-4">
+         <Box className="flex gap-4 pt-1">
             <TfiAnnouncement
                size={24}
                className="flex items-start"
@@ -55,31 +75,74 @@ export function ProjectsResponseForm({ project, skills, category, city, profileI
             variant="mensaje">
             {project.description}
          </Typography>
+
          <Divider />
-         <Box className="flex gap-36">
-            <Box className="flex gap-1">
-               <IoPricetagOutline size={22} />
-               <Box className="flex flex-col items-center">
-                  <Typography variant="etiqueta">{`$${project.budget.toFixed(2)}`}</Typography>
-                  <Typography
-                     variant="etiqueta"
-                     className="font-light">
-                     Presupuesto
-                  </Typography>
+
+         <Box className="flex flex-col gap-4">
+            <Box className="flex  gap-36">
+               <Box className="flex gap-2 w-1/4">
+                  <IoPricetagOutline size={22} />
+                  <Box className="flex flex-col">
+                     <Typography variant="etiqueta">{`${
+                        project.budget ? `$${project.budget.toFixed(2)}/${budgetUnitMap[project.budgetUnit]}` : "Solicita presupuesto: SI"
+                     }`}</Typography>
+                     <Typography
+                        variant="etiqueta"
+                        className="font-light">
+                        Presupuesto
+                     </Typography>
+                  </Box>
+               </Box>
+               <Box className="flex gap-2 w-2/4">
+                  <MdOutlineCalendarToday size={20} />
+                  <Box className="flex flex-col">
+                     <Typography variant="etiqueta">{projectLengthMap[project.projectLength]}</Typography>
+                     <Typography
+                        variant="etiqueta"
+                        className="text-center font-light">
+                        Duración
+                     </Typography>
+                  </Box>
                </Box>
             </Box>
-            <Box className="flex gap-1">
-               <IoTimeOutline size={22} />
-               <Box className="flex flex-col items-center">
-                  <Typography variant="etiqueta">10 a 20 días</Typography>
-                  <Typography
-                     variant="etiqueta"
-                     className="text-center font-light">
-                     Duración <br /> del proyecto
-                  </Typography>
+
+            <Box className="flex gap-36">
+               <Box className="flex gap-2 w-1/4">
+                  <RiBuilding4Line size={20} />
+                  <Box className="flex flex-col">
+                     <Typography variant="etiqueta">{projectTypeMap[project.projectType]}</Typography>
+                     <Typography
+                        variant="etiqueta"
+                        className="font-light">
+                        Tipo de proyecto
+                     </Typography>
+                  </Box>
+               </Box>
+               <Box className="flex gap-2 w-2/4">
+                  <IoTimeOutline size={22} />
+                  <Box className="flex flex-col">
+                     <Typography variant="etiqueta">{projectWorkloadMap[project.projectWorkload]}</Typography>
+                     <Typography
+                        variant="etiqueta"
+                        className="font-light">
+                        Carga horaria
+                     </Typography>
+                  </Box>
                </Box>
             </Box>
          </Box>
+
+         <Divider />
+
+         <Box className="flex gap-2">
+            <Typography
+               variant="etiqueta"
+               className="font-light">
+               Propuestas recibidas:
+            </Typography>
+            <Typography variant="etiqueta">{project.countResponses}</Typography>
+         </Box>
+
          <Divider />
          <Typography variant="subtitulo2">Hablidades y experiencia</Typography>
          <Box className="flex gap-2 pb-4">
@@ -96,7 +159,7 @@ export function ProjectsResponseForm({ project, skills, category, city, profileI
          ) : (
             <>
                <Typography variant="subtitulo2">Aplica a esta propuesta</Typography>
-               <form onSubmit={handleSubmit(onSubmitHandler)}>
+               <form onSubmit={handleSubmit(onSubmit)}>
                   <TextArea
                      rows={5}
                      error={errors.message?.message as string}
@@ -113,17 +176,11 @@ export function ProjectsResponseForm({ project, skills, category, city, profileI
                      variant="primary"
                      size="lg"
                      type="submit"
-                     disabled={pending}
-                     isLoading={pending}>
+                     disabled={loading}
+                     isLoading={loading}>
                      Enviar propuesta
                   </Button>
                </form>
-               {state.error && (
-                  <Box className="flex h-2 items-center gap-2">
-                     <IoAlertCircleOutline size={22} />
-                     <Typography variant="nota">{state.error}</Typography>
-                  </Box>
-               )}
             </>
          )}
       </Box>

@@ -1,84 +1,71 @@
 import { create } from "zustand"
-import { GetCategoriesByGroupIdResponse } from "@/data/dtos/get-categories-by-groupId"
-import { GetSkillsByCategoryIdResponse } from "@/data/dtos/get-skills-by-categoryId"
-import { GetAllGroupsResponse } from "@/data/dtos/gett-all-groups"
-import { fetchAllGroups } from "@/data/api/services/group.service"
-import { fetchCategoriesByGroupId } from "@/data/api/services/category.service"
+import { Category, Group, Skill } from "@/data/types/models/models"
 
 interface State {
-   groups: GetAllGroupsResponse[]
-   loadGroups: () => Promise<void>
+   groups: Group[]
+   selectedGroupId: string
+   setGroups: (groups: Group[]) => void
+   setSelectedGroupId: (groupId: string) => void
 
-   categories: GetCategoriesByGroupIdResponse[]
-   loadCategories: (groupId: string) => Promise<void>
+   categories: Category[]
+   setCategories: (categories: Category[]) => void
 
-   selectedTags: GetSkillsByCategoryIdResponse[]
-   addSelectedTag: (tags: GetSkillsByCategoryIdResponse) => void
-   removeSelectedTag: (tags: GetSkillsByCategoryIdResponse) => void
+   selectedTags: Skill[]
+   addSelectedTag: (tags: Skill) => void
+   removeSelectedTag: (tags: Skill) => void
    cleanSelectedTags: () => void
 
-   optionsTags: GetSkillsByCategoryIdResponse[]
-   setOptionsTags: (tags: GetSkillsByCategoryIdResponse[]) => void
-   addOptionsTag: (tags: GetSkillsByCategoryIdResponse) => void
-   removeOptionsTag: (tags: GetSkillsByCategoryIdResponse) => void
+   optionsTags: Skill[]
+   setOptionsTags: (tags: Skill[]) => void
+   addOptionsTag: (tags: Skill) => void
+   removeOptionsTag: (tags: Skill) => void
 
-   isLoading: boolean
-   error: string | null
+   bannerImagePreview: string
+   setBannerImagePreview: (bannerImagePreview: string) => void
 }
 
 export const useWizardCreateProfileFormDataStore = create<State>((set) => ({
    groups: [],
+   selectedGroupId: "",
    categories: [],
    selectedTags: [],
    optionsTags: [],
+   bannerImagePreview: "",
 
-   isLoading: false,
-   error: null,
-
-   loadGroups: async () => {
-      set({ isLoading: true, error: null })
-      const res = await fetchAllGroups()
-
-      if (res.success) {
-         set({ groups: res.data })
-      } else {
-         set({ error: res.message })
-      }
-
-      set({ isLoading: false })
+   setGroups: (groups: Group[]) => {
+      set({ groups })
    },
 
-   loadCategories: async (groupId: string) => {
-      set({ isLoading: true, error: null })
-      const response = await fetchCategoriesByGroupId(groupId)
-
-      if (response.success) {
-         set({ categories: response.data })
-      } else {
-         set({ error: response.message })
-      }
-
-      set({ isLoading: false })
+   setSelectedGroupId: (groupId: string) => {
+      set({ selectedGroupId: groupId })
    },
 
-   addSelectedTag: (tags: GetSkillsByCategoryIdResponse) => {
+   setCategories: (categories: Category[]) => {
+      set({ categories })
+   },
+
+   addSelectedTag: (tags: Skill) => {
       set((state) => ({ selectedTags: [...state.selectedTags, tags] }))
    },
 
-   removeSelectedTag: (tags: GetSkillsByCategoryIdResponse) => {
+   removeSelectedTag: (tags: Skill) => {
       set((state) => ({ selectedTags: state.selectedTags.filter((tag) => tag.id !== tags.id) }))
    },
 
-   setOptionsTags: (tags: GetSkillsByCategoryIdResponse[]) => {
+   setOptionsTags: (tags: Skill[]) => {
       set({ optionsTags: tags })
    },
 
-   addOptionsTag: (tags: GetSkillsByCategoryIdResponse) => {
+   addOptionsTag: (tags: Skill) => {
       set((state) => ({ optionsTags: [...state.optionsTags, tags] }))
    },
 
-   removeOptionsTag: (tags: GetSkillsByCategoryIdResponse) => {
+   removeOptionsTag: (tags: Skill) => {
       set((state) => ({ optionsTags: state.optionsTags.filter((tag) => tag.id !== tags.id) }))
+   },
+
+   setBannerImagePreview: (bannerImagePreview: string) => {
+      set({ bannerImagePreview })
    },
 
    cleanSelectedTags: () => {

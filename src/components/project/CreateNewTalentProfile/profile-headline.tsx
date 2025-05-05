@@ -1,9 +1,12 @@
 import { Box, InputField, Typography } from "@/components/ui"
-import { useWizardUserDataStore } from "@/stores/use-create-profile-user-data.store"
+import { CreateVendorProfileRequest } from "@/data/dtos/create-vendor-profile.types"
 
-export function ProfileHeadline() {
-   const { setVendorProfile, vendorProfile } = useWizardUserDataStore((state) => state)
+interface Props {
+   vendorProfile: CreateVendorProfileRequest
+   setVendorProfile: (data: Partial<CreateVendorProfileRequest>) => void
+}
 
+export function ProfileHeadline({ vendorProfile, setVendorProfile }: Readonly<Props>) {
    return (
       <Box className="flex flex-col gap-2 w-4/7">
          <Typography variant="titulo3">Lo tengo, Ahora, agrega un titulo para decirle a todos lo que haces</Typography>

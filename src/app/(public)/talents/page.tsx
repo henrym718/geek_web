@@ -24,6 +24,8 @@ export default async function TalentsPage({ searchParams }: TalentsPageProps) {
    const response = await fetchTalents({ query: formattedQuery, skills: formattedSkills, categoryId })
    const talents = response.success ? response.data.results : []
 
+   console.log(talents)
+
    return (
       <Box className="flex flex-col gap-4 w-full h-full">
          {/* Título */}

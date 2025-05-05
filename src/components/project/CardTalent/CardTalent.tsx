@@ -1,20 +1,21 @@
+/* eslint-disable @next/next/no-img-element */
 "use client"
 
 import { useState } from "react"
 import { Avatar, Box, Typography } from "../../ui"
 import { MapPinCheckInside } from "lucide-react"
 import { formatURLParam } from "@/lib/utils/formatURLParams"
-
 interface Props {
    id: string
    firstName: string
    lastName: string
+   bannerImage: string
    photo: string
    city: string
    title: string
 }
 
-export function CardTalent({ id, firstName, lastName, photo, city, title }: Readonly<Props>) {
+export function CardTalent({ id, firstName, lastName, bannerImage, photo, city, title }: Readonly<Props>) {
    const [hoveringImageOrTitle, setHoveringImageOrTitle] = useState(false)
 
    function handleOpenProfile(title: string) {
@@ -23,13 +24,18 @@ export function CardTalent({ id, firstName, lastName, photo, city, title }: Read
 
    return (
       <Box className="flex flex-col w-[302px] h-[366px] gap-1 relative">
-         <div
+         <Box
             className="w-[302px] h-[182px] bg-gray-200 rounded-lg"
             onMouseEnter={() => setHoveringImageOrTitle(true)}
             onMouseLeave={() => setHoveringImageOrTitle(false)}
             style={{ cursor: "pointer" }}
-            onClick={() => handleOpenProfile(title)}
-         />
+            onClick={() => handleOpenProfile(title)}>
+            <img
+               src={bannerImage}
+               alt={title}
+               className="w-full h-full object-cover rounded-lg"
+            />
+         </Box>
 
          <Box className="flex items-center gap-2 pt-2">
             <Avatar

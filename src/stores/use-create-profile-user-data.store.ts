@@ -5,6 +5,8 @@ interface State {
    vendorProfile: CreateVendorProfileRequest
    setVendorProfile: (data: Partial<CreateVendorProfileRequest>) => void
    resetVendorProfile: () => void
+   bannerImage: File | null
+   setBannerImage: (file: File | null) => void
 }
 
 export const useWizardUserDataStore = create<State>((set) => ({
@@ -13,7 +15,11 @@ export const useWizardUserDataStore = create<State>((set) => ({
       skills: [],
       aboutme: "",
       categoryId: "",
+      bannerImage: "",
    },
+   bannerImage: null,
+   setBannerImage: (file: File | null) => set({ bannerImage: file }),
+
    setVendorProfile: (data: Partial<CreateVendorProfileRequest>) => set((state) => ({ vendorProfile: { ...state.vendorProfile, ...data } })),
 
    resetVendorProfile: () =>
@@ -23,6 +29,8 @@ export const useWizardUserDataStore = create<State>((set) => ({
             skills: [],
             aboutme: "",
             categoryId: "",
+            bannerImage: "",
          },
+         bannerImage: null,
       }),
 }))

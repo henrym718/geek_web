@@ -3,6 +3,7 @@ export interface CreateVendorProfileRequest {
    skills: string[]
    aboutme: string
    categoryId: string
+   bannerImage: string
 }
 
 export interface CreateVendorProfileResponse {

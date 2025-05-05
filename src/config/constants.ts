@@ -87,7 +87,7 @@ export const PROJECT_WORKLOAD_OPTIONS = [
    { value: "THIRTY_FORTY", label: "Entre 30 y 40 horas/semana" },
    { value: "GT_FORTY", label: "Más de 40 horas/semana" },
    { value: "VARIABLE", label: "Carga horaria variable semana a semana" },
-   { value: "FLEXIBLE", label: "Horario flexible / depende del avance del proyecto" },
+   { value: "FLEXIBLE", label: "Horario flexible" },
 ] as const
 
 export type ProjectWorkloadType = (typeof PROJECT_WORKLOAD_OPTIONS)[number]["value"]

@@ -1,15 +1,25 @@
 "use client"
 import { Box, Button, Typography } from "@/components/ui"
-import { useWizardCreateProfileFormDataStore } from "@/stores/use-create-profile-form-data.store"
-import { useWizardUserDataStore } from "@/stores/use-create-profile-user-data.store"
-import React, { useEffect } from "react"
+import { CreateVendorProfileRequest } from "@/data/dtos/create-vendor-profile.types"
+import { Category, Group } from "@/data/types/models/models"
+import React from "react"
 
-export function CategorySelector() {
-   const { groups, categories, loadGroups, loadCategories, cleanSelectedTags } = useWizardCreateProfileFormDataStore((state) => state)
-   const { vendorProfile, setVendorProfile } = useWizardUserDataStore((state) => state)
+interface Props {
+   groups: Group[]
+   categories: Category[]
+   isLoadingGroups: boolean
+   isLoadingCategories: boolean
+   cleanSelectedTags: () => void
+   setVendorProfile: (data: Partial<CreateVendorProfileRequest>) => void
+   vendorProfile: CreateVendorProfileRequest
+   setSelectedGroupId: (groupId: string) => void
+}
+
+export function CategorySelector(props: Readonly<Props>) {
+   const { groups, categories, isLoadingGroups, isLoadingCategories, cleanSelectedTags, vendorProfile, setVendorProfile, setSelectedGroupId } = props
 
    const handleSelectedGroup = async (groupId: string) => {
-      await loadCategories(groupId)
+      setSelectedGroupId(groupId)
       setVendorProfile({ categoryId: undefined })
    }
 
@@ -18,17 +28,15 @@ export function CategorySelector() {
       cleanSelectedTags()
    }
 
-   console.log(vendorProfile)
-
-   useEffect(() => {
-      const fetchData = async () => {
-         if (groups.length === 0) {
-            await loadGroups()
-         }
-      }
-
-      fetchData()
-   }, [groups.length, loadGroups])
+   if (isLoadingGroups) {
+      return (
+         <Box className="flex flex-col gap-4 ">
+            <Box className="flex flex-col gap-2">
+               <Typography variant="titulo3">Cargando...</Typography>
+            </Box>
+         </Box>
+      )
+   }
 
    return (
       <Box className="flex flex-col gap-4 ">
@@ -57,18 +65,24 @@ export function CategorySelector() {
                ))}
             </ul>
             <ul className="flex flex-col">
-               {categories.map((group) => (
-                  <label
-                     className="flex items-center gap-2"
-                     key={group.id}>
-                     <input
-                        type="checkbox"
-                        onChange={() => handleSelectedCategory(group.id)}
-                        checked={vendorProfile.categoryId === group.id}
-                     />
-                     {group.name}
-                  </label>
-               ))}
+               {isLoadingCategories ? (
+                  <li>
+                     <Typography variant="parrafo">Cargando...</Typography>
+                  </li>
+               ) : (
+                  categories.map((group) => (
+                     <label
+                        className="flex items-center gap-2"
+                        key={group.id}>
+                        <input
+                           type="checkbox"
+                           onChange={() => handleSelectedCategory(group.id)}
+                           checked={vendorProfile.categoryId === group.id}
+                        />
+                        {group.name}
+                     </label>
+                  ))
+               )}
             </ul>
          </Box>
       </Box>

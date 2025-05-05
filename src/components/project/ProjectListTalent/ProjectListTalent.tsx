@@ -10,12 +10,14 @@ interface Props {
 }
 
 export function ProjectListTalent({ profileId }: Readonly<Props>) {
+   // Obtener las solicitudes de proforma
    const {
       data: response,
       isLoading,
       isValidating,
    } = useSWR(profileId ? ["request-list", profileId] : null, () => fetchProformaRequestByProfileId(profileId))
 
+   // Si la solicitud está cargando o está validando
    if (isLoading || isValidating) {
       return <Box className="p-4 text-center">Cargando solicitudes...</Box>
    }

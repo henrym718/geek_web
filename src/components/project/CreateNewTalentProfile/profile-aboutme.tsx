@@ -1,10 +1,13 @@
 import React from "react"
 import { Box, Typography, TextArea } from "@/components/ui"
-import { useWizardUserDataStore } from "@/stores/use-create-profile-user-data.store"
+import { CreateVendorProfileRequest } from "@/data/dtos/create-vendor-profile.types"
 
-export function ProfileAboutMe() {
-   const { setVendorProfile, vendorProfile } = useWizardUserDataStore((state) => state)
+interface Props {
+   vendorProfile: CreateVendorProfileRequest
+   setVendorProfile: (data: Partial<CreateVendorProfileRequest>) => void
+}
 
+export function ProfileAboutMe({ vendorProfile, setVendorProfile }: Readonly<Props>) {
    return (
       <Box className="flex flex-col gap-2 w-4/7">
          <Typography variant="titulo3">Genial, ahora escribe una biografia para contarle al mundo sobre ti</Typography>

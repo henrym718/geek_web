@@ -16,6 +16,7 @@ export interface GetTalentsResponse {
       id: string
       firstName: string
       lastName: string
+      bannerImage: string
       photo: string
       city: string
       title: string

@@ -5,16 +5,25 @@ import { createVendorProfile } from "@/data/api/services/vendor-profile.service"
 import { useWizardCreateProfileStepHandlerStore } from "@/stores/use-create-profile-step-handler.store"
 import { useWizardUserDataStore } from "@/stores/use-create-profile-user-data.store"
 import { useSessionDataStore } from "@/stores/user-session-data.store"
+import { useCloudinary } from "@/lib/hooks/cloudinary/useCloudinary"
 
 export function WizardFooter() {
    const router = useRouter()
    const { step, totalSteps, previousStep, nextStep, resetStep } = useWizardCreateProfileStepHandlerStore((state) => state)
-   const { vendorProfile, resetVendorProfile } = useWizardUserDataStore((state) => state)
+   const { vendorProfile, resetVendorProfile, bannerImage } = useWizardUserDataStore((state) => state)
    const { user } = useSessionDataStore((state) => state)
+   const { uploadImage } = useCloudinary({ file: bannerImage })
 
    const handleCreateProfile = async () => {
-      if (!user?.vendor) return
-      const response = await createVendorProfile(vendorProfile)
+      if (!user?.vendor || !bannerImage) return
+
+      const bannerImageUrl = await uploadImage()
+      if (!bannerImageUrl) return
+
+      const response = await createVendorProfile({
+         ...vendorProfile,
+         bannerImage: bannerImageUrl,
+      })
       if (response.success) {
          resetVendorProfile()
          resetStep()
