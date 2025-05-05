@@ -5,7 +5,7 @@ import { GroupCategorySkillsSelector } from "./skill-request-builder/GroupCatego
 import { Headline } from "./Headline"
 import { Description } from "./Description"
 import { Timing } from "./Timing"
-import { Scope } from "./cope"
+import { Scope } from "./Scope"
 import { Budget } from "./Budget"
 import { useCreateProjectData } from "@/stores/useCreateProjectData"
 import { useCreateProjectRecoveryData } from "@/stores/useCreateProjectRecoveryData"

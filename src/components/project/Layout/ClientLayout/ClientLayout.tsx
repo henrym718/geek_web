@@ -2,9 +2,8 @@
 
 import { Sidebar } from "@/components/project/Sidebar/Sidebar"
 import { useSessionDataStore } from "@/stores/user-session-data.store"
-import { FaRegMessage } from "react-icons/fa6"
+import { MessageCircle } from "lucide-react"
 import { FiGitPullRequest } from "react-icons/fi"
-import { IoSettingsOutline } from "react-icons/io5"
 
 export function ClientLayout({ children }: Readonly<React.PropsWithChildren>) {
    const data = useSessionDataStore((state) => state.user)
@@ -13,19 +12,14 @@ export function ClientLayout({ children }: Readonly<React.PropsWithChildren>) {
 
    const navigationLinks = [
       {
-         label: "Solicitudes",
-         href: "/client/account/request-panel",
+         label: "Proyectos",
+         href: "/client/account/projects",
          icon: FiGitPullRequest,
       },
       {
-         label: "Chat",
-         href: "/chat",
-         icon: FaRegMessage,
-      },
-      {
-         label: "Configuración",
-         href: "/client/account/settings",
-         icon: IoSettingsOutline,
+         label: "Mensajes",
+         href: "/client/account/chat",
+         icon: MessageCircle,
       },
    ]
 
@@ -40,7 +34,7 @@ export function ClientLayout({ children }: Readonly<React.PropsWithChildren>) {
             dashboardLink={{ href: "/client/dashboard" }}
             navigationLinks={navigationLinks}
          />
-         <main className="flex-1 px-10">{children}</main>
+         <main className="w-full h-[calc(100vh-10rem)] bg-zinc-100 rounded-2xl ml-9 mt-7 overflow-y-auto p-8">{children}</main>
       </div>
    )
 }
