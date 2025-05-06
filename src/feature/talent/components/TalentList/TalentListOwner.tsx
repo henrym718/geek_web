@@ -1,6 +1,6 @@
 "use client"
 
-import { CardTalent } from "../CardTalent/CardTalent"
+import { TalentCard } from "@/feature/talent/components/TalentCard/TalentCard"
 
 interface Props {
    talents: {
@@ -14,11 +14,11 @@ interface Props {
    }[]
 }
 
-export function CardListTalent({ talents }: Readonly<Props>) {
+export function TalentListOwner({ talents }: Readonly<Props>) {
    return (
       <>
          {talents.map((talent) => (
-            <CardTalent
+            <TalentCard
                key={talent.id}
                id={talent.id}
                firstName={talent.firstName}

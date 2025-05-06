@@ -1,10 +1,10 @@
 "use client"
 
 import Link from "next/link"
-import { Button } from "../../ui"
-import { useCreateProfileData } from "@/feature/profiles/stores/useCreateProfileData"
-import { useCreateProfileRecoveryData } from "@/feature/profiles/stores/useCreateProfileRecoveryData"
-import { useCreateProfileSteps } from "@/feature/profiles/stores/useCreateProfileSteps"
+import { Button } from "@/components/ui"
+import { useCreateProfileData } from "@/feature/talent/stores/useCreateProfileData"
+import { useCreateProfileRecoveryData } from "@/feature/talent/stores/useCreateProfileRecoveryData"
+import { useCreateProfileSteps } from "@/feature/talent/stores/useCreateProfileSteps"
 
 export function AddProfileButton() {
    const { resetProfileData } = useCreateProfileData((state) => state)

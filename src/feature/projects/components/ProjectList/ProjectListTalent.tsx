@@ -3,7 +3,7 @@
 import { Box, Typography } from "@/components/ui"
 import { fetchProformaRequestByProfileId } from "@/data/api/services/proforma-request.service"
 import useSWR from "swr"
-import { ProjectTalentItem } from "../ProjectTalentItem/ProjectTalentItem"
+import { ProjectTalentItem } from "../../../../components/project/ProjectTalentItem/ProjectTalentItem"
 
 interface Props {
    profileId: string

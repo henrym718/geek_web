@@ -1,8 +1,8 @@
 import { cookies } from "next/headers"
 import { fetchVendorProfilesByAccessToken } from "@/data/api/services/vendor-profile.service"
-import { CardListTalent } from "@/components/project/CardListTalent/CardListTalent"
 import { Box, Typography } from "@/components/ui"
-import { AddProfileButton } from "@/components/project/AddProfileButton/AddProfileButton"
+import { AddProfileButton } from "@/feature/talent/components/AddTalentButton/AddTalentButton"
+import { TalentListOwner } from "@/feature/talent/components/TalentList/TalentListOwner"
 
 export default async function ProfilesPage() {
    // Obtenemos el token de las cookies
@@ -26,7 +26,7 @@ export default async function ProfilesPage() {
             <AddProfileButton />
          </Box>
          <Box className="grid grid-cols-3 gap-4">
-            <CardListTalent talents={data} />
+            <TalentListOwner talents={data} />
          </Box>
       </Box>
    )

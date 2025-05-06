@@ -1,4 +1,4 @@
-import { Wizard } from "@/feature/profiles/components/create/wizard"
+import { Wizard } from "@/feature/talent/components/create/wizard"
 
 export default function CreateVendorProfilePage() {
    return <Wizard />

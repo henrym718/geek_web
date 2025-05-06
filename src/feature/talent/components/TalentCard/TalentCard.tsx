@@ -2,7 +2,7 @@
 "use client"
 
 import { useState } from "react"
-import { Avatar, Box, Typography } from "../../ui"
+import { Avatar, Box, Typography } from "../../../../components/ui"
 import { MapPinCheckInside } from "lucide-react"
 import { formatURLParam } from "@/lib/utils/formatURLParams"
 interface Props {
@@ -15,7 +15,7 @@ interface Props {
    title: string
 }
 
-export function CardTalent({ id, firstName, lastName, bannerImage, photo, city, title }: Readonly<Props>) {
+export function TalentCard({ id, firstName, lastName, bannerImage, photo, city, title }: Readonly<Props>) {
    const [hoveringImageOrTitle, setHoveringImageOrTitle] = useState(false)
 
    function handleOpenProfile(title: string) {

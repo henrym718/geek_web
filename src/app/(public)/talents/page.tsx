@@ -1,4 +1,4 @@
-import { CardListTalent } from "@/components/project/CardListTalent/CardListTalent"
+import { TalentListPublic } from "@/feature/talent/components/TalentList/TalentListPublic"
 import { FilterTalentForm } from "@/components/project/FilterTalentForm/FilterTalentForm"
 import { Box, Typography } from "@/components/ui"
 import { fetchTalents } from "@/data/api/services/vendor-profile.service"
@@ -42,7 +42,7 @@ export default async function TalentsPage({ searchParams }: TalentsPageProps) {
          {/* Lista de talentos */}
          {talents.length > 0 ? (
             <Box className="grid grid-cols-4 gap-x-4 w-full h-full place-items-center">
-               <CardListTalent talents={talents} />
+               <TalentListPublic talents={talents} />
             </Box>
          ) : (
             <Typography variant="parrafo">No se encontraron talentos</Typography>

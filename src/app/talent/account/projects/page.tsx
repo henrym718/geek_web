@@ -6,7 +6,7 @@ import { TalentProjectFilterTabs } from "@/components/project/TalentProjectFilte
 import { cookies } from "next/headers"
 import { fetchVendorProfilesByAccessToken } from "@/data/api/services/vendor-profile.service"
 import { Suspense } from "react"
-import { ProjectListTalent } from "@/components/project/ProjectListTalent/ProjectListTalent"
+import { ProjectListTalent } from "@/feature/projects/components/ProjectList/ProjectListTalent"
 
 interface Props {
    searchParams: {
