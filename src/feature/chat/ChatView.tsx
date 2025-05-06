@@ -33,7 +33,7 @@ export function ChatView() {
          {/* Chat */}
          <Box className="w-3/5 h-full flex flex-col justify-between bg-white rounded-2xl">
             {chatId ? (
-               <Box className="flex flex-col overflow-y-auto">
+               <Box className="flex flex-col h-full">
                   <Box className="flex items-center py-4 px-6">
                      <ChatAvatar
                         fullName={chatData.fullName}
@@ -41,10 +41,12 @@ export function ChatView() {
                      />
                   </Box>
                   <Divider />
-                  <MessageList
-                     messages={messages}
-                     senderId={senderId || ""}
-                  />
+                  <Box className="flex-1 overflow-y-auto">
+                     <MessageList
+                        messages={messages}
+                        senderId={senderId || ""}
+                     />
+                  </Box>
                   <ChatInputForm onSendMessage={handleSendMessage} />
                </Box>
             ) : (

@@ -16,7 +16,8 @@ import { updateStatusByClient } from "@/data/api/services/proforma-response.serv
 import { sleep } from "@/lib/utils/sleep"
 import { toast, Toaster } from "sonner"
 import { createChat } from "@/data/api/services/chat.service"
-import { useRouter } from "next/navigation"
+import { useChatList } from "@/lib/hooks/chats/useChatList"
+import { useSocket } from "@/lib/hooks/socket/useSocket"
 
 interface Props {
    username: string
@@ -52,36 +53,35 @@ export function ProposalResponseModal({
    children,
 }: Readonly<Props>) {
    const [pending, setPending] = useState(false)
-   const router = useRouter()
 
    const handleAcceptProposal = async (closeModal: () => void, status: StatusResponseType) => {
-      setPending(true)
-
       try {
+         setPending(true)
          await sleep(1000)
          const response = await updateStatusByClient({
             proformaRequestId: requestid,
             proformaResponseId: responseid,
             newStatus: status,
          })
-
-         const chat = await createChat({
-            clientId: clientId,
-            vendorId: vendorId,
-         })
-
-         if (chat.success) {
-            toast.success("Chat creado correctamente")
-            router.push("/client/account/chat")
-         } else {
-            toast.error(chat.message)
-         }
-
          if (response.success) {
             closeModal()
             mutate(["response", requestid])
          } else {
             toast(response.message)
+         }
+
+         if (status === STATUS_RESPONSE.ACCEPTED) {
+            const chat = await createChat({
+               clientId: clientId,
+               vendorId: vendorId,
+            })
+
+            if (chat.success) {
+               toast.success("Chat creado correctamente")
+               window.location.href = "/client/account/chat"
+            } else {
+               toast.error(chat.message)
+            }
          }
       } finally {
          setPending(false)
