@@ -15,6 +15,8 @@ import { mutate } from "swr"
 import { updateStatusByClient } from "@/data/api/services/proforma-response.service"
 import { sleep } from "@/lib/utils/sleep"
 import { toast, Toaster } from "sonner"
+import { createChat } from "@/data/api/services/chat.service"
+import { useRouter } from "next/navigation"
 
 interface Props {
    username: string
@@ -28,11 +30,15 @@ interface Props {
    createdAt: string
    requestid: string
    responseid: string
+   clientId: string
+   vendorId: string
    children: React.ReactElement<{ onClick: () => void }>
 }
 
 export function ProposalResponseModal({
    username,
+   vendorId,
+   clientId,
    firstName,
    lastName,
    title,
@@ -46,6 +52,7 @@ export function ProposalResponseModal({
    children,
 }: Readonly<Props>) {
    const [pending, setPending] = useState(false)
+   const router = useRouter()
 
    const handleAcceptProposal = async (closeModal: () => void, status: StatusResponseType) => {
       setPending(true)
@@ -57,6 +64,18 @@ export function ProposalResponseModal({
             proformaResponseId: responseid,
             newStatus: status,
          })
+
+         const chat = await createChat({
+            clientId: clientId,
+            vendorId: vendorId,
+         })
+
+         if (chat.success) {
+            toast.success("Chat creado correctamente")
+            router.push("/client/account/chat")
+         } else {
+            toast.error(chat.message)
+         }
 
          if (response.success) {
             closeModal()

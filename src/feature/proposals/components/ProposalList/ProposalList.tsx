@@ -4,13 +4,14 @@ import { fetchAllResponsesByRequestId } from "@/data/api/services/proforma-respo
 import useSWR from "swr"
 import { Box } from "@/components/ui"
 import { ProposalItem } from "../ProposalItem/ProposalItem"
+import { useSessionDataStore } from "@/stores/user-session-data.store"
 interface Props {
    requestid: string
 }
 
 export function ProposalsList({ requestid }: Readonly<Props>) {
    const { data: proposals, isLoading } = useSWR(requestid ? ["response", requestid] : null, () => fetchAllResponsesByRequestId({ requestid }))
-
+   const { user } = useSessionDataStore()
    if (isLoading) return <div>Loading...</div>
    if (!proposals?.success) return <div>Error: {proposals?.message}</div>
 
@@ -20,6 +21,8 @@ export function ProposalsList({ requestid }: Readonly<Props>) {
             {proposals?.data.map((data) => (
                <ProposalItem
                   key={data.proformaResponse.id}
+                  vendorId={data.user.id}
+                  clientId={user?.user.id ?? ""}
                   username={data.user.username}
                   firstName={data.vendor.firstName}
                   aboutme={data.vendorProfile.aboutme}

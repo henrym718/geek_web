@@ -3,6 +3,8 @@ import { ProposalResponseModal } from "../ProposalResponseModal/ProposalResponse
 import { Skill } from "@/data/types/models/models"
 
 interface Props {
+   vendorId: string
+   clientId: string
    username: string
    firstName: string
    lastName: string
@@ -29,10 +31,14 @@ export function ProposalItem({
    aboutme,
    requestid,
    responseid,
+   vendorId,
+   clientId,
 }: Readonly<Props>) {
    return (
       <ProposalResponseModal
          username={username}
+         vendorId={vendorId}
+         clientId={clientId}
          firstName={firstName}
          lastName={lastName}
          aboutme={aboutme}

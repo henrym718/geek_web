@@ -7,7 +7,7 @@ export interface GetResponsesByRequestIdRequest {
 
 export interface GetResponsesByRequestIdResponse {
    proformaResponse: Pick<ProformaResponse, "id" | "budget" | "message" | "status">
-   user: Pick<User, "createdAt" | "username">
+   user: Pick<User, "id" | "createdAt" | "username">
    vendor: Pick<Vendor, "firstName" | "lastName" | "photo" | "phone" | "city">
    vendorProfile: Pick<VendorProfile, "aboutme" | "title">
    skills: Skill[]

@@ -7,6 +7,8 @@ interface State {
    setVendorProfile: (data: Partial<CreateVendorProfileRequest>) => void
    resetProfileData: () => void
    setBannerImage: (file: File | null) => void
+   addSkill: (skill: string) => void
+   removeSkill: (skill: string) => void
 }
 
 export const useCreateProfileData = create<State>((set) => ({
@@ -33,4 +35,8 @@ export const useCreateProfileData = create<State>((set) => ({
          },
          bannerImage: null,
       }),
+
+   addSkill: (skill) => set((state) => ({ vendorProfile: { ...state.vendorProfile, skills: [...state.vendorProfile.skills, skill] } })),
+   removeSkill: (skill: string) =>
+      set((state) => ({ vendorProfile: { ...state.vendorProfile, skills: state.vendorProfile.skills.filter((s) => s !== skill) } })),
 }))

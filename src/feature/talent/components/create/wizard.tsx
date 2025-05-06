@@ -30,7 +30,7 @@ export function Wizard() {
    const { step, previousStep, nextStep } = useCreateProfileSteps((state) => state)
 
    //Store de datos del usuario
-   const { vendorProfile, setVendorProfile, bannerImage, setBannerImage } = useCreateProfileData((state) => state)
+   const { vendorProfile, setVendorProfile, bannerImage, setBannerImage, addSkill, removeSkill } = useCreateProfileData((state) => state)
 
    //Store de datos
    const {
@@ -46,13 +46,13 @@ export function Wizard() {
 
       // Tags/Skills
       optionsTags,
+      setOptionsTags,
+      addOptionsTag,
+      removeOptionsTag,
       selectedTags,
       addSelectedTag,
       removeSelectedTag,
       cleanSelectedTags,
-      setOptionsTags,
-      addOptionsTag,
-      removeOptionsTag,
 
       // Banner image
       bannerImagePreview,
@@ -159,7 +159,8 @@ export function Wizard() {
                   categoryId={vendorProfile.categoryId}
                   optionsTags={optionsTags}
                   selectedTags={selectedTags}
-                  setVendorProfile={setVendorProfile}
+                  addSkill={addSkill}
+                  removeSkill={removeSkill}
                   addSelectedTag={addSelectedTag}
                   removeSelectedTag={removeSelectedTag}
                   addOptionsTag={addOptionsTag}

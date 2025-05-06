@@ -1,7 +1,6 @@
 "use client"
 
 import { Box, Typography, InputTag } from "@/components/ui"
-import { CreateVendorProfileRequest } from "@/data/dtos/create-vendor-profile.types"
 import { Skill } from "@/data/types/models/models"
 
 interface Props {
@@ -12,21 +11,23 @@ interface Props {
    addOptionsTag: (tags: Skill) => void
    removeOptionsTag: (tags: Skill) => void
    optionsTags: Skill[]
-   setVendorProfile: (data: Partial<CreateVendorProfileRequest>) => void
+   addSkill: (skill: string) => void
+   removeSkill: (skill: string) => void
 }
 
 export function SkillsSelector(props: Readonly<Props>) {
-   const { selectedTags, addSelectedTag, removeSelectedTag, optionsTags, addOptionsTag, removeOptionsTag, setVendorProfile } = props
+   const { selectedTags, addSelectedTag, removeSelectedTag, optionsTags, addOptionsTag, removeOptionsTag, addSkill, removeSkill } = props
 
    const handleSelectedTags = (tag: Skill) => {
       addSelectedTag(tag)
       removeOptionsTag(tag)
-      setVendorProfile({ skills: [tag.id] })
+      addSkill(tag.id)
    }
 
    const handleUnselectedTags = (tag: Skill) => {
       removeSelectedTag(tag)
       addOptionsTag(tag)
+      removeSkill(tag.id)
    }
 
    return (
