@@ -45,144 +45,155 @@ export function ProjectsResponseForm({ project, skills, city, profileId, exists,
    }
 
    return (
-      <Box className="flex flex-col p-10 gap-4 cursor-default w-[700px] min-h-[100vh] overflow-y-auto">
-         <IoIosArrowRoundBack
-            className="cursor-pointer hover:rounded-full hover:bg-gray-100"
-            size={30}
-            onClick={closeModal}
-         />
-         <Typography
-            className="pb-2"
-            variant="subtitulo1">
-            {project.title}
-         </Typography>
-         <Box className="flex items-center gap-4 justify-between">
-            <Typography variant="etiqueta">{`Publicado: ${timeAgo(project.createdAt ?? new Date())} - ${city.name}`}</Typography>
-         </Box>
-         <Box className="flex gap-4 pt-1">
-            <TfiAnnouncement
-               size={24}
-               className="flex items-start"
+      <main className="flex flex-col p-10 gap-4 cursor-default w-[700px] min-h-[100vh] overflow-y-auto">
+         <header className="flex flex-col gap-4">
+            <IoIosArrowRoundBack
+               className="cursor-pointer hover:rounded-full hover:bg-gray-100"
+               size={30}
+               onClick={closeModal}
             />
-            <Typography variant="nota">
-               Los perfiles especializados pueden ayudarte a destacar mejor tu experiencia al presentar propuestas para puestos como estos, esfuerzate
-               en crear el mejor perfil para que te contraten.
+            <Typography
+               className="pb-2"
+               variant="subtitulo1">
+               {project.title}
             </Typography>
-         </Box>
-         <Divider />
-         <Typography
-            className="pb-4"
-            variant="mensaje">
-            {project.description}
-         </Typography>
-
-         <Divider />
-
-         <Box className="flex flex-col gap-4">
-            <Box className="flex  gap-36">
-               <Box className="flex gap-2 w-1/4">
-                  <IoPricetagOutline size={22} />
-                  <Box className="flex flex-col">
-                     <Typography variant="etiqueta">{`${
-                        project.budget ? `$${project.budget.toFixed(2)}/${budgetUnitMap[project.budgetUnit]}` : "Solicita presupuesto: SI"
-                     }`}</Typography>
-                     <Typography
-                        variant="etiqueta"
-                        className="font-light">
-                        Presupuesto
-                     </Typography>
-                  </Box>
-               </Box>
-               <Box className="flex gap-2 w-2/4">
-                  <MdOutlineCalendarToday size={20} />
-                  <Box className="flex flex-col">
-                     <Typography variant="etiqueta">{projectLengthMap[project.projectLength]}</Typography>
-                     <Typography
-                        variant="etiqueta"
-                        className="text-center font-light">
-                        Duración
-                     </Typography>
-                  </Box>
-               </Box>
+            <Box className="flex items-center gap-4 justify-between">
+               <Typography variant="etiqueta">{`Publicado: ${timeAgo(project.createdAt ?? new Date())} - ${city.name}`}</Typography>
             </Box>
-
-            <Box className="flex gap-36">
-               <Box className="flex gap-2 w-1/4">
-                  <RiBuilding4Line size={20} />
-                  <Box className="flex flex-col">
-                     <Typography variant="etiqueta">{projectTypeMap[project.projectType]}</Typography>
-                     <Typography
-                        variant="etiqueta"
-                        className="font-light">
-                        Tipo de proyecto
-                     </Typography>
-                  </Box>
-               </Box>
-               <Box className="flex gap-2 w-2/4">
-                  <IoTimeOutline size={22} />
-                  <Box className="flex flex-col">
-                     <Typography variant="etiqueta">{projectWorkloadMap[project.projectWorkload]}</Typography>
-                     <Typography
-                        variant="etiqueta"
-                        className="font-light">
-                        Carga horaria
-                     </Typography>
-                  </Box>
-               </Box>
+            <Box className="flex gap-4 pt-1">
+               <TfiAnnouncement
+                  size={24}
+                  className="flex items-start"
+               />
+               <Typography variant="nota">
+                  Los perfiles especializados pueden ayudarte a destacar mejor tu experiencia al presentar propuestas para puestos como estos,
+                  esfuerzate en crear el mejor perfil para que te contraten.
+               </Typography>
             </Box>
-         </Box>
+         </header>
 
          <Divider />
 
-         <Box className="flex gap-2">
+         <section>
+            <Typography
+               className="pb-4"
+               variant="mensaje">
+               {project.description}
+            </Typography>
+         </section>
+
+         <Divider />
+
+         <section className="grid grid-cols-2 gap-8">
+            <article className="flex gap-2">
+               <IoPricetagOutline size={22} />
+               <Box className="flex flex-col">
+                  <Typography variant="etiqueta">{`${
+                     project.budget ? `$${project.budget.toFixed(2)}/${budgetUnitMap[project.budgetUnit]}` : "Solicita presupuesto: SI"
+                  }`}</Typography>
+                  <Typography
+                     variant="etiqueta"
+                     className="font-light">
+                     Presupuesto
+                  </Typography>
+               </Box>
+            </article>
+
+            <article className="flex gap-2">
+               <MdOutlineCalendarToday size={20} />
+               <Box className="flex flex-col">
+                  <Typography variant="etiqueta">{projectLengthMap[project.projectLength]}</Typography>
+                  <Typography
+                     variant="etiqueta"
+                     className="font-light">
+                     Duración
+                  </Typography>
+               </Box>
+            </article>
+
+            <article className="flex gap-2">
+               <RiBuilding4Line size={20} />
+               <Box className="flex flex-col">
+                  <Typography variant="etiqueta">{projectTypeMap[project.projectType]}</Typography>
+                  <Typography
+                     variant="etiqueta"
+                     className="font-light">
+                     Tipo de proyecto
+                  </Typography>
+               </Box>
+            </article>
+
+            <article className="flex gap-2">
+               <IoTimeOutline size={22} />
+               <Box className="flex flex-col">
+                  <Typography variant="etiqueta">{projectWorkloadMap[project.projectWorkload]}</Typography>
+                  <Typography
+                     variant="etiqueta"
+                     className="font-light">
+                     Carga horaria
+                  </Typography>
+               </Box>
+            </article>
+         </section>
+
+         <Divider />
+
+         <section className="flex gap-2">
             <Typography
                variant="etiqueta"
                className="font-light">
                Propuestas recibidas:
             </Typography>
             <Typography variant="etiqueta">{project.countResponses}</Typography>
-         </Box>
+         </section>
 
          <Divider />
-         <Typography variant="subtitulo2">Hablidades y experiencia</Typography>
-         <Box className="flex gap-2 pb-4">
-            {skills.map((skill) => (
-               <Badge key={skill.id}>{skill.name}</Badge>
-            ))}
-         </Box>
-         <Divider />
-         {exists ? (
-            <Box className="flex h-2 items-center gap-2">
-               <IoAlertCircleOutline size={22} />
-               <Typography variant="nota">Ya has aplicado a esta soliciutd de trabajo</Typography>
+
+         <section>
+            <Typography variant="subtitulo2">Hablidades y experiencia</Typography>
+            <Box className="flex gap-2 pb-4">
+               {skills.map((skill) => (
+                  <Badge key={skill.id}>{skill.name}</Badge>
+               ))}
             </Box>
-         ) : (
-            <>
-               <Typography variant="subtitulo2">Aplica a esta propuesta</Typography>
-               <form onSubmit={handleSubmit(onSubmit)}>
-                  <TextArea
-                     rows={5}
-                     error={errors.message?.message as string}
-                     register={register("message", {
-                        required: "El mensaje es requerido",
-                        minLength: {
-                           value: 10,
-                           message: "El mensaje debe tener al menos 10 caracteres",
-                        },
-                     })}
-                  />
-                  <Button
-                     className="mt-4 w-full"
-                     variant="primary"
-                     size="lg"
-                     type="submit"
-                     disabled={loading}
-                     isLoading={loading}>
-                     Enviar propuesta
-                  </Button>
-               </form>
-            </>
-         )}
-      </Box>
+         </section>
+
+         <Divider />
+
+         <footer>
+            {exists ? (
+               <Box className="flex h-2 items-center gap-2">
+                  <IoAlertCircleOutline size={22} />
+                  <Typography variant="nota">Ya has aplicado a esta soliciutd de trabajo</Typography>
+               </Box>
+            ) : (
+               <section>
+                  <Typography variant="subtitulo2">Aplica a esta propuesta</Typography>
+                  <form onSubmit={handleSubmit(onSubmit)}>
+                     <TextArea
+                        rows={5}
+                        error={errors.message?.message as string}
+                        register={register("message", {
+                           required: "El mensaje es requerido",
+                           minLength: {
+                              value: 10,
+                              message: "El mensaje debe tener al menos 10 caracteres",
+                           },
+                        })}
+                     />
+                     <Button
+                        className="mt-4 w-full"
+                        variant="primary"
+                        size="lg"
+                        type="submit"
+                        disabled={loading}
+                        isLoading={loading}>
+                        Enviar propuesta
+                     </Button>
+                  </form>
+               </section>
+            )}
+         </footer>
+      </main>
    )
 }
