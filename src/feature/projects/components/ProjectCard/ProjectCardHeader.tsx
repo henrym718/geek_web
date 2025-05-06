@@ -7,7 +7,7 @@ interface Props {
    title: string
 }
 
-export function ProjectHeader({ createdAt, title }: Readonly<Props>) {
+export function ProjectCardHeader({ createdAt, title }: Readonly<Props>) {
    return (
       <Box className="relative flex flex-col gap-0.5">
          <Typography variant="etiqueta">{timeAgo(createdAt ?? new Date())}</Typography>

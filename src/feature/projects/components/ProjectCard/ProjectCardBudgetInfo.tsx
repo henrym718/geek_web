@@ -7,7 +7,7 @@ interface Props {
    budgetUnit: string
 }
 
-export function ProjectBudgetInfo({ quotation, budget, budgetUnit }: Readonly<Props>) {
+export function ProjectCardBudgetInfo({ quotation, budget, budgetUnit }: Readonly<Props>) {
    return (
       <>
          {quotation ? (

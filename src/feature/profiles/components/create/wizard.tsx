@@ -18,7 +18,7 @@ import { createVendorProfile } from "@/data/api/services/vendor-profile.service"
 import { useState } from "react"
 import { sleep } from "@/lib/utils/sleep"
 import { Toaster, toast } from "sonner"
-import { useCreateProfileData } from "../stores/useCreateProfileData"
+import { useCreateProfileData } from "../../stores/useCreateProfileData"
 
 export function Wizard() {
    const [isPendingCreateProfile, setIsPendingCreateProfile] = useState(false)

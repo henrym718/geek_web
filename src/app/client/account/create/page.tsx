@@ -1,4 +1,4 @@
-import { Wizard } from "@/feature/projects/create/wizard"
+import { Wizard } from "@/feature/projects/components/Create/wizard"
 
 export default function CreateRequestPage() {
    return <Wizard />

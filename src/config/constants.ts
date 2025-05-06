@@ -103,3 +103,9 @@ export const TALENT_TABS = [
 ] as const
 
 export type TalentTabType = (typeof TALENT_TABS)[number]
+
+export const CLIENT_TABS = [
+   { label: "Activo", value: STATUS_REQUEST.ACTIVE },
+   { label: "Completado", value: STATUS_REQUEST.MATCHED },
+   { label: "Anulado", value: STATUS_REQUEST.ANNULLED },
+]

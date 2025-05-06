@@ -1,7 +1,7 @@
 import { Box, Select, SelectOption, Typography } from "@/components/ui"
 import { STATUS_REQUEST } from "@/config/constants"
 
-export function ProjectStatusSelector() {
+export function ProjectCardStatus() {
    return (
       <Box className="flex gap-2 pt-4">
          <Typography variant="label">Estado de la solicitud:</Typography>

@@ -13,7 +13,7 @@ interface Props {
    status: string
 }
 
-export function ProposalSumaryCard({ username, title, city, message, status }: Readonly<Props>) {
+export function ProposalCard({ username, title, city, message, status }: Readonly<Props>) {
    return (
       <Box className="flex flex-col relative bg-white pb-2 border-2 border-gray-200 rounded-lg p-4 hover:border-gray-300 hover:shadow hover:cursor-pointer">
          <Box className="flex items-center gap-2">

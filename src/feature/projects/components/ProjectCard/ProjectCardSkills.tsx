@@ -6,7 +6,7 @@ interface Props {
    skills: Skill[]
 }
 
-export function ProjectSkillsList({ skills }: Readonly<Props>) {
+export function ProjectCardSkills({ skills }: Readonly<Props>) {
    return (
       <Box className="flex gap-2 pt-4 pb-4 flex-wrap">
          {skills.map((skill) => (

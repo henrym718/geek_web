@@ -12,7 +12,7 @@ interface Props {
    countResponses: number
 }
 
-export function ProjectMetadata({ projectType, projectLength, projectWorkload, city, countResponses }: Readonly<Props>) {
+export function ProjectCardMetadata({ projectType, projectLength, projectWorkload, city, countResponses }: Readonly<Props>) {
    return (
       <>
          <Box className="flex gap-6 items-center pb-2">

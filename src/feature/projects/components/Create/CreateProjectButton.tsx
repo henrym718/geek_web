@@ -6,7 +6,7 @@ import { useCreateProjectData } from "@/stores/useCreateProjectData"
 import { Plus } from "lucide-react"
 import { useRouter } from "next/navigation"
 
-export function StartCreateRequestButton() {
+export function CreateProjectButton() {
    const { resetFormData } = useCreateProjectRecoveryData((state) => state)
    const { resetProject } = useCreateProjectData((state) => state)
    const { resetStep } = useCreateProjectSteps((state) => state)
