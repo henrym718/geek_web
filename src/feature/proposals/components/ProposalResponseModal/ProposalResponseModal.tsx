@@ -15,10 +15,14 @@ import { mutate } from "swr"
 import { updateStatusByClient } from "@/data/api/services/proforma-response.service"
 import { sleep } from "@/lib/utils/sleep"
 import { toast, Toaster } from "sonner"
+
 interface Props {
    username: string
+   firstName: string
+   lastName: string
    title: string
    city: string
+   aboutme: string
    message: string
    skills: Skill[]
    createdAt: string
@@ -27,7 +31,20 @@ interface Props {
    children: React.ReactElement<{ onClick: () => void }>
 }
 
-export function ProposalResponseModal({ username, title, city, message, skills, createdAt, requestid, responseid, children }: Readonly<Props>) {
+export function ProposalResponseModal({
+   username,
+   firstName,
+   lastName,
+   title,
+   city,
+   aboutme,
+   message,
+   skills,
+   createdAt,
+   requestid,
+   responseid,
+   children,
+}: Readonly<Props>) {
    const [pending, setPending] = useState(false)
 
    const handleAcceptProposal = async (closeModal: () => void, status: StatusResponseType) => {
@@ -59,51 +76,56 @@ export function ProposalResponseModal({ username, title, city, message, skills, 
          </SideModalTrigger>
          <SideModalContent>
             {(closeModal) => (
-               <Box className="flex flex-col px-4 gap-4 cursor-default overflow-y-auto">
-                  <Box className="flex items-center gap-2">
-                     <Avatar size="7xl" />
-                     <Box className="flex flex-col">
+               <Box className="flex flex-col w-[650px] p-10 space-y-6 overflow-y-auto">
+                  <header className="flex items-center gap-4">
+                     <Avatar
+                        size="7xl"
+                        name={firstName}
+                     />
+                     <div className="space-y-1">
+                        <Typography variant="subtitulo1">{`${firstName} ${lastName}`}</Typography>
+                        <Typography variant="parrafo">{title}</Typography>
                         <Typography
                            variant="label"
-                           className="font-bold">
-                           {`@${username}`}
-                        </Typography>
-                        <Typography variant="parrafo">{title}</Typography>
-                     </Box>
-                  </Box>
-                  <Divider />
-                  <Box className="flex flex-col gap-2">
-                     <Typography variant="subtitulo2">Un poco sobre mi</Typography>
-                     <Typography
-                        variant="parrafo"
-                        className="pt-4">
-                        {message}
-                     </Typography>
-                  </Box>
-                  <Divider />
-                  <Typography variant="subtitulo2">Hablidades y experiencia</Typography>
-                  <RequestSkills skills={skills} />
-                  <Divider />
-                  <Box className="flex gap-32">
-                     <Box className="flex flex-col gap-1 items-center">
-                        <Typography variant="parrafo">Ubicación</Typography>
-                        <Typography
-                           variant="parrafo"
-                           className="font-bold">
-                           {city}
-                        </Typography>
-                     </Box>
-                     <Box className="flex flex-col gap-1 items-center">
-                        <Typography variant="parrafo">Miembro desde</Typography>
-                        <Typography
-                           variant="parrafo"
-                           className="font-bold">
-                           {timeAgo(new Date(createdAt))}
-                        </Typography>
-                     </Box>
-                  </Box>
-                  <Divider />
-                  <Box className="flex gap-8 justify-center mt-6">
+                           className="font-bold">{`@${username}`}</Typography>
+                     </div>
+                  </header>
+
+                  <section className="border border-gray-200 p-6 space-y-6 ">
+                     <Typography variant="parrafo">{aboutme}</Typography>
+
+                     <Divider />
+                     <div className="grid grid-cols-3 gap-8 pt-5">
+                        <div>
+                           <Typography variant="parrafo">Ubicación</Typography>
+                           <Typography
+                              variant="parrafo"
+                              className="font-bold">
+                              {city}
+                           </Typography>
+                        </div>
+                        <div>
+                           <Typography variant="parrafo">Miembro desde</Typography>
+                           <Typography
+                              variant="parrafo"
+                              className="font-bold">
+                              {timeAgo(new Date(createdAt))}
+                           </Typography>
+                        </div>
+                     </div>
+                  </section>
+
+                  <section className="space-y-2 mx-5">
+                     <Typography variant="subtitulo2">Hablidades y experiencia</Typography>
+                     <RequestSkills skills={skills} />
+                  </section>
+
+                  <section className="space-y-2 border border-gray-200 p-6">
+                     <Typography variant="subtitulo2">Mensaje de la propuesta</Typography>
+                     <Typography variant="parrafo">{message}</Typography>
+                  </section>
+
+                  <footer className="flex gap-4 justify-center pt-4">
                      <Button
                         className="flex-1"
                         variant="outline"
@@ -122,7 +144,7 @@ export function ProposalResponseModal({ username, title, city, message, skills, 
                         Rechazar Propuesta
                         <IoIosCloseCircleOutline size={24} />
                      </Button>
-                  </Box>
+                  </footer>
                </Box>
             )}
          </SideModalContent>

@@ -4,8 +4,11 @@ import { Skill } from "@/data/types/models/models"
 
 interface Props {
    username: string
+   firstName: string
+   lastName: string
    title: string
    city: string
+   aboutme: string
    message: string
    status: string
    skills: Skill[]
@@ -13,10 +16,26 @@ interface Props {
    requestid: string
    responseid: string
 }
-export function ProposalItem({ username, title, city, message, status, skills, createdAt, requestid, responseid }: Readonly<Props>) {
+export function ProposalItem({
+   username,
+   firstName,
+   lastName,
+   title,
+   city,
+   message,
+   status,
+   skills,
+   createdAt,
+   aboutme,
+   requestid,
+   responseid,
+}: Readonly<Props>) {
    return (
       <ProposalResponseModal
          username={username}
+         firstName={firstName}
+         lastName={lastName}
+         aboutme={aboutme}
          title={title}
          city={city}
          message={message}
@@ -26,9 +45,10 @@ export function ProposalItem({ username, title, city, message, status, skills, c
          responseid={responseid}>
          <ProposalCard
             username={username}
+            firstName={firstName}
+            lastName={lastName}
             title={title}
             city={city}
-            message={message}
             status={status}
          />
       </ProposalResponseModal>

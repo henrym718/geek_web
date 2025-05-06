@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils/cn"
 import { cva, type VariantProps } from "class-variance-authority"
 import { UserRound } from "lucide-react"
 
-const avatarVariants = cva(["rounded-full", "object-cover", "object-center", "flex", "items-center", "justify-center"], {
+const avatarVariants = cva(["rounded-full", "object-cover", "object-center", "flex", "items-center", "justify-center", "shrink-0"], {
    variants: {
       size: {
          sm: "w-7 h-7",

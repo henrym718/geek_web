@@ -9,7 +9,7 @@ interface Props {
    tabs: readonly TalentTabType[]
 }
 
-export function TalentProjectFilterTabs({ tabs }: Readonly<Props>) {
+export function FilterProjectTabTalent({ tabs }: Readonly<Props>) {
    const router = useRouter()
    const searchParams = useSearchParams()
    const initialTabValue = searchParams.get("search") || tabs[0].value

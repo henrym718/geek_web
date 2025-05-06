@@ -11,7 +11,7 @@ interface PropsFilterRequestTab {
    }[]
 }
 
-export function FilterRequestTab({ tabs }: Readonly<PropsFilterRequestTab>) {
+export function FilterProjectTabClient({ tabs }: Readonly<PropsFilterRequestTab>) {
    const router = useRouter()
    const pathname = usePathname()
    const searchParams = useSearchParams()

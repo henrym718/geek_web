@@ -16,13 +16,16 @@ export function ProposalsList({ requestid }: Readonly<Props>) {
 
    return (
       <Box className="flex gap-6">
-         <Box className="flex flex-col h-[calc(100vh-9rem)] overflow-y-auto gap-4 w-5/12">
+         <Box className="flex flex-col overflow-y-auto gap-4 w-full">
             {proposals?.data.map((data) => (
                <ProposalItem
                   key={data.proformaResponse.id}
                   username={data.user.username}
+                  firstName={data.vendor.firstName}
+                  aboutme={data.vendorProfile.aboutme}
+                  lastName={data.vendor.lastName}
                   title={data.vendorProfile.title}
-                  city={data.vendor.city}
+                  city={data.city.name}
                   message={data.proformaResponse.message}
                   status={data.proformaResponse.status}
                   skills={data.skills}

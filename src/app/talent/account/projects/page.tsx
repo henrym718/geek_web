@@ -2,7 +2,7 @@
 import { Box, Typography } from "@/components/ui"
 import { ProfileTalentSelectorButton } from "@/feature/talent/components/ProfileTalentSelectorButton/ProfileTalentSelectorButton"
 import { TALENT_TABS, TOKEN_NAME } from "@/config/constants"
-import { TalentProjectFilterTabs } from "@/feature/projects/components/TalentProjectFilterTabs/TalentProjectFilterTabs"
+import { FilterProjectTabTalent } from "@/feature/projects/components/FilterTabs/FilterProjectTabTalent"
 import { cookies } from "next/headers"
 import { fetchVendorProfilesByAccessToken } from "@/data/api/services/vendor-profile.service"
 import { Suspense } from "react"
@@ -34,7 +34,7 @@ export default async function ProjectsPage({ searchParams }: Readonly<Props>) {
       <Box className="flex flex-col gap-4 w-full px-4">
          <Box className="flex gap-4 justify-between items-center border-b border-black/10 pb-4">
             {/* Tabs de filtros para mostrar proyectos segun el perfil del talento */}
-            <TalentProjectFilterTabs tabs={TALENT_TABS} />
+            <FilterProjectTabTalent tabs={TALENT_TABS} />
             {/* Selector para mostrar proyectos segun el perfil del talento */}
             <ProfileTalentSelectorButton options={profileOptions} />
          </Box>

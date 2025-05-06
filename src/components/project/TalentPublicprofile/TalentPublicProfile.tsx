@@ -33,7 +33,11 @@ export function TalentPublicProfile(props: Readonly<Props>) {
                   {firstName} {lastName}
                </Typography>
                <Typography variant="parrafo">{title}</Typography>
-               <Typography variant="parrafo">{`@${username}`}</Typography>
+               <Typography
+                  variant="parrafo"
+                  className="font-bold">
+                  {`@${username}`}
+               </Typography>
             </Box>
          </Box>
 
