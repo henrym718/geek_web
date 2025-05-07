@@ -16,8 +16,7 @@ import { updateStatusByClient } from "@/data/api/services/proforma-response.serv
 import { sleep } from "@/lib/utils/sleep"
 import { toast, Toaster } from "sonner"
 import { createChat } from "@/data/api/services/chat.service"
-import { useChatList } from "@/lib/hooks/chats/useChatList"
-import { useSocket } from "@/lib/hooks/socket/useSocket"
+import { useRouter } from "next/navigation"
 
 interface Props {
    username: string
@@ -53,7 +52,7 @@ export function ProposalResponseModal({
    children,
 }: Readonly<Props>) {
    const [pending, setPending] = useState(false)
-
+   const router = useRouter()
    const handleAcceptProposal = async (closeModal: () => void, status: StatusResponseType) => {
       try {
          setPending(true)
@@ -78,7 +77,7 @@ export function ProposalResponseModal({
 
             if (chat.success) {
                toast.success("Chat creado correctamente")
-               window.location.href = "/client/account/chat"
+               router.push("/client/account/chat")
             } else {
                toast.error(chat.message)
             }

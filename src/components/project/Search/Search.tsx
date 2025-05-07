@@ -175,7 +175,7 @@ export function Search({
             data-visible={isVisibleIcon}
             className="absolute top-3 right-4 p-2 rounded-full bg-secondary data-[visible=true]:block data-[visible=false]:hidden">
             <FaSearch
-               onClick={() => findOptions?.()}
+               onClick={() => value?.trim() && findOptions?.()}
                className="text-white"
                size={22}
             />

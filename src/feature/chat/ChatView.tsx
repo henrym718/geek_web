@@ -14,7 +14,7 @@ export function ChatView() {
    const { chatsIds, chats, parsedChats, chatData, handleSelectChatData } = useChatList(senderId || "")
    const { messages, chatId, handleSendMessage, handleSelectChat } = useSocket(chatsIds, senderId || "")
 
-   if (!chats) {
+   if (!senderId || !chats) {
       return <ChatNotData />
    }
 
