@@ -1,13 +1,13 @@
 "use client"
 import { Box, Divider } from "@/components/ui"
-import { ChatInputForm } from "@/feature/chat/ChatInputForm"
-import { useSocket } from "@/lib/hooks/socket/useSocket"
+import { ChatInputForm } from "@/feature/chat/components/ChatInputForm"
+import { useSocket } from "@/feature/chat/hooks/useSocket"
 import { useChatList } from "@/lib/hooks/chats/useChatList"
 import { useSessionDataStore } from "@/stores/user-session-data.store"
-import { ChatNotData } from "@/feature/chat/ChatNotData"
-import { ChatList } from "@/feature/chat/ChatList"
-import { ChatAvatar } from "@/feature/chat/ChatAvatar"
-import { MessageList } from "@/feature/chat/MessageList"
+import { ChatNotData } from "@/feature/chat/components/ChatNotData"
+import { ChatList } from "@/feature/chat/components/ChatList"
+import { ChatAvatar } from "@/feature/chat/components/ChatAvatar"
+import { MessageList } from "@/feature/chat/components/MessageList"
 
 export function ChatView() {
    const senderId = useSessionDataStore((state) => state.user?.user.id)
