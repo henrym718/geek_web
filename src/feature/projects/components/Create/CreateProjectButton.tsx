@@ -24,7 +24,7 @@ export function CreateProjectButton() {
          variant="secundary"
          onClick={handleClick}>
          <Plus className="w-4 h-4" />
-         Nueva solicitud
+         Nuevo proyecto
       </Button>
    )
 }

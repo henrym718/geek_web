@@ -34,7 +34,7 @@ export function ClientLayout({ children }: Readonly<React.PropsWithChildren>) {
             dashboardLink={{ href: "/client/dashboard" }}
             navigationLinks={navigationLinks}
          />
-         <main className="w-full h-[calc(100vh-10rem)] bg-zinc-100 rounded-2xl ml-9 mt-7 overflow-y-auto p-8">{children}</main>
+         <main className="w-full h-[calc(100vh-10rem)] bg-zinc-100 rounded-2xl ml-9 mt-7 overflow-hidden p-8">{children}</main>
       </div>
    )
 }

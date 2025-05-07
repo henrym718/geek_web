@@ -4,6 +4,8 @@ import { CLIENT_TABS, STATUS_REQUEST } from "@/config/constants"
 import { CreateProjectButton } from "@/feature/projects/components/Create/CreateProjectButton"
 import { ProposalsList } from "@/feature/proposals/components/ProposalList/ProposalList"
 import { ActiveProjectListClient } from "@/feature/projects/components/ProjectList/ProjectListClient"
+import { ChevronLeft } from "lucide-react"
+import Link from "next/link"
 
 interface Props {
    searchParams: Promise<{
@@ -22,6 +24,9 @@ export default async function RequestPanelPage({ searchParams }: Readonly<Props>
          {/* Si ha seleccionado una solicitud, se muestra la lista de respuestas */}
          {requestid ? (
             <Box className="flex flex-col gap-4">
+               <Link href="/client/account/projects">
+                  <ChevronLeft className="cursor-pointer hover:text-black/50 hover:bg-black/5 hover:rounded-full" />
+               </Link>
                <Typography variant="subtitulo1">Respuestas a la solicitud</Typography>
                <ProposalsList requestid={requestid} />
             </Box>
@@ -30,7 +35,7 @@ export default async function RequestPanelPage({ searchParams }: Readonly<Props>
                <Typography variant="subtitulo1">Panel de solicitudes</Typography>
 
                {/* Tabs para filtrar los proyectos y el botón para crear un nuevo proyecto */}
-               <Box className="sticky flex justify-between top-0 z-10 py-2 bg-zinc-100">
+               <Box className="flex justify-between top-0 z-10 py-2 bg-zinc-100">
                   <FilterProjectTabClient tabs={CLIENT_TABS} />
                   <CreateProjectButton />
                </Box>

@@ -1,10 +1,10 @@
-/* eslint-disable @next/next/no-img-element */
 "use client"
 
 import { useState } from "react"
 import { Avatar, Box, Typography } from "../../../../components/ui"
 import { MapPinCheckInside } from "lucide-react"
 import { formatURLParam } from "@/lib/utils/formatURLParams"
+import Image from "next/image"
 interface Props {
    id: string
    firstName: string
@@ -30,10 +30,13 @@ export function TalentCard({ id, firstName, lastName, bannerImage, photo, city, 
             onMouseLeave={() => setHoveringImageOrTitle(false)}
             style={{ cursor: "pointer" }}
             onClick={() => handleOpenProfile(title)}>
-            <img
+            <Image
                src={bannerImage}
                alt={title}
+               width={302}
+               height={182}
                className="w-full h-full object-cover rounded-lg"
+               priority
             />
          </Box>
 

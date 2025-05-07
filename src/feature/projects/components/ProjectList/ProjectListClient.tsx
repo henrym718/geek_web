@@ -22,7 +22,7 @@ export function ActiveProjectListClient({ search }: Readonly<Props>) {
    if (!request?.success) return <div>Error: {request?.message}</div>
 
    return (
-      <Box className="flex flex-col gap-8 mt-4">
+      <Box className="flex flex-col gap-8 mt-4 h-[calc(100vh-333px)] overflow-y-auto">
          {request.data.map((data) => (
             <Box
                key={data.request.id}
