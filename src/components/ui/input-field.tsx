@@ -93,7 +93,7 @@ export const InputField = (props: InputFieldProps) => {
    return (
       <div className={cn("relative flex flex-col w-full", classNameWrapper)}>
          {/* Etiqueta opcional */}
-         {label && <span className="text-sm pb-1">{label}</span>}
+         {label && <span className="text-sm pb-1 font-semibold">{label}</span>}
          {/* Input con estilos configurables */}
          <input
             className={cn(inputVariants({ variant, sizing, rounded, background, fullWidth, error: !!error }), className)}
