@@ -51,8 +51,15 @@ apiClient.interceptors.response.use(
 
 //
 
-const isServerError = (error: any): error is FailureApiResponse => {
-   return error?.success === false && typeof error?.message === "string"
+const isServerError = (error: unknown): error is FailureApiResponse => {
+   return (
+      typeof error === "object" &&
+      error !== null &&
+      "success" in error &&
+      "message" in error &&
+      (error as FailureApiResponse).success === false &&
+      typeof (error as FailureApiResponse).message === "string"
+   )
 }
 
 export const mapAxiosErrorToApiResponse = (error: AxiosError): ApiResponse<never> => {
