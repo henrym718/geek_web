@@ -27,6 +27,7 @@ export const PROFORMA_REQUEST_ENDPOINTS = {
    CREATE_REQUEST: "/proforma-request",
    PROFORMA_REQUEST_BY_VENDOR_PROFILE_ID: (vendorProfileId: string) => `/proforma-request/vendor/${vendorProfileId}`,
    PROFORMA_REQUEST_BY_CLIENT_ID: () => `/proforma-request/client`,
+   PROFORMA_REQUEST_BY_SKILL_ID: (skillId: string) => `/proforma-request/${skillId}`,
 } as const
 
 export const PROFORMA_RESPONSE_ENDPOINTS = {

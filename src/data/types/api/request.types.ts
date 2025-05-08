@@ -25,3 +25,10 @@ export interface GetRequestsByClientIdResponse {
    category: Category
    city: City
 }
+
+export interface GetProjectsBySkillIdResponse {
+   request: ProformaRequest
+   skills: Skill[]
+   category: Category
+   city: City
+}

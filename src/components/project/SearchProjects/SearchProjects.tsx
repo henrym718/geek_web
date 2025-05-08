@@ -52,7 +52,7 @@ export function SearchProjects() {
 
    const handleSkillSelect = (skillId: string, skillName: string) => {
       setSkillSearchText(skillName)
-      router.push(`/talents?q=${skillId}`) // Cambiado de /search a /talents
+      router.push(`/projects?skill=${skillId}`) // Cambiado de /search a /talents
    }
 
    const handleChangeSkill = (searchText: string) => {

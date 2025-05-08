@@ -5,5 +5,5 @@ interface Props {
 }
 
 export function ProjectCardDescription({ description }: Readonly<Props>) {
-   return <Typography className="text-balance">{description}</Typography>
+   return <Typography>{description}</Typography>
 }

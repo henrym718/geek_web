@@ -5,9 +5,10 @@ import { GrNext } from "react-icons/gr"
 interface Props {
    createdAt: Date
    title: string
+   nextButton?: boolean
 }
 
-export function ProjectCardHeader({ createdAt, title }: Readonly<Props>) {
+export function ProjectCardHeader({ createdAt, title, nextButton = true }: Readonly<Props>) {
    return (
       <Box className="relative flex flex-col gap-0.5">
          <Typography variant="etiqueta">{timeAgo(createdAt ?? new Date())}</Typography>
@@ -16,9 +17,11 @@ export function ProjectCardHeader({ createdAt, title }: Readonly<Props>) {
             variant="subtitulo1">
             {title}
          </Typography>
-         <span className="absolute top-4 right-0">
-            <GrNext className="w-8 h-8 opacity-0 group-hover:opacity-80 transition-opacity duration-300" />
-         </span>
+         {nextButton && (
+            <span className="absolute top-4 right-0">
+               <GrNext className="w-8 h-8 opacity-0 group-hover:opacity-80 transition-opacity duration-300" />
+            </span>
+         )}
       </Box>
    )
 }

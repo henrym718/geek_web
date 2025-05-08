@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Box, InputField } from "../../components/ui"
+import { Box, InputField } from "@/components/ui"
 import { LucideSendHorizontal } from "lucide-react"
 
 interface ChatInputFormProps {

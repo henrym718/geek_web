@@ -3,6 +3,7 @@ import { FilterTalentForm } from "@/components/project/FilterTalentForm/FilterTa
 import { Box, Typography } from "@/components/ui"
 import { fetchTalents } from "@/data/api/services/vendor-profile.service"
 import { formatApiParams } from "@/lib/utils/formatURLParams"
+import { notFound } from "next/navigation"
 
 interface TalentsPageProps {
    searchParams: {
@@ -24,7 +25,9 @@ export default async function TalentsPage({ searchParams }: TalentsPageProps) {
    const response = await fetchTalents({ query: formattedQuery, skills: formattedSkills, categoryId })
    const talents = response.success ? response.data.results : []
 
-   console.log(talents)
+   if (talents.length === 0) {
+      return notFound()
+   }
 
    return (
       <Box className="flex flex-col gap-4 w-full h-full">
@@ -40,13 +43,9 @@ export default async function TalentsPage({ searchParams }: TalentsPageProps) {
          </Box>
 
          {/* Lista de talentos */}
-         {talents.length > 0 ? (
-            <Box className="grid grid-cols-4 gap-x-4 w-full h-full place-items-center">
-               <TalentListPublic talents={talents} />
-            </Box>
-         ) : (
-            <Typography variant="parrafo">No se encontraron talentos</Typography>
-         )}
+         <Box className="grid grid-cols-4 gap-x-4 w-full h-full place-items-center">
+            <TalentListPublic talents={talents} />
+         </Box>
       </Box>
    )
 }
