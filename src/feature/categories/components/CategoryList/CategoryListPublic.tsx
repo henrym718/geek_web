@@ -1,10 +1,10 @@
 "use client"
 
 import { useCategoriesStore } from "@/stores/useCategoriesStore"
-import CardCategory from "../CardCategory/CardCategory"
-import { Box, Typography } from "../../ui"
+import CardCategory from "../CategoryCard/CategoryCardPublic"
+import { Box, Typography } from "../../../../components/ui"
 
-export function CardListCategory() {
+export function CategoryCardPublic() {
    const { isLoading, categories } = useCategoriesStore((state) => state)
 
    return (

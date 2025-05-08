@@ -1,5 +1,5 @@
 import { formatURLParam } from "@/lib/utils/formatURLParams"
-import { Button } from "../../ui"
+import { Button } from "../../../../components/ui"
 import { useRouter } from "next/navigation"
 
 interface Props {

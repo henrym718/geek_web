@@ -1,6 +1,6 @@
 "use client"
 
-import { Box, Typography } from "../../ui"
+import { Box, Typography } from "@/components/ui"
 import { useCategoriesStore } from "@/stores/useCategoriesStore"
 import { fetchCategoriesByGroupId } from "@/data/api/services/category.service"
 
@@ -10,7 +10,7 @@ interface CardGroupProps {
    Icon: React.ElementType
 }
 
-export function CardGroup({ id, title, Icon }: Readonly<CardGroupProps>) {
+export function GroupCardPublic({ id, title, Icon }: Readonly<CardGroupProps>) {
    const { setCategories, setIsLoading } = useCategoriesStore((state) => state)
 
    const handleSelectGroup = async () => {

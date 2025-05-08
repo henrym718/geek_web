@@ -1,5 +1,5 @@
-import { CardListCategory } from "@/components/project/CardListCategory/CardListCategory"
-import { CardListGroup } from "@/components/project/CardListGroup/CardListGroup"
+import { CategoryCardPublic } from "@/feature/categories/components/CategoryList/CategoryListPublic"
+import { GroupListPublic } from "@/feature/groups/components/CardListGroup/GroupListPublic"
 import { SearchGroups } from "@/components/project/SearchGroups/SearchGroups"
 import { Box, Divider } from "@/components/ui"
 import { fecthSuggestions } from "@/data/api/services/suggestions.service"
@@ -17,10 +17,10 @@ export default async function HomePage() {
          <Divider className="w-screen" />
 
          {/* Lista de grupos */}
-         <CardListGroup />
+         <GroupListPublic />
 
          {/* Lista de categorías */}
-         <CardListCategory />
+         <CategoryCardPublic />
       </Box>
    )
 }
