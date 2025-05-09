@@ -5,13 +5,12 @@ import ProjectListPublic from "@/feature/projects/components/ProjectList/Project
 import { notFound } from "next/navigation"
 
 interface ProjectsPageProps {
-   searchParams: {
-      skill: string
-   }
+   searchParams: Record<string, string | string[] | undefined>
 }
 
 export default async function ProjectsPage({ searchParams }: ProjectsPageProps) {
-   const { skill } = await searchParams
+   const skillParam = searchParams.skill
+   const skill = Array.isArray(skillParam) ? skillParam[0] : skillParam
 
    if (!skill) {
       return <div>No skill provided</div>
