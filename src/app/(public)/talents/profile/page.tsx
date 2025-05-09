@@ -2,14 +2,14 @@ import { TalentPublicProfile } from "@/components/project/TalentPublicprofile/Ta
 import { fetchVendorProfileById } from "@/data/api/services/vendor-profile.service"
 import { timeAgo } from "@/lib/utils/timeAgo"
 
-interface TalentProfilePageProps {
-   searchParams: {
+interface Props {
+   searchParams: Promise<{
       id: string
-   }
+   }>
 }
 
-export default async function TalentProfilePage({ searchParams }: TalentProfilePageProps) {
-   const { id } = await searchParams
+export default async function TalentProfilePage(props: Readonly<Props>) {
+   const { id } = await props.searchParams
 
    const response = await fetchVendorProfileById(id)
 
