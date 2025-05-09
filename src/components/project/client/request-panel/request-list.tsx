@@ -26,7 +26,7 @@ export function RequestList({ search }: Readonly<Props>) {
                quotation={data.request.quotation}
                budget={data.request.budget}
                budgetUnit={data.request.budgetUnit}
-               scope={data.request.scope}
+               scope={data.request.id}
                projectType={data.request.projectType}
                projectLength={data.request.projectLength}
                projectWorkload={data.request.projectWorkload}

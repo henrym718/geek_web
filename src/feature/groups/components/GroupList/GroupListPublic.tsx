@@ -1,7 +1,7 @@
 "use client"
 
 import { Box } from "@/components/ui"
-import { GroupCardPublic } from "../GroupCard/GroupCardPublic"
+import { GroupCardPublic } from "../CardGroup/GroupCardPublic"
 import { GROUPS } from "@/data/states/Groups"
 
 export function CardListGroup() {
