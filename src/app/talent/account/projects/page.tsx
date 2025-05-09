@@ -9,13 +9,13 @@ import { Suspense } from "react"
 import { ProjectListTalent } from "@/feature/projects/components/ProjectList/ProjectListTalent"
 
 interface Props {
-   searchParams: {
+   searchParams: Promise<{
       profile: string
-   }
+   }>
 }
 
 export default async function ProjectsPage({ searchParams }: Readonly<Props>) {
-   const profile = (await searchParams).profile
+   const { profile } = await searchParams
 
    // Obtener el accessToken de las cookies
    const accessToken = (await cookies()).get(TOKEN_NAME)?.value
