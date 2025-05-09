@@ -6,7 +6,7 @@ import { notFound } from "next/navigation"
 
 interface ProjectsPageProps {
    searchParams: {
-      skill?: string
+      skill: string
    }
 }
 
