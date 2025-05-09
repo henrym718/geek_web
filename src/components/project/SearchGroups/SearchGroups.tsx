@@ -24,7 +24,7 @@ export function SearchGroups({ suggestions }: Readonly<Props>) {
             />
             <TabButton
                isActive={activeTab === SEARCH_TYPE.PROJECT}
-               label="Buscar proyectos ahora"
+               label="Buscar proyectos"
                onClick={() => setActiveTab(SEARCH_TYPE.PROJECT)}
             />
          </Box>
