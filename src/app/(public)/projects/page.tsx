@@ -4,14 +4,12 @@ import { fetchProjectsBySkillId } from "@/data/api/services/proforma-request.ser
 import ProjectListPublic from "@/feature/projects/components/ProjectList/ProjectListPublic"
 import { notFound } from "next/navigation"
 
-interface ProjectsPageProps {
-   searchParams: {
-      skill: string
-   }
+type Props = {
+   searchParams: { [key: string]: string | string[] | undefined }
 }
 
-export default async function ProjectsPage({ searchParams }: ProjectsPageProps) {
-   const { skill } = searchParams
+export default async function ProjectsPage({ searchParams }: Readonly<Props>) {
+   const skill = searchParams.skill as string | undefined
 
    if (!skill) {
       return <div>No skill provided</div>
