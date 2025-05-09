@@ -3,13 +3,12 @@ import { Typography } from "@/components/ui"
 import { fetchProjectsBySkillId } from "@/data/api/services/proforma-request.service"
 import ProjectListPublic from "@/feature/projects/components/ProjectList/ProjectListPublic"
 import { notFound } from "next/navigation"
-
-type Props = {
-   searchParams: { [key: string]: string | string[] | undefined }
+interface Props {
+   searchParams: Promise<{ skill: string }>
 }
 
-export default async function ProjectsPage({ searchParams }: Readonly<Props>) {
-   const skill = searchParams.skill as string | undefined
+export default async function ProjectsPage(props: Readonly<Props>) {
+   const { skill } = await props.searchParams
 
    if (!skill) {
       return <div>No skill provided</div>
