@@ -11,7 +11,7 @@ interface ProjectsPageProps {
 }
 
 export default async function ProjectsPage({ searchParams }: ProjectsPageProps) {
-   const { skill } = searchParams
+   const { skill } = await searchParams
 
    if (!skill) {
       return <div>No skill provided</div>
