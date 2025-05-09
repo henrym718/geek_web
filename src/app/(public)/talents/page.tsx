@@ -5,15 +5,15 @@ import { fetchTalents } from "@/data/api/services/vendor-profile.service"
 import { formatApiParams } from "@/lib/utils/formatURLParams"
 import { notFound } from "next/navigation"
 
-interface TalentsPageProps {
-   searchParams: {
+interface Props {
+   searchParams: Promise<{
       query?: string
       skills?: string
       categoryId?: string
-   }
+   }>
 }
 
-export default async function TalentsPage({ searchParams }: TalentsPageProps) {
+export default async function TalentsPage({ searchParams }: Props) {
    const { query, skills, categoryId } = await searchParams
    const formattedQuery = query ? formatApiParams(query) : undefined
    const formattedSkills = skills ? formatApiParams(skills) : undefined
