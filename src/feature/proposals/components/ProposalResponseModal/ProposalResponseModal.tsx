@@ -5,7 +5,7 @@ import { Box } from "@/components/ui/box"
 import { Divider } from "@/components/ui/divider"
 import { Typography } from "@/components/ui/typography"
 import React, { useState } from "react"
-import { RequestSkills } from "@/components/project/client/request-panel/request-skills"
+import { ProjectCardSkills } from "@/feature/projects/components/ProjectCard/ProjectCardSkills"
 import { timeAgo } from "@/lib/utils/timeAgo"
 import { Skill } from "@/data/types/models/models"
 import { IoIosCheckmarkCircleOutline, IoIosCloseCircleOutline } from "react-icons/io"
@@ -135,7 +135,7 @@ export function ProposalResponseModal({
 
                   <section className="space-y-2 mx-5">
                      <Typography variant="subtitulo2">Hablidades y experiencia</Typography>
-                     <RequestSkills skills={skills} />
+                     <ProjectCardSkills skills={skills} />
                   </section>
 
                   <section className="space-y-2 border border-gray-200 p-6">
