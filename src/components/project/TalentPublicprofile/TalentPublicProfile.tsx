@@ -1,7 +1,7 @@
 "use client"
 
 import { Avatar, Box, Divider, Typography } from "../../ui"
-import { RequestSkills } from "../client/request-panel/request-skills"
+import { ProjectCardSkills } from "@/feature/projects/components/ProjectCard/ProjectCardSkills"
 import { Skill } from "@/data/types/models/models"
 import { ContactTalent } from "../ContactTalent/ContactTalent"
 
@@ -99,7 +99,7 @@ export function TalentPublicProfile(props: Readonly<Props>) {
                className="font-bold">
                Skills
             </Typography>
-            <RequestSkills skills={skills} />
+            <ProjectCardSkills skills={skills} />
          </Box>
       </Box>
    )
