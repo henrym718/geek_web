@@ -6,7 +6,7 @@ import { GROUPS } from "@/data/states/Groups"
 
 export function GroupListPublic() {
    return (
-      <Box className="flex gap-4 flex-wrap w-full justify-center ">
+      <Box className="flex gap-4 flex-wrap w-full justify-center">
          {GROUPS.map((group) => (
             <GroupCardPublic
                key={group.id}
