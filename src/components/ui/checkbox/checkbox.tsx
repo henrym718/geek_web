@@ -8,12 +8,12 @@ export function Checkbox(props: Readonly<CheckboxProps>) {
    const { children, className, ...rest } = props
    return (
       <label className={cn("flex items-center gap-2", className)}>
-         <input
+         <input         
             type="checkbox"
             className="w-5 h-5 accent-primary"
             {...rest}
          />
-         <span>{children}</span>
+      <span className="text-sm font-medium">{children}</span>
       </label>
    )
 }
