@@ -4,6 +4,22 @@ import { apiGet, apiPost } from "../api.client"
 import { VENDOR_PROFILE_ENDPOINTS } from "@/config/endpoints"
 import { GetAllProfilesByTokenResponse, GetTalentsRequest, GetTalentsResponse, GetVendorProfileByIdResponse } from "@/data/types/api/profiles.types"
 
+export interface GetAllProfilesByTokenResponse {
+   id: string
+   firstName: string
+   lastName: string
+   bannerImage: string
+   photo: string
+   city: string
+   title: string
+}
+
+export const fetchProfiles = async (accessToken?: string): Promise<ApiResponse<GetAllProfilesByTokenResponse[]>> => {
+   return await apiGet<GetAllProfilesByTokenResponse[]>(VENDOR_PROFILE_ENDPOINTS.VENDOR_PROFILE_BY_ACCESS_TOKEN, {
+      headers: { Authorization: `Bearer ${accessToken}` },
+   })
+}
+
 export const fetchVendorProfilesByAccessToken = async (accessToken?: string): Promise<ApiResponse<GetAllProfilesByTokenResponse[]>> => {
    return await apiGet<GetAllProfilesByTokenResponse[]>(VENDOR_PROFILE_ENDPOINTS.VENDOR_PROFILE_BY_ACCESS_TOKEN, {
       headers: { Authorization: `Bearer ${accessToken}` },
