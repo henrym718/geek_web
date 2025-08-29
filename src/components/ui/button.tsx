@@ -120,12 +120,13 @@ interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, "col
  * Componente Button que implementa las variantes de estilo definidas.
  * Acepta todas las propiedades de un botón HTML estándar más las variantes personalizadas.
  */
-export const Button: FC<ButtonProps> = ({ variant, size, rounded, color, disabled, children, className, isLoading, ...props }) => {
+export const Button = (props: ButtonProps) => {
+   const { variant, size, rounded, color, disabled, children, className, isLoading, ...rest } = props
    return (
       <button
          className={cn(buttonVariants({ variant, size, rounded, color }), className)}
          disabled={disabled}
-         {...props}>
+         {...rest}>
          {isLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : children}
       </button>
    )

@@ -7,6 +7,16 @@ export const ROLE = {
 
 export type RoleType = (typeof ROLE)[keyof typeof ROLE]
 
+export const RouteType = {
+   TALENT: "VENDOR",
+   CLIENT: "CLIENT",
+   PUBLIC: "PUBLIC",
+   CLIENT_AND_PUBLIC: "CLIENT_AND_PUBLIC",
+   NO_AUTH_ONLY: "NO_AUTH_ONLY",
+} as const
+
+export type RouteType = (typeof RouteType)[keyof typeof RouteType]
+
 export const AUTH_FORM = {
    ROLE: "ROLE",
    REGISTER: "REGISTER",

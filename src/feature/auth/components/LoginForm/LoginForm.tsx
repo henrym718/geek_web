@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form"
 import { Box, Button, InputField, Typography } from "@/components/ui"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { loginSchema, LoginType } from "@/data/schemas/login.schema"
-import { loginAction } from "@/app/(auth)/login/actions"
+import { loginAction } from "@/app/auth/login/actions"
 import Link from "next/link"
 
 export function LoginForm() {

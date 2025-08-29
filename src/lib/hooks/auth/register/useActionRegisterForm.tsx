@@ -2,7 +2,7 @@
 import { RegisterType } from "@/data/schemas/register.schema"
 import { useRouter } from "next/navigation"
 import { startTransition, useActionState, useEffect } from "react"
-import { registerAction } from "@/app/(auth)/register/action"
+import { registerAction } from "@/app/auth/register/action"
 
 export default function useActionRegisterForm() {
    const router = useRouter()
