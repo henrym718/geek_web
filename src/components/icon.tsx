@@ -2,7 +2,7 @@ import * as LucideIcons from "lucide-react"
 import type { LucideIcon } from "lucide-react"
 import { HelpCircle } from "lucide-react"
 
-type LucideIconName = keyof typeof LucideIcons
+export type LucideIconName = keyof typeof LucideIcons
 
 interface IconProps {
    name: LucideIconName
