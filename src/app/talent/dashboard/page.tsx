@@ -92,9 +92,9 @@ export default function TalentDasboardPage() {
 
             <ActionTitle
                title="Mi Perfil"
-               description="Actualiza tu información"
+               description="Crea o actualiza tus perfiles"
                icon="User"
-               link="/professional-profile-detail"
+               link="/talent/profiles"
                badge="90% completo"
                color="green"
             />
